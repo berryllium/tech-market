@@ -4,7 +4,7 @@
       <nav id="menu">
         <router-link class="menu__item" to="/">Главная</router-link>
         <router-link class="menu__item" to="/">О нас</router-link>
-        <router-link class="menu__item" to="/">Каталог</router-link>
+        <!-- <router-link class="menu__item" to="/">Каталог</router-link> -->
         <router-link class="menu__item" to="/">Доставка и оплата</router-link>
         <router-link class="menu__item" to="/">Контакты</router-link>
         <router-link class="menu__item" to="/">Гаратния</router-link>
