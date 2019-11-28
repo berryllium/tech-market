@@ -2,8 +2,8 @@
   <div id="app">
     <Header />
     <main class="container">
-    <Catalog />
-    <router-view class="content"/>
+      <Catalog />
+      <router-view />
     </main>
     <Footer />
   </div>

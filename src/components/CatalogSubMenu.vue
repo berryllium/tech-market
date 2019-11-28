@@ -8,21 +8,21 @@
           <div class="submenu__title">Категория товара</div>
           <div class="submenu__desc">Описание категории</div>
           <a href="#" class="submenu__link">Все товары >></a>
-          <div class="submenu__goods">
-            <a href="#" class="good submenu__good">
+          <div class="submenu__product-cards">
+            <a href="#" class="product-card">
               <img src="http://placehold.it/100x100" alt />
-              <div class="good__title">Товар 1</div>
-              <div class="good__price">500$</div>
+              <div class="product-card__title">Товар 1</div>
+              <div class="product-card__price">500$</div>
             </a>
-            <a href="#" class="good submenu__good">
+            <a href="#" class="product-card">
               <img src="http://placehold.it/100x100" alt />
-              <div class="good__title">Товар 1</div>
-              <div class="good__price">500$</div>
+              <div class="product-card__title">Товар 1</div>
+              <div class="product-card__price">500$</div>
             </a>
-            <a href="#" class="good submenu__good">
+            <a href="#" class="product-card">
               <img src="http://placehold.it/100x100" alt />
-              <div class="good__title">Товар 1</div>
-              <div class="good__price">500$</div>
+              <div class="product-card__title">Товар 1</div>
+              <div class="product-card__price">500$</div>
             </a>
           </div>
         </header>
@@ -69,6 +69,7 @@
   padding-left: 15px;
 }
 .submenu__wrap {
+  background-color: @bg;
   padding: 10px;
   width: 100%;
   border: 1px solid @bg;
@@ -91,13 +92,13 @@
     text-decoration: underline;
   }
 }
-.submenu__goods {
+.submenu__product-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   flex-wrap: wrap;
 }
-.good {
+.product-card {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -26,8 +26,13 @@ const routes = [
     component: () => import('../views/Guarantee.vue')
   },
   {
-    path: '/Feedback',
+    path: '/feedback',
     component: () => import('../views/Feedback.vue')
+  }
+  ,
+  {
+    path: '/cart',
+    component: () => import('../views/Cart.vue')
   }
 ]
 

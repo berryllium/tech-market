@@ -9,7 +9,7 @@
         <router-link class="menu__item" to="/guarantee">Гаратния</router-link>
         <router-link class="menu__item" to="/feedback">Отзывы</router-link>
         <input type="text" name="search" id="top-search" placeholder="Поиск" />
-        <router-link class="menu__item" to="/">
+        <router-link class="menu__item" to="/cart">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </router-link>
       </nav>
