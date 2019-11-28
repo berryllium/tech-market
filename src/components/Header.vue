@@ -4,7 +4,6 @@
       <nav id="menu">
         <router-link class="menu__item" to="/">Главная</router-link>
         <router-link class="menu__item" to="/">О нас</router-link>
-        <!-- <router-link class="menu__item" to="/">Каталог</router-link> -->
         <router-link class="menu__item" to="/">Доставка и оплата</router-link>
         <router-link class="menu__item" to="/">Контакты</router-link>
         <router-link class="menu__item" to="/">Гаратния</router-link>
@@ -43,7 +42,7 @@
           </div>
         </div>
         <div class="header-info__item">
-          <i class="fa fa-time left-icon" aria-hidden="true"></i>
+          <i class="fa fa-clock-o left-icon" aria-hidden="true"></i>
           <p>
             Прием заказов и доставка
             <b>8.00-24.00</b>
@@ -110,6 +109,8 @@
     }
     .soc-icons {
       i {
+        opacity: .8;
+        transition-duration: .3s;
         font-size: 1.5em;
         margin-right: 10px;
         &.fa-whatsapp {
@@ -117,6 +118,9 @@
         }
         &.fa-telegram {
           color: #0088cc;
+        }
+        &:hover {
+          opacity: 1;
         }
       }
     }

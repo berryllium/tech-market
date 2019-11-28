@@ -2,9 +2,6 @@
 body {
   font-family: @font;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   font-size: 1em;
   background-color: @bg;
 }
@@ -19,6 +16,15 @@ a {
 p {
   margin: 0;
   padding: 0;
+}
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.content {
+  flex: 1
 }
 .container {
   margin: 0 auto;
