@@ -3,18 +3,18 @@
     <div class="container">
       <nav id="menu">
         <router-link class="menu__item" to="/">Главная</router-link>
-        <router-link class="menu__item" to="/">О нас</router-link>
-        <router-link class="menu__item" to="/">Доставка и оплата</router-link>
-        <router-link class="menu__item" to="/">Контакты</router-link>
-        <router-link class="menu__item" to="/">Гаратния</router-link>
-        <router-link class="menu__item" to="/">Отзывы</router-link>
+        <router-link class="menu__item" to="/about">О нас</router-link>
+        <router-link class="menu__item" to="/delivery">Доставка и оплата</router-link>
+        <router-link class="menu__item" to="/contacts">Контакты</router-link>
+        <router-link class="menu__item" to="/guarantee">Гаратния</router-link>
+        <router-link class="menu__item" to="/feedback">Отзывы</router-link>
         <input type="text" name="search" id="top-search" placeholder="Поиск" />
         <router-link class="menu__item" to="/">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </router-link>
       </nav>
       <div class="header-info">
-        <div class="header-info__item">
+        <div class="header-info__item header-logo">
           <a href="/">
             <img src="http://placehold.it/100x100" />
           </a>
@@ -87,6 +87,9 @@
     border-radius: 10px;
     padding: 5px;
   }
+}
+.header-logo {
+  width: 250px;
 }
 .header-info {
   display: flex;

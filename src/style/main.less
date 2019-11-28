@@ -6,8 +6,15 @@ body {
   background-color: @bg;
 }
 main {
+  display: flex;
+  justify-content: space-between;
   position: relative;
   flex: 1;
+}
+h1,h2,h3 {
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;
@@ -23,10 +30,11 @@ p {
   flex-direction: column;
   justify-content: space-between;
 }
-.content {
-  flex: 1
-}
 .container {
   margin: 0 auto;
   width: 1140px;
+}
+.content {
+  flex: 1;
+  padding: 0 15px;
 }
