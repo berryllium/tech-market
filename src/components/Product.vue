@@ -1,7 +1,9 @@
 <template>
   <div href="#" class="product-card">
+    <router-link class="product-card__link" to="/product">
     <div class="product-card__title">Название какого-то товара в 2 строки</div>
     <img class="product-card__img" src="http://placehold.it/250x200" alt="photo" />
+    </router-link>
     <div class="product-card__feedback">
       <div class="product-card__stars product-card__stars_four">
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -27,8 +29,15 @@
 @import url("../style/variables.less");
 .product-card {
   display: block;
-  padding: 5px;
+  padding: 10px   5px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+  &__link {
+    display: block;
+    transition-duration: .3s;
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
   &__title {
     font-size: 1.1em;
     margin-bottom: 10px;

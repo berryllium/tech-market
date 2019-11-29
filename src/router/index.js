@@ -28,11 +28,14 @@ const routes = [
   {
     path: '/feedback',
     component: () => import('../views/Feedback.vue')
-  }
-  ,
+  },
   {
     path: '/cart',
     component: () => import('../views/Cart.vue')
+  },
+  {
+    path: '/product',
+    component: () => import('../views/Product.vue')
   }
 ]
 
