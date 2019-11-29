@@ -1,7 +1,11 @@
 <template>
   <div class="content">
-    <h1>Главная</h1>
-    <div class="main-catalog__wrapper">
+    <div class="products">
+      <product />
+      <product />
+      <product />
+      <product />
+      <product />
       <product />
     </div>
   </div>
@@ -15,3 +19,11 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+  .products {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+</style>

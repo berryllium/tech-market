@@ -7,25 +7,22 @@
           <span class="footer__title">Меню</span>
         </div>
         <p class="footer__par">
-          <a href="#" class="footer__link">Пункт_меню</a>
+          <router-link class="footer__link" to="/">Главная</router-link>
         </p>
         <p class="footer__par">
-          <a href="#" class="footer__link">Пункт_меню</a>
+          <router-link class="footer__link" to="/about">О нас</router-link>
         </p>
         <p class="footer__par">
-          <a href="#" class="footer__link">Пункт_меню</a>
+          <router-link class="footer__link" to="/delivery">Доставка и оплата</router-link>
         </p>
         <p class="footer__par">
-          <a href="#" class="footer__link">Пункт_меню</a>
+          <router-link class="footer__link" to="/contacts">Контакты</router-link>
         </p>
         <p class="footer__par">
-          <a href="#" class="footer__link">Пункт_меню</a>
+          <router-link class="footer__link" to="/guarantee">Гарантия</router-link>
         </p>
         <p class="footer__par">
-          <a href="#" class="footer__link">Пункт_меню</a>
-        </p>
-        <p class="footer__par">
-          <a href="#" class="footer__link">Пункт_меню</a>
+          <router-link class="footer__link" to="/feedback">Отзывы</router-link>
         </p>
       </div>
       <div class="footer__item footer-catalog">
@@ -104,6 +101,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding: 20px 0;
+  border-top: 2px solid #e1e1e1;
 }
 .fa {
   font-size: 1.5em;
@@ -124,7 +122,6 @@
   color: @grey;
   margin-bottom: 10px;
   a {
-    text-transform: capitalize;
     &:hover {
       color: @blue;
     }
