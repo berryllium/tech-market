@@ -9,21 +9,10 @@
           <div class="submenu__desc">Описание категории</div>
           <a href="#" class="submenu__link">Все товары >></a>
           <div class="submenu__product-cards">
-            <a href="#" class="product-card">
-              <img src="http://placehold.it/100x100" alt />
-              <div class="product-card__title">Товар 1</div>
-              <div class="product-card__price">500$</div>
-            </a>
-            <a href="#" class="product-card">
-              <img src="http://placehold.it/100x100" alt />
-              <div class="product-card__title">Товар 1</div>
-              <div class="product-card__price">500$</div>
-            </a>
-            <a href="#" class="product-card">
-              <img src="http://placehold.it/100x100" alt />
-              <div class="product-card__title">Товар 1</div>
-              <div class="product-card__price">500$</div>
-            </a>
+            <catalog-product />
+            <catalog-product />
+            <catalog-product />
+            <catalog-product />
           </div>
         </header>
         <main class="submenu_main"></main>
@@ -31,6 +20,14 @@
     </div>
   </li>
 </template>
+<script>
+import CatalogProduct from '@/components/CatalogProduct'
+export default {
+  components: {
+    'catalog-product': CatalogProduct
+  }
+}
+</script>
 
 <style lang="less" scoped>
 @import url("../style/variables.less");
@@ -97,14 +94,5 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   flex-wrap: wrap;
-}
-.product-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100px;
-  &:hover {
-    text-decoration: underline;
-  }
 }
 </style>
