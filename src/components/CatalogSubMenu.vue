@@ -59,6 +59,7 @@ export default {
   display: none;
   box-sizing: border-box;
   position: absolute;
+  z-index: 2;
   top: 0;
   left: @catalogW;
   width: 400px;
