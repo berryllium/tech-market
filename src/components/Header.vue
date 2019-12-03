@@ -16,7 +16,9 @@
       <div class="header-info">
         <div class="header-info__item header-logo">
           <a href="/">
-            <img src="http://placehold.it/100x100" />
+            <img
+              src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg"
+            />
           </a>
         </div>
         <div class="header-info__item">
@@ -90,6 +92,11 @@
 }
 .header-logo {
   width: 250px;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
 }
 .header-info {
   display: flex;
@@ -112,8 +119,8 @@
     }
     .soc-icons {
       i {
-        opacity: .8;
-        transition-duration: .3s;
+        opacity: 0.8;
+        transition-duration: 0.3s;
         font-size: 1.5em;
         margin-right: 10px;
         &.fa-whatsapp {

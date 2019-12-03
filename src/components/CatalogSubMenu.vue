@@ -1,6 +1,6 @@
 <template>
   <li class="catalog__item">
-    <img src="http://placehold.it/40x40" alt class="catalog__icon" />
+    <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt class="catalog__icon" />
     <div class="catalog__title">Категория товара</div>
     <div class="submenu catalog__submenu">
       <div class="submenu__wrap">
@@ -38,6 +38,11 @@ export default {
   padding: 10px 5px;
   transition: 0.2s;
   margin-right: -1px;
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
   &:hover {
     background-color: @blue;
     .catalog__title {

@@ -2,7 +2,7 @@
   <div href="#" class="product-card">
     <router-link class="product-card__link" to="/product">
     <div class="product-card__title">Название какого-то товара в 2 строки</div>
-    <img class="product-card__img" src="http://placehold.it/250x200" alt="photo" />
+    <img class="product-card__img" src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
     </router-link>
     <div class="product-card__feedback">
       <div class="product-card__stars product-card__stars_four">

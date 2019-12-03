@@ -1,6 +1,6 @@
 <template>
   <router-link class="product-card" to="/product">
-    <img class="product-card__img" src="http://placehold.it/80x100" alt="photo" />
+    <img class="product-card__img" src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
     <div class="product-card__title">Набор инструментов</div>
   </router-link>
 </template>
@@ -16,7 +16,7 @@
     display: block;
     width: 100%;
     height: 80px;
-    object-fit: cover;
+    object-fit: contain;
     margin-bottom: 10px;
   }
   &__title {

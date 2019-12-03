@@ -4,9 +4,9 @@
       <div class="slider-wrap">
         <h1>Название товара в две строки</h1>
         <div class="slider fotorama">
-          <img src="https://s1.1zoom.ru/big3/297/Canada_Mountains_Scenery_488936.jpg"  />
-          <img src="https://s1.1zoom.ru/big3/531/Rivers_Geese_Grass_Watermill_566707_2560x1600.jpg"  />
-          <img src="https://avatars.mds.yandex.net/get-pdb/902733/9e981818-74fe-4f6c-a245-aae430844dda/s1200?webp=false"  />
+          <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
+          <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
+          <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
         </div>
       </div>
       <div class="product-card">
