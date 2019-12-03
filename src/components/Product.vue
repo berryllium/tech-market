@@ -46,7 +46,7 @@
     display: block;
     width: 100%;
     height: 150px;
-    object-fit: cover;
+    object-fit: contain;
     margin-bottom: 10px;
   }
   &__feedback {
