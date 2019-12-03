@@ -4,7 +4,7 @@
       <div class="slider-wrap">
         <h1>Название товара в две строки</h1>
         <div class="slider fotorama">
-          <img src="images/slider.png"  />
+          <img src="https://s1.1zoom.ru/big3/297/Canada_Mountains_Scenery_488936.jpg"  />
           <img src="https://s1.1zoom.ru/big3/531/Rivers_Geese_Grass_Watermill_566707_2560x1600.jpg"  />
           <img src="https://avatars.mds.yandex.net/get-pdb/902733/9e981818-74fe-4f6c-a245-aae430844dda/s1200?webp=false"  />
         </div>
@@ -192,7 +192,9 @@ export default {
     const fotorama = require('fotorama/fotorama')
     setTimeout(()=>$('.fotorama').fotorama({
       allowfullscreen: true,
-      nav: 'thumbs'
+      nav: 'thumbs',
+      width: '100%',
+      fit: 'cover'
     }
     ), 200)
   }
@@ -213,12 +215,6 @@ h1 {
 }
 .slider-wrap {
   width: 50%;
-}
-.slider > img {
-  width: 100%!important;
-  height: 100%!important;
-  top: 0!important;
-  object-fit: cover;
 }
 .product-card {
   box-sizing: border-box;
