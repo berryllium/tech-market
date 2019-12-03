@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    modi: history,
     path: '/',
     component: Home
   },

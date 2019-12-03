@@ -3,12 +3,14 @@
     <section class="section-buy">
       <div class="slider-wrap">
         <h1>Название товара в две строки</h1>
-        <div class="slider">
-          <img src="images/slider.png" alt />
+        <div class="slider fotorama">
+          <img src="images/slider.png"  />
+          <img src="https://s1.1zoom.ru/big3/531/Rivers_Geese_Grass_Watermill_566707_2560x1600.jpg"  />
+          <img src="https://avatars.mds.yandex.net/get-pdb/902733/9e981818-74fe-4f6c-a245-aae430844dda/s1200?webp=false"  />
         </div>
       </div>
-      <div class="block-buy">
-        <div class="card__feedback">
+      <div class="product-card">
+        <div class="block-feedback">
           <div class="stars stars_four">
             <i class="fa fa-star" aria-hidden="true"></i>
             <i class="fa fa-star" aria-hidden="true"></i>
@@ -115,17 +117,54 @@
                 <header>
                   <div class="name">Андрей</div>
                   <div class="date">29.12.2019</div>
-                  <div class="stars stars_four">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                  </div>
-                  <div
-                    class="text"
-                  >Долго держит заряд акб, если еще комплект ручки с сиденьем купить, получается практически картинг)</div>
                 </header>
+                <div class="stars stars_four">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                </div>
+                <div
+                  class="text"
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, possimus aliquid vel quaerat tempore officia ullam pariatur quo tempora. Officia laboriosam atque suscipit itaque, aut magni cumque explicabo deserunt exercitationem.</div>
+              </div>
+              <div class="form">
+                <h3 class="form__header">Оставьте свой отзыв</h3>
+                <form action="#">
+                  <div class="form__name">
+                    <label for="name">Ваше имя</label>
+                    <br />
+                    <input type="name" id="name" name="name" />
+                  </div>
+                  <div class="form__email">
+                    <label for="email">Ваша электронная почта</label>
+                    <br />
+                    <input type="email" id="email" name="email" />
+                  </div>
+                  <div class="form__header">
+                    <label for="header">Заголовок отзыва</label>
+                    <br />
+                    <input type="text" id="header" name="header" />
+                  </div>
+                  <div class="form__rating">
+                    <label>Ваша оценка</label>
+                    <br />
+                    <div class="stars stars_four">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="form__feedback">
+                    <label for="feedback">Ваш отзыв</label>
+                    <br />
+                    <textarea id="feedback" name="feedback" rows="10"></textarea>
+                  </div>
+                  <submit class="form__button">Отправить</submit>
+                </form>
               </div>
             </div>
           </div>
@@ -146,28 +185,47 @@ export default {
     changeTab(tab) {
       this.tab = tab;
     }
+  },
+  mounted() {
+    var $ = require("jquery");
+    window.jQuery = $;
+    const fotorama = require('fotorama/fotorama')
+    setTimeout(()=>$('.fotorama').fotorama({
+      allowfullscreen: true,
+      nav: 'thumbs'
+    }
+    ), 200)
   }
 };
 </script>
 
 <style lang="less" scoped>
 @import url("../style/variables.less");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css");
+
 h1 {
   text-align: left;
 }
 .section-buy {
-  padding-left: 10px;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
-.slider-wrap,
-.block-buy {
+.slider-wrap {
   width: 50%;
 }
 .slider > img {
-  width: 100%;
+  width: 100%!important;
+  height: 100%!important;
+  top: 0!important;
+  object-fit: cover;
 }
-.card__feedback {
+.product-card {
+  box-sizing: border-box;
+  width: 50%;
+  padding-left: 10px;
+}
+.block-feedback {
   margin-bottom: 20px;
   .fa-star,
   .fa-star-o {
@@ -248,14 +306,15 @@ h1 {
   }
 }
 .tabs {
-  border: 1px solid @blue;
+  border: 1px solid lighten(@grey, 40%);
+  margin-bottom: 20px;
 
   .tabs__header {
     display: flex;
     list-style-type: none;
     padding: 0;
-    margin: 0;
-    border-bottom: 1px solid @blue;
+    margin: -1px;
+    border: 1px solid @blue;
   }
   .tabs__link {
     padding: 10px 0;
@@ -286,9 +345,89 @@ h1 {
       background-color: lighten(@grey, 40%);
     }
   }
-  .fa-star,
-  .fa-star-o {
-    color: gold;
+  .feedback {
+    margin: 10px;
+    background-color: darken(@bg, 5%);
+    padding: 10px;
+    border-radius: 10px;
+    header {
+      display: flex;
+      margin-bottom: 5px;
+      align-items: center;
+    }
+    .name {
+      font-size: 1.2em;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .date {
+      color: @grey;
+    }
+    .fa-star,
+    .fa-star-o {
+      font-size: 1.3em;
+      color: gold;
+    }
+    .text {
+      margin-top: 10px;
+    }
+  }
+}
+.form {
+  h3 {
+    margin: 10px 0;
+  }
+  form {
+    display: grid;
+    gap: 20px;
+    grid-template-areas:
+      "name email"
+      "header header"
+      "rating rating"
+      "feedback feedback";
+    textarea,
+    input[type="text"],
+    input[type="name"],
+    input[type="email"] {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 5px;
+    }
+    .form__button {
+      text-align: center;
+      border: none;
+      outline: none;
+      padding: 10px;
+      background-color: @blue;
+      color: white;
+      &:hover {
+        cursor: pointer;
+        background-color: darken(@blue, 10%);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    .fa-star,
+    .fa-star-o {
+      font-size: 1.3em;
+      color: gold;
+    }
+  }
+  &__name {
+    grid-area: name;
+  }
+  &__email {
+    grid-area: email;
+  }
+  &__header {
+    grid-area: header;
+  }
+  &__rating {
+    grid-area: rating;
+  }
+  &__feedback {
+    grid-area: feedback;
   }
 }
 </style>
