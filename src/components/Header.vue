@@ -17,7 +17,7 @@
         <div class="header-info__item header-logo">
           <a href="/">
             <img
-              src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg"
+              src="images/image-phone.jpg"
             />
           </a>
         </div>

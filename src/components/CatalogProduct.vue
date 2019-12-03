@@ -1,6 +1,6 @@
 <template>
   <router-link class="product-card" to="/product">
-    <img class="product-card__img" src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
+    <img class="product-card__img" src="images/image-phone.jpg" alt="photo" />
     <div class="product-card__title">Набор инструментов</div>
   </router-link>
 </template>

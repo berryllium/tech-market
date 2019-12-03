@@ -1,6 +1,6 @@
 <template>
   <li class="catalog__item">
-    <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt class="catalog__icon" />
+    <img src="images/image-phone.jpg" alt class="catalog__icon" />
     <div class="catalog__title">Категория товара</div>
     <div class="submenu catalog__submenu">
       <div class="submenu__wrap">

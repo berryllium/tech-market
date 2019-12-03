@@ -3,10 +3,10 @@
     <section class="section-buy">
       <div class="slider-wrap">
         <h1>Название товара в две строки</h1>
-        <div class="slider fotorama">
-          <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
-          <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
-          <img src="https://img2.freepng.ru/20180206/pyw/kisspng-iphone-4-telephone-samsung-galaxy-clip-art-aok-cliparts-5a79bcc68e77f8.8337419115179276225836.jpg" alt="photo" />
+        <div class="slider">
+          <img src="images/image-phone.jpg" alt="photo" />
+          <img src="images/image-phone.jpg" alt="photo" />
+          <img src="images/image-phone.jpg" alt="photo" />
         </div>
       </div>
       <div class="product-card">
@@ -190,13 +190,13 @@ export default {
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require('fotorama/fotorama')
-    setTimeout(()=>$('.fotorama').fotorama({
+    setTimeout(()=>$('.slider').fotorama({
       allowfullscreen: true,
       nav: 'thumbs',
       width: '100%',
       fit: 'cover'
     }
-    ), 200)
+    ),)
   }
 };
 </script>
