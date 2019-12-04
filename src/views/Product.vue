@@ -3,7 +3,7 @@
     <section class="section-buy">
       <div class="slider-wrap">
         <h1>Название товара в две строки</h1>
-        <div class="slider">
+        <div class="slider" data-auto="false">
           <img src="images/image-phone.jpg" alt="photo" />
           <img src="images/image-phone.jpg" alt="photo" />
           <img src="images/image-phone.jpg" alt="photo" />
@@ -113,59 +113,8 @@
           </div>
           <div class="tabs__item" v-if="this.tab=='feed'">
             <div class="feedback-wrap">
-              <div class="feedback">
-                <header>
-                  <div class="name">Андрей</div>
-                  <div class="date">29.12.2019</div>
-                </header>
-                <div class="stars stars_four">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-                </div>
-                <div
-                  class="text"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, possimus aliquid vel quaerat tempore officia ullam pariatur quo tempora. Officia laboriosam atque suscipit itaque, aut magni cumque explicabo deserunt exercitationem.</div>
-              </div>
-              <div class="form">
-                <h3 class="form__header">Оставьте свой отзыв</h3>
-                <form action="#">
-                  <div class="form__name">
-                    <label for="name">Ваше имя</label>
-                    <br />
-                    <input type="name" id="name" name="name" />
-                  </div>
-                  <div class="form__email">
-                    <label for="email">Ваша электронная почта</label>
-                    <br />
-                    <input type="email" id="email" name="email" />
-                  </div>
-                  <div class="form__header">
-                    <label for="header">Заголовок отзыва</label>
-                    <br />
-                    <input type="text" id="header" name="header" />
-                  </div>
-                  <div class="form__rating">
-                    <label>Ваша оценка</label>
-                    <br />
-                    <div class="stars stars_four">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star-o" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                  <div class="form__feedback">
-                    <label for="feedback">Ваш отзыв</label>
-                    <br />
-                    <textarea id="feedback" name="feedback" rows="10"></textarea>
-                  </div>
-                  <submit class="form__button">Отправить</submit>
-                </form>
-              </div>
+              <Feedback />
+              <FeedbackForm />
             </div>
           </div>
         </div>
@@ -175,7 +124,13 @@
 </template>
 
 <script>
+import Feedback from "@/components/Feedback"
+import FeedbackForm from "@/components/FeedbackForm"
 export default {
+  components: {
+    Feedback,
+    FeedbackForm
+  },
   data() {
     return {
       tab: "desc"
@@ -189,14 +144,14 @@ export default {
   mounted() {
     var $ = require("jquery");
     window.jQuery = $;
-    const fotorama = require('fotorama/fotorama')
-    setTimeout(()=>$('.slider').fotorama({
-      allowfullscreen: true,
-      nav: 'thumbs',
-      width: '100%',
-      fit: 'cover'
-    }
-    ),)
+    const fotorama = require("fotorama/fotorama");
+    setTimeout(() =>
+      $(".slider").fotorama({
+        allowfullscreen: true,
+        nav: "thumbs",
+        height: 450
+      })
+    );
   }
 };
 </script>
@@ -341,89 +296,6 @@ h1 {
       background-color: lighten(@grey, 40%);
     }
   }
-  .feedback {
-    margin: 10px;
-    background-color: darken(@bg, 5%);
-    padding: 10px;
-    border-radius: 10px;
-    header {
-      display: flex;
-      margin-bottom: 5px;
-      align-items: center;
-    }
-    .name {
-      font-size: 1.2em;
-      margin-right: 10px;
-      font-weight: bold;
-    }
-    .date {
-      color: @grey;
-    }
-    .fa-star,
-    .fa-star-o {
-      font-size: 1.3em;
-      color: gold;
-    }
-    .text {
-      margin-top: 10px;
-    }
-  }
-}
-.form {
-  h3 {
-    margin: 10px 0;
-  }
-  form {
-    display: grid;
-    gap: 20px;
-    grid-template-areas:
-      "name email"
-      "header header"
-      "rating rating"
-      "feedback feedback";
-    textarea,
-    input[type="text"],
-    input[type="name"],
-    input[type="email"] {
-      box-sizing: border-box;
-      width: 100%;
-      padding: 5px;
-    }
-    .form__button {
-      text-align: center;
-      border: none;
-      outline: none;
-      padding: 10px;
-      background-color: @blue;
-      color: white;
-      &:hover {
-        cursor: pointer;
-        background-color: darken(@blue, 10%);
-      }
-      &:active {
-        transform: scale(0.95);
-      }
-    }
-    .fa-star,
-    .fa-star-o {
-      font-size: 1.3em;
-      color: gold;
-    }
-  }
-  &__name {
-    grid-area: name;
-  }
-  &__email {
-    grid-area: email;
-  }
-  &__header {
-    grid-area: header;
-  }
-  &__rating {
-    grid-area: rating;
-  }
-  &__feedback {
-    grid-area: feedback;
-  }
+  
 }
 </style>
