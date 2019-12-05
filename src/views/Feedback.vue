@@ -30,6 +30,13 @@ export default {
 </script>
 <style lang="less" scoped>
 @import url("../style/variables.less");
+.page-text {
+  text-align: justify;
+  text-indent: 20px;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin-bottom: 10px;
+}
 button {
   transition-duration: 0.3s;
   border: none;

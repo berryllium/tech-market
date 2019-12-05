@@ -32,11 +32,11 @@
           <i class="fa fa-clock-o left-icon" aria-hidden="true"></i>
           <p>
             Прием заказов и доставка
-            <b>8.00-24.00</b>
+            <b>8.00&#8209;24.00</b>
           </p>
           <p>
             Самовывоз
-            <b>10.00-19.00</b>
+            <b>10.00&#8209;19.00</b>
           </p>
           <p>Работаем без выходных</p>
         </div>
@@ -61,7 +61,7 @@
   flex-direction: column;
   position: relative;
   padding-left: 50px;
-  font-size: 1.2em;
+  font-size: 1.1em;
   p {
     margin: 4px 0;
   }
@@ -73,6 +73,7 @@
     color: @blue;
   }
   .soc-icons {
+    margin-top: 15px;
     i {
       opacity: 0.8;
       transition-duration: 0.3s;
