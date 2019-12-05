@@ -19,7 +19,7 @@
       </div>
       <div class="delivery-item">
         <i class="fa fa-clock-o delivery-item__img" aria-hidden="true"></i>
-        <div class="delivery-item__header">Доставка курьером</div>
+        <div class="delivery-item__header">Курьер</div>
         <div class="delivery-item__content">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui voluptas provident hic beatae esse asperiores est doloremque, ipsum maxime. In perspiciatis numquam, rem qui, asperiores ratione possimus magni hic sint, deserunt voluptas inventore debitis facere. Vitae, quos. Soluta sint doloribus iste officiis cumque adipisci nihil, nisi libero eveniet. Ratione, in?</p>
         </div>
@@ -57,6 +57,7 @@
       color: @grey;
   }
   &__header {
+    text-align: center;
     color: @blue;
     font-size: 1.1em;
     text-transform: uppercase;
