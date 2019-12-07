@@ -1,8 +1,8 @@
 <template>
   <div href="#" class="product-card">
     <router-link class="product-card__link" to="/product">
-    <div class="product-card__title">Название какого-то товара в 2 строки</div>
-    <img class="product-card__img" src="images/image-phone.jpg" alt="photo" />
+      <div class="product-card__title">Название какого-то товара в 2 строки</div>
+      <img class="product-card__img" src="images/image-phone.jpg" alt="photo" />
     </router-link>
     <div class="product-card__feedback">
       <div class="product-card__stars product-card__stars_four">
@@ -19,8 +19,8 @@
       <div class="product-card__old-price">12700 руб.</div>
     </div>
     <div class="product-card__buttons">
-      <!-- <button class="vie-btn">Посмотреть</button> -->
-      <button class="buy-btn">Купить</button>
+      <button class="more-btn">Подробнее</button>
+      <button class="buy-btn">В корзину</button>
     </div>
   </div>
 </template>
@@ -29,11 +29,11 @@
 @import url("../style/variables.less");
 .product-card {
   display: block;
-  padding: 10px   5px;
+  padding: 10px 5px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
   &__link {
     display: block;
-    transition-duration: .3s;
+    transition-duration: 0.3s;
     &:hover {
       transform: translateY(-5px);
     }
@@ -87,23 +87,38 @@
   }
   &__buttons {
     display: flex;
-    justify-content: flex-end;
-    padding: 5px 10px;
-    button {
-      border: none;
+    justify-content: space-between;
+    .buy-btn,
+    .more-btn {
+      transition-duration: .3s;
       border-radius: 5px;
+      padding: 5px 5px;
+      border: none;
       outline: none;
-      padding: 5px 10px;
-      background: #288ee0;
-      color: white;
       &:hover {
         cursor: pointer;
-        background: darken(@blue, 10%);
       }
       &:active {
         transform: scale(0.95);
       }
     }
+    .buy-btn {
+      background: @blue;
+      color: white;
+      &:hover {
+        background: darken(@blue, 10%);
+      }
+    }
+    .more-btn {
+      background: none;
+      border: 1px solid @blue;
+      color: @blue;
+      &:hover {
+      background-color: @blue;
+      color: white;
+    }
+    }
+    
   }
 }
 </style>

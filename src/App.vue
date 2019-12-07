@@ -12,12 +12,19 @@
 <script>
 import Header from "@/components/Header";
 import Catalog from "@/components/Catalog";
-import Footer from "@/components/Footer"; 
+import Footer from "@/components/Footer";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Header,
     Footer,
     Catalog
+  },
+  methods: {
+    ...mapActions(["fetchCatalog"])
+  },
+  mounted() {
+    this.fetchCatalog();
   }
 };
 </script>

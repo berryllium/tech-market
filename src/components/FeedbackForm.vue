@@ -21,11 +21,7 @@
         <label>Ваша оценка</label>
         <br />
         <div class="stars stars_four">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star-o" aria-hidden="true"></i>
+          <star-rating v-model="rating" text-class="custom-text" />
         </div>
       </div>
       <div class="form__feedback">
@@ -33,10 +29,25 @@
         <br />
         <textarea id="feedback" name="feedback" rows="10"></textarea>
       </div>
-      <input type="submit" class="form__button" value="Отправить">
+      <input type="submit" class="form__button" value="Отправить" />
     </form>
   </div>
 </template>
+
+<script>
+import StarRating from "vue-star-rating";
+export default {
+  data() {
+    return {
+      rating: 5
+    };
+  },
+  components: {
+    "star-rating": StarRating
+  }
+};
+</script>
+
 <style lang="less" scoped>
 @import url("../style/variables.less");
 .form {
@@ -75,11 +86,6 @@
       &:active {
         transform: scale(0.95);
       }
-    }
-    .fa-star,
-    .fa-star-o {
-      font-size: 1.3em;
-      color: gold;
     }
   }
   &__name {

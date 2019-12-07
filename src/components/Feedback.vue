@@ -1,21 +1,25 @@
 <template>
   <div class="feedback">
     <header>
-      <div class="name">Андрей</div>
-      <div class="date">29.12.2019</div>
+      <div class="name">{{feedback.name}}</div>
+      <div class="date">{{feedback.date}}</div>
     </header>
     <div class="stars stars_four">
       <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star-o" aria-hidden="true"></i>
+      <i class="fa" :class="feedback.rating > 1 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+      <i class="fa" :class="feedback.rating > 2 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+      <i class="fa" :class="feedback.rating > 3 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+      <i class="fa" :class="feedback.rating > 4 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
     </div>
-    <div
-      class="text"
-    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, possimus aliquid vel quaerat tempore officia ullam pariatur quo tempora. Officia laboriosam atque suscipit itaque, aut magni cumque explicabo deserunt exercitationem.</div>
+    <div class="text">{{feedback.text}}</div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ["feedback"]
+};
+</script>
 
 <style lang="less" scoped>
 @import url("../style/variables.less");

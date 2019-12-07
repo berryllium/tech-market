@@ -17,7 +17,7 @@
         <div class="header-info__item header-logo">
           <a href="/">
             <img
-              src="images/image-phone.jpg"
+              src="images/logo.png"
             />
           </a>
         </div>
@@ -93,15 +93,15 @@
 .header-logo {
   width: 250px;
   img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: auto;
     object-fit: contain;
   }
 }
 .header-info {
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  margin: 10px 0 30px 0;
   .header-info__item:not(:first-child) {
     display: flex;
     flex-direction: column;

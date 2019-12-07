@@ -1,0 +1,60 @@
+[
+  {
+    "id": 1,
+    "category": "phone",
+    "title": "Iphone 18s",
+    "rating": 4,
+    "vote": 20,
+    "price_old": 18900,
+    "price_new": 16500,
+    "photo": [
+      "image-phone.jpg",
+      "image-phone1.jpg",
+      "image-phone2.jpg"
+    ],
+    "features": "Здесь вписываем особенности товара",
+    "description": "Отличный смартфон с OS от разработчиков железа",
+    "properties": [
+      {
+        "name": "Диагональ",
+        "value": "10\""
+      },
+      {
+        "name": "Емкость батареи",
+        "value": "1800mAh"
+      }
+    ],
+    "feedbacks": [
+      {
+        "name": "Антон",
+        "date": "18.12.2019",
+        "rating": 4,
+        "text": "Текст отзыва"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "phone",
+    "title": "Iphone 18s",
+    "rating": 4,
+    "vote": 20,
+    "price": 1800,
+    "photo": [
+      "image-phone.jpg"
+    ],
+    "description": "Отличный смартфон с OS от разработчиков железа",
+    "properties": {
+      "diagonal": "10\"",
+      "battery": "1800mAh"
+    },
+    "feedbacks": [
+      {
+        "name": "Антон",
+        "date": "18.12.2019",
+        "rating": 4,
+        "text": "Текст отзыва"
+      }
+    ]
+  }
+]

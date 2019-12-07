@@ -2,36 +2,39 @@
   <div class="content">
     <section class="section-buy">
       <div class="slider-wrap">
-        <h1>Название товара в две строки</h1>
+        <h2>{{oneProduct.title}}</h2>
         <div class="slider" data-auto="false">
-          <img src="images/image-phone.jpg" alt="photo" />
-          <img src="images/image-phone.jpg" alt="photo" />
-          <img src="images/image-phone.jpg" alt="photo" />
+          <img
+            v-for="image in oneProduct.photo"
+            :key="image"
+            :src="'db/images/'+image  "
+            alt="photo"
+          />
         </div>
       </div>
       <div class="product-card">
         <div class="block-feedback">
           <div class="stars stars_four">
             <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa" :class="oneProduct.rating > 1 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i class="fa" :class="oneProduct.rating > 2 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i class="fa" :class="oneProduct.rating > 3 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i class="fa" :class="oneProduct.rating > 4 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
           </div>
-          <div class="counter">Рейтинг: 18 голосов</div>
+          <div class="counter">Рейтинг: {{oneProduct.vote}} голосов</div>
         </div>
         <div class="block-price">
           <div class="price-line price-line_rec">
             <span class="price-name">Рыночная цена</span>
-            <span class="price-value">16800 руб.</span>
+            <span class="price-value">{{oneProduct.price_old}} руб.</span>
           </div>
           <div class="price-line price-line_your">
             <span class="price-name">Ваша цена</span>
-            <span class="price-value">12900 руб.</span>
+            <span class="price-value">{{oneProduct.price_new}} руб.</span>
           </div>
           <div class="price-line price-line_econ">
             <span class="price-name">Вы экономите</span>
-            <span class="price-value">3900 руб.</span>
+            <span class="price-value">{{oneProduct.price_old-oneProduct.price_new}} руб.</span>
           </div>
         </div>
         <div class="block-btn">
@@ -40,7 +43,7 @@
         </div>
         <div class="properties">
           <header class="properties__header">Особенности товара</header>
-          <div class="properties__content">Тут перечисляются особенности товара, если они имеются</div>
+          <div class="properties__content">{{oneProduct.features}}</div>
         </div>
       </div>
     </section>
@@ -74,31 +77,12 @@
           >Отзывы</li>
         </ul>
         <div class="tabs__content">
-          <div
-            class="tabs__item"
-            v-if="this.tab=='desc'"
-          >Описания Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut hic, dicta molestias asperiores in ea sequi? Natus laboriosam voluptatem explicabo.</div>
+          <div class="tabs__item" v-if="this.tab=='desc'">{{oneProduct.description}}</div>
           <div class="tabs__item" v-if="this.tab=='prop'">
             <table class="tabs__table">
-              <tr>
-                <td>Поле</td>
-                <td>Значение</td>
-              </tr>
-              <tr>
-                <td>Поле</td>
-                <td>Значение</td>
-              </tr>
-              <tr>
-                <td>Поле</td>
-                <td>Значение</td>
-              </tr>
-              <tr>
-                <td>Поле</td>
-                <td>Значение</td>
-              </tr>
-              <tr>
-                <td>Поле</td>
-                <td>Значение</td>
+              <tr v-for="property in oneProduct.properties" :key="property.name">
+                <td>{{property.name}}</td>
+                <td>{{property.value}}</td>
               </tr>
             </table>
           </div>
@@ -113,8 +97,12 @@
           </div>
           <div class="tabs__item" v-if="this.tab=='feed'">
             <div class="feedback-wrap">
-              <Feedback />
               <FeedbackForm />
+              <Feedback
+                v-for="feedback in oneProduct.feedbacks"
+                :key="feedback.date"
+                :feedback="feedback"
+              />
             </div>
           </div>
         </div>
@@ -124,8 +112,9 @@
 </template>
 
 <script>
-import Feedback from "@/components/Feedback"
-import FeedbackForm from "@/components/FeedbackForm"
+import Feedback from "@/components/Feedback";
+import FeedbackForm from "@/components/FeedbackForm";
+import { mapGetters } from "vuex";
 export default {
   components: {
     Feedback,
@@ -135,6 +124,9 @@ export default {
     return {
       tab: "desc"
     };
+  },
+  computed: {
+    ...mapGetters(["oneProduct"])
   },
   methods: {
     changeTab(tab) {
@@ -296,6 +288,5 @@ h1 {
       background-color: lighten(@grey, 40%);
     }
   }
-  
 }
 </style>
