@@ -16,10 +16,26 @@
         <div class="block-feedback">
           <div class="stars stars_four">
             <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa" :class="oneProduct.rating > 1 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
-            <i class="fa" :class="oneProduct.rating > 2 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
-            <i class="fa" :class="oneProduct.rating > 3 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
-            <i class="fa" :class="oneProduct.rating > 4 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i
+              class="fa"
+              :class="oneProduct.rating > 1 ? 'fa-star' : 'fa-star-o'"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="fa"
+              :class="oneProduct.rating > 2 ? 'fa-star' : 'fa-star-o'"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="fa"
+              :class="oneProduct.rating > 3 ? 'fa-star' : 'fa-star-o'"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="fa"
+              :class="oneProduct.rating > 4 ? 'fa-star' : 'fa-star-o'"
+              aria-hidden="true"
+            ></i>
           </div>
           <div class="counter">Рейтинг: {{oneProduct.vote}} голосов</div>
         </div>
@@ -123,25 +139,31 @@ export default {
   data() {
     return {
       tab: "desc",
+      oneProduct: []
     };
-  },
-  computed: {
-    oneProduct() {
-      return this.$store.getters.oneProduct(this.$route.params.id)
-    }  
   },
   methods: {
     changeTab(tab) {
       this.tab = tab;
     },
     buyOneClick(event) {
-      alert('Покупка в 1 клик товара с id=' + this.oneProduct.id)
+      alert("Покупка в 1 клик товара с id=" + this.oneProduct.id);
     },
     addToCart() {
-      alert('Добавление в корзину товара с id=' + this.oneProduct.id)
+      alert("Добавление в корзину товара с id=" + this.oneProduct.id);
+    }
+  },
+  watch: {
+    "$route.params.id": {
+      immediate: true,
+      handler() {
+        // сюда переносите код из created
+        this.oneProduct = this.$store.getters.oneProduct(this.$route.params.id);
+      }
     }
   },
   mounted() {
+    console.log(this.oneProduct);
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require("fotorama/fotorama");

@@ -2,7 +2,7 @@
   <li class="catalog__item">
     <img src="images/image-phone.jpg" alt class="catalog__icon" />
     <div class="catalog__title">{{category}}</div>
-    <div class="submenu catalog__submenu">
+    <div class="submenu catalog__submenu" v-if="showMenu" @click="closeMenu">
       <div class="submenu__wrap">
         <header class="submenu__header">
           <div class="submenu__title">{{category}}</div>
@@ -21,6 +21,11 @@ import CatalogProduct from '@/components/CatalogProduct'
 import { mapGetters } from 'vuex'
 export default {
   props: ['category'],
+  data() {
+    return {
+      showMenu: true
+    }
+  },
   components: {
     'catalog-product': CatalogProduct
   },
@@ -28,6 +33,13 @@ export default {
     ...mapGetters(['allCatalog']),
     products() {
       return this.allCatalog.filter(product => product.category == this.category)
+    }
+  },
+  methods: {
+    closeMenu() {
+      console.log('закрыл')
+      this.showMenu = false
+      setTimeout(()=>this.showMenu = true, 200)
     }
   }
 }

@@ -10,6 +10,7 @@ export default {
     updateCatalog(state, catalog) {
       state.catalog = catalog
       state.loading = false
+      console.log(catalog)
     }
   },
   state: {
