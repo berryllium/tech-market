@@ -21,10 +21,11 @@ export default {
     Catalog
   },
   methods: {
-    ...mapActions(["fetchCatalog"])
+    ...mapActions(["fetchCatalog", "fetchFeedbacks"])
   },
   created() {
     this.fetchCatalog();
+    this.fetchFeedbacks();
   }
 };
 </script>

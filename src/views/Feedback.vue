@@ -7,20 +7,22 @@
     <button class="send-feedback" v-if="!formVisible" @click="formVisible = !formVisible">Оставить отзыв</button>
     <FeedbackForm v-if="formVisible"/>
     <div class="feedbacks">
-      <Feedback />
-      <Feedback />
-      <Feedback />
+      <Feedback v-for="feedback in globalFeedbacks" :key="feedback.date" :feedback="feedback"/>
     </div>
   </div>
 </template>
 <script>
 import Feedback from "@/components/Feedback";
 import FeedbackForm from "@/components/FeedbackForm";
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
       formVisible: false
     }
+  },
+  computed: {
+    ...mapGetters(['globalFeedbacks'])
   },
   components: {
     Feedback,
