@@ -30,8 +30,8 @@
           <i class="fa fa-database" aria-hidden="true"></i>
           <span class="footer__title">Каталог</span>
         </div>
-        <p class="footer__par" v-for="category in allCategories" :key="category">
-          <router-link to="/" class="footer__link">{{category}}</router-link>
+        <p class="footer__par" v-for="category in allCategories" :key="category.name">
+          <router-link to="/" class="footer__link">{{category.name}}</router-link>
         </p>
       </div>
       <div class="footer__item footer-address">

@@ -8,7 +8,7 @@
         <router-link class="menu__item" to="/contacts">Контакты</router-link>
         <router-link class="menu__item" to="/guarantee">Гарантия</router-link>
         <router-link class="menu__item" to="/feedback">Отзывы</router-link>
-        <input type="text" name="search" id="top-search" placeholder="Поиск" />
+        <input v-model="searchStr" @keyup="search" type="text" name="search" id="top-search" placeholder="Поиск" />
         <router-link class="menu__item" to="/cart">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </router-link>
@@ -59,6 +59,21 @@
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      searchStr: ''
+    }
+  },
+  methods: {
+    search() {
+      this.$store.dispatch('search', this.searchStr)
+    }
+  }
+}
+</script>
 
 <style lang="less" scoped>
 @import url("../style/variables.less");

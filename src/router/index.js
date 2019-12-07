@@ -6,9 +6,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    modi: history,
+    mode: history,
     path: '/',
-    component: Home
+    component: Home,
+    name: 'Home',
+    props: true,
   },
   {
     path: '/about',

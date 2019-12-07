@@ -157,13 +157,11 @@ export default {
     "$route.params.id": {
       immediate: true,
       handler() {
-        // сюда переносите код из created
         this.oneProduct = this.$store.getters.oneProduct(this.$route.params.id);
       }
     }
   },
   mounted() {
-    console.log(this.oneProduct);
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require("fotorama/fotorama");

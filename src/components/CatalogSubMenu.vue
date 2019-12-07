@@ -1,12 +1,12 @@
 <template>
   <li class="catalog__item">
-    <img src="images/image-phone.jpg" alt class="catalog__icon" />
-    <div class="catalog__title">{{category}}</div>
-    <div class="submenu catalog__submenu" v-if="showMenu" @click="closeMenu">
+    <img :src="'db/images/'+category.img" alt class="catalog__icon" />
+    <div class="catalog__title"  @click="selectCat">{{category.name}}</div>
+    <div class="submenu catalog__submenu" v-if="showMenu">
       <div class="submenu__wrap">
         <header class="submenu__header">
-          <div class="submenu__title">{{category}}</div>
-          <a href="#" class="submenu__link">Все товары &gt;&gt;</a>
+          <div class="submenu__title">{{category.name}}</div>
+          <a href="#" class="submenu__link"  @click="selectCat">Все товары &gt;&gt;</a>
           <div class="submenu__product-cards">
             <catalog-product v-for="product in products" :product="product" :key="product.id"/>
           </div>
@@ -18,29 +18,24 @@
 </template>
 <script>
 import CatalogProduct from '@/components/CatalogProduct'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  props: ['category'],
-  data() {
-    return {
-      showMenu: true
-    }
-  },
+  props: ['category', 'showMenu'],
   components: {
     'catalog-product': CatalogProduct
   },
   computed: {
     ...mapGetters(['allCatalog']),
     products() {
-      return this.allCatalog.filter(product => product.category == this.category)
+      return this.allCatalog.filter(product => product.category == this.category.name)
     }
   },
   methods: {
-    closeMenu() {
-      console.log('закрыл')
-      this.showMenu = false
-      setTimeout(()=>this.showMenu = true, 200)
-    }
+    selectCat() {
+      this.$store.dispatch('selectCategory', this.category.name)
+      if(this.$route.fullPath != '/')
+      this.$router.push('/')
+    },
   }
 }
 </script>

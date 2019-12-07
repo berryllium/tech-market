@@ -1,19 +1,30 @@
 <template>
-  <aside class="catalog">
+  <aside class="catalog" @click="closeMenu">
     <ul class="catalog__list">
-        <catalog-sub v-for="category in allCategories" :category="category" :key="category"/>
+      <catalog-sub :showMenu="showMenu" v-for="category in allCategories" :category="category" :key="category.name" />
     </ul>
   </aside>
 </template>
 <script>
 import CatalogSubMenu from "@/components/CatalogSubMenu";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   components: {
     "catalog-sub": CatalogSubMenu
   },
+  data() {
+    return {
+      showMenu: true
+    };
+  },
   computed: {
-    ...mapGetters(['allCategories'])
+    ...mapGetters(["allCategories"])
+  },
+  methods: {
+    closeMenu() {
+      this.showMenu = false;
+      setTimeout(() => (this.showMenu = true), 200);
+    }
   }
 };
 </script>
@@ -31,6 +42,5 @@ export default {
     list-style-type: none;
     padding: 0px;
   }
-  
 }
 </style>

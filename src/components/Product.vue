@@ -1,29 +1,42 @@
 <template>
   <div href="#" class="product-card">
-    <router-link class="product-card__link" to="/product">
-      <div class="product-card__title">Название какого-то товара в 2 строки</div>
-      <img class="product-card__img" src="images/image-phone.jpg" alt="photo" />
+    <router-link class="product-card__link" :to="'/product'+product.id">
+      <div class="product-card__title">{{product.title}}</div>
+      <img class="product-card__img" :src="'db/images/' + product.img" alt="photo" />
     </router-link>
     <div class="product-card__feedback">
       <div class="product-card__stars product-card__stars_four">
         <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa fa-star-o" aria-hidden="true"></i>
+        <i class="fa" :class="product.rating > 1 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="product.rating > 2 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="product.rating > 3 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="product.rating > 4 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
       </div>
-      <span class="product-card__counter">(18)</span>
+      <span class="product-card__counter">({{product.vote}})</span>
     </div>
     <div class="product-card__price">
-      <div class="product-card__new-price">7500 руб.</div>
-      <div class="product-card__old-price">12700 руб.</div>
+      <div class="product-card__new-price">{{product.price_new}} руб.</div>
+      <div class="product-card__old-price">{{product.price_old}} руб.</div>
     </div>
     <div class="product-card__buttons">
-      <router-link class="menu__item" to="/product"><button class="more-btn">Подробнее</button></router-link>
-      <button class="buy-btn">В корзину</button>
+      <router-link class="menu__item" :to="'/product'+product.id">
+        <button class="more-btn">Подробнее</button>
+      </router-link>
+      <button class="buy-btn" :data-id="product.id" @click="addToCart">В корзину</button>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ["product"],
+  methods: {
+    addToCart() {
+      alert(event.target.dataset.id)
+    }
+  }
+};
+</script>
 
 <style lang="less" scoped>
 @import url("../style/variables.less");
@@ -79,18 +92,19 @@
   &__old-price {
     color: @grey;
     text-decoration: line-through;
+    font-size: 0.9em;
   }
   &__new-price {
     color: @blue;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   &__buttons {
     display: flex;
     justify-content: space-between;
     .buy-btn,
     .more-btn {
-      transition-duration: .3s;
+      transition-duration: 0.3s;
       border-radius: 5px;
       padding: 5px 5px;
       border: none;
@@ -114,11 +128,10 @@
       border: 1px solid @blue;
       color: @blue;
       &:hover {
-      background-color: @blue;
-      color: white;
+        background-color: @blue;
+        color: white;
+      }
     }
-    }
-    
   }
 }
 </style>
