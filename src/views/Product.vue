@@ -38,8 +38,8 @@
           </div>
         </div>
         <div class="block-btn">
-          <button class="buy-btn">Купить в 1 клик</button>
-          <button class="cart-btn">В корзину</button>
+          <button class="buy-btn" @click="buyOneClick">Купить в 1 клик</button>
+          <button class="cart-btn" @click="addToCart">В корзину</button>
         </div>
         <div class="properties">
           <header class="properties__header">Особенности товара</header>
@@ -131,6 +131,12 @@ export default {
   methods: {
     changeTab(tab) {
       this.tab = tab;
+    },
+    buyOneClick(event) {
+      alert('Покупка в 1 клик товара с id=' + this.oneProduct.id)
+    },
+    addToCart() {
+      alert('Добавление в корзину товара с id=' + this.oneProduct.id)
     }
   },
   mounted() {

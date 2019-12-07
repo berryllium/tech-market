@@ -1,20 +1,19 @@
 <template>
   <aside class="catalog">
     <ul class="catalog__list">
-        <catalog-sub />
-        <catalog-sub />
-        <catalog-sub />
-        <catalog-sub />
-        <catalog-sub />
-        <catalog-sub />
+        <catalog-sub v-for="category in allCategories" :key="category"/>
     </ul>
   </aside>
 </template>
 <script>
 import CatalogSubMenu from "@/components/CatalogSubMenu";
+import { mapGetters } from 'vuex';
 export default {
   components: {
     "catalog-sub": CatalogSubMenu
+  },
+  computed: {
+    ...mapGetters(['allCategories'])
   }
 };
 </script>

@@ -19,7 +19,7 @@
       <div class="product-card__old-price">12700 руб.</div>
     </div>
     <div class="product-card__buttons">
-      <button class="more-btn">Подробнее</button>
+      <router-link class="menu__item" to="/product"><button class="more-btn">Подробнее</button></router-link>
       <button class="buy-btn">В корзину</button>
     </div>
   </div>

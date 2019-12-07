@@ -7,6 +7,7 @@
     "vote": 20,
     "price_old": 18900,
     "price_new": 16500,
+    "img": "image-phone.jpg",
     "photo": [
       "image-phone.jpg",
       "image-phone1.jpg",
@@ -35,19 +36,65 @@
   },
   {
     "id": 2,
-    "category": "phone",
+    "category": "auto",
     "title": "Iphone 18s",
     "rating": 4,
     "vote": 20,
-    "price": 1800,
+    "price_old": 18900,
+    "price_new": 16500,
+    "img": "image-phone.jpg",
     "photo": [
-      "image-phone.jpg"
+      "image-phone.jpg",
+      "image-phone1.jpg",
+      "image-phone2.jpg"
     ],
+    "features": "Здесь вписываем особенности товара",
     "description": "Отличный смартфон с OS от разработчиков железа",
-    "properties": {
-      "diagonal": "10\"",
-      "battery": "1800mAh"
-    },
+    "properties": [
+      {
+        "name": "Диагональ",
+        "value": "10\""
+      },
+      {
+        "name": "Емкость батареи",
+        "value": "1800mAh"
+      }
+    ],
+    "feedbacks": [
+      {
+        "name": "Антон",
+        "date": "18.12.2019",
+        "rating": 4,
+        "text": "Текст отзыва"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "category": "accessories",
+    "title": "Iphone 18s",
+    "rating": 4,
+    "vote": 20,
+    "price_old": 18900,
+    "price_new": 16500,
+    "img": "image-phone.jpg",
+    "photo": [
+      "image-phone.jpg",
+      "image-phone1.jpg",
+      "image-phone2.jpg"
+    ],
+    "features": "Здесь вписываем особенности товара",
+    "description": "Отличный смартфон с OS от разработчиков железа",
+    "properties": [
+      {
+        "name": "Диагональ",
+        "value": "10\""
+      },
+      {
+        "name": "Емкость батареи",
+        "value": "1800mAh"
+      }
+    ],
     "feedbacks": [
       {
         "name": "Антон",
