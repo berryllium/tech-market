@@ -1,10 +1,17 @@
 <template>
-  <router-link class="product-card" to="/product">
-    <img class="product-card__img" src="images/image-phone.jpg" alt="photo" />
-    <div class="product-card__title">Набор инструментов</div>
+  <router-link class="product-card" :to="{name: 'product', params: {id: product.id}}">
+    <img class="product-card__img" :src="'db/images/' + product.img" alt="photo" />
+    <div class="product-card__title">{{product.title}}</div>
   </router-link>
 </template>
 
+<script>
+export default {
+  props: [
+    'product'
+  ]
+}
+</script>
 
 <style lang="less" scoped>
 @import url("../style/variables.less");

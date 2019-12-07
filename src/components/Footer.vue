@@ -30,23 +30,8 @@
           <i class="fa fa-database" aria-hidden="true"></i>
           <span class="footer__title">Каталог</span>
         </div>
-        <p class="footer__par">
-          <a href="#" class="footer__link">Раздел_каталога</a>
-        </p>
-        <p class="footer__par">
-          <a href="#" class="footer__link">Раздел_каталога</a>
-        </p>
-        <p class="footer__par">
-          <a href="#" class="footer__link">Раздел_каталога</a>
-        </p>
-        <p class="footer__par">
-          <a href="#" class="footer__link">Раздел_каталога</a>
-        </p>
-        <p class="footer__par">
-          <a href="#" class="footer__link">Раздел_каталога</a>
-        </p>
-        <p class="footer__par">
-          <a href="#" class="footer__link">Раздел_каталога</a>
+        <p class="footer__par" v-for="category in allCategories" :key="category">
+          <router-link to="/" class="footer__link">{{category}}</router-link>
         </p>
       </div>
       <div class="footer__item footer-address">
@@ -94,6 +79,15 @@
     </div>
   </footer>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+export default {
+  computed: {
+    ...mapGetters(['allCategories'])
+  }
+}
+</script>
 
 <style lang="less" scoped>
 @import url("../style/variables.less");

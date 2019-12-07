@@ -1,18 +1,14 @@
 <template>
   <li class="catalog__item">
     <img src="images/image-phone.jpg" alt class="catalog__icon" />
-    <div class="catalog__title">Категория товара</div>
+    <div class="catalog__title">{{category}}</div>
     <div class="submenu catalog__submenu">
       <div class="submenu__wrap">
         <header class="submenu__header">
-          <div class="submenu__title">Категория товара</div>
-          <div class="submenu__desc">Описание категории</div>
-          <a href="#" class="submenu__link">Все товары >></a>
+          <div class="submenu__title">{{category}}</div>
+          <a href="#" class="submenu__link">Все товары &gt;&gt;</a>
           <div class="submenu__product-cards">
-            <catalog-product />
-            <catalog-product />
-            <catalog-product />
-            <catalog-product />
+            <catalog-product v-for="product in products" :product="product" :key="product.id"/>
           </div>
         </header>
         <main class="submenu_main"></main>
@@ -22,9 +18,17 @@
 </template>
 <script>
 import CatalogProduct from '@/components/CatalogProduct'
+import { mapGetters } from 'vuex'
 export default {
+  props: ['category'],
   components: {
     'catalog-product': CatalogProduct
+  },
+  computed: {
+    ...mapGetters(['allCatalog']),
+    products() {
+      return this.allCatalog.filter(product => product.category == this.category)
+    }
   }
 }
 </script>
@@ -51,6 +55,7 @@ export default {
     }
     .catalog__submenu {
       display: flex;
+      margin-left: -1px;
     }
   }
   .catalog__icon {
@@ -81,11 +86,6 @@ export default {
 .submenu__title {
   margin: 10px 0;
   font-weight: bold;
-}
-.submenu__desc {
-  font-size: 0.9em;
-  color: @grey;
-  margin-bottom: 20px;
 }
 .submenu__link {
   display: block;

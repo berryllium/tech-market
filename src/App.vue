@@ -23,7 +23,7 @@ export default {
   methods: {
     ...mapActions(["fetchCatalog"])
   },
-  mounted() {
+  created() {
     this.fetchCatalog();
   }
 };

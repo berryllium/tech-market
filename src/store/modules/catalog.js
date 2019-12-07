@@ -20,8 +20,8 @@ export default {
     allCatalog(state) {
       return state.catalog
     },
-    oneProduct(state) {
-      return state.catalog.filter(element=> element.id == 1)[0]
+    oneProduct: (state) => (id) => {
+      return state.catalog.find(element=> element.id == id)
     },
     allFeedbacks(state) {
       return state.catalog.filter(element=> element.id == 1)[0].feedbacks

@@ -7,7 +7,7 @@
           <img
             v-for="image in oneProduct.photo"
             :key="image"
-            :src="'db/images/'+image  "
+            src="db/images/image-phone.jpg"
             alt="photo"
           />
         </div>
@@ -122,11 +122,13 @@ export default {
   },
   data() {
     return {
-      tab: "desc"
+      tab: "desc",
     };
   },
   computed: {
-    ...mapGetters(["oneProduct"])
+    oneProduct() {
+      return this.$store.getters.oneProduct(this.$route.params.id)
+    }  
   },
   methods: {
     changeTab(tab) {

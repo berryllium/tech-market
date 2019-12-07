@@ -1,7 +1,7 @@
 <template>
   <aside class="catalog">
     <ul class="catalog__list">
-        <catalog-sub v-for="category in allCategories" :key="category"/>
+        <catalog-sub v-for="category in allCategories" :category="category" :key="category"/>
     </ul>
   </aside>
 </template>
