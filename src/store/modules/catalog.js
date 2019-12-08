@@ -45,6 +45,9 @@ export default {
       return state.currentCategory
     },
     allCatalog(state) {
+      return state.catalog
+    },
+    filteredCatalog(state) {
       return state.filteredCatalog
     },
     oneProduct: (state) => (id) => {
@@ -58,6 +61,9 @@ export default {
     },
     loadingState(state) {
       return state.loading
+    },
+    photoProduct: (state) => (id) => {
+      return state.catalog.find(element=> element.id == id).photo
     }
   }
 }

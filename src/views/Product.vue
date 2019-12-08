@@ -6,8 +6,8 @@
         <div class="slider" data-auto="false">
           <img
             v-for="image in oneProduct.photo"
-            :key="image"
-            src="db/images/image-phone.jpg"
+            :key="image.alt"
+            :src="'db/images/'+image.src"
             alt="photo"
           />
         </div>
@@ -157,7 +157,16 @@ export default {
     "$route.params.id": {
       immediate: true,
       handler() {
-        this.oneProduct = this.$store.getters.oneProduct(this.$route.params.id);
+        this.oneProduct = this.$store.getters.oneProduct(this.$route.params.id)
+    console.log('change')
+
+    // setTimeout(() => {
+      jQuery(".slider").fotorama({
+        allowfullscreen: true,
+        nav: "thumbs",
+        height: 450
+      })
+    // },2000);
       }
     }
   },
@@ -165,13 +174,6 @@ export default {
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require("fotorama/fotorama");
-    setTimeout(() =>
-      $(".slider").fotorama({
-        allowfullscreen: true,
-        nav: "thumbs",
-        height: 450
-      })
-    );
   }
 };
 </script>

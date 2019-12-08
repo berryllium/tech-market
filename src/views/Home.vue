@@ -13,9 +13,9 @@ export default {
   computed: {
     ...mapGetters(['currentCategory']),
     products() {
-      if(this.currentCategory.length == 0) return this.$store.getters.allCatalog
+      if(this.currentCategory.length == 0) return this.$store.getters.filteredCatalog
       else {
-        return this.$store.getters.allCatalog.filter(product => product.category == this.currentCategory)
+        return this.$store.getters.filteredCatalog.filter(product => product.category == this.currentCategory)
       }
     }
   },

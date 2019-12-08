@@ -70,6 +70,7 @@ export default {
   methods: {
     search() {
       this.$store.dispatch('search', this.searchStr)
+      if(this.$route.fullPath != '/') this.$router.push('/')
     }
   }
 }

@@ -25,11 +25,16 @@
         "vote": 20,
         "price_old": 18900,
         "price_new": 16500,
-        "img": "image-phone.jpg",
+        "img": "image-phone1.jpg",
         "photo": [
-          "image-phone.jpg",
-          "image-phone1.jpg",
-          "image-phone2.jpg"
+          {
+            "src": "image-phone.jpg",
+            "alt": "13\""
+          },
+          {
+            "src": "phone.png",
+            "alt": "10\""
+          }
         ],
         "features": "Здесь вписываем особенности товара",
         "description": "Отличный смартфон с OS от разработчиков железа",
@@ -62,16 +67,21 @@
         "price_new": 16500,
         "img": "image-phone.jpg",
         "photo": [
-          "image-phone.jpg",
-          "image-phone1.jpg",
-          "image-phone2.jpg"
+          {
+            "src": "image-phone1.jpg",
+            "alt": "13\""
+          },
+          {
+            "src": "phone.png",
+            "alt": "10\""
+          }
         ],
         "features": "Здесь вписываем особенности товара",
         "description": "Отличный смартфон с OS от разработчиков железа",
         "properties": [
           {
-            "name": "Диагональ",
-            "value": "10\""
+            "name": "Диаметр обода",
+            "value": "17\""
           },
           {
             "name": "Емкость батареи",
@@ -97,9 +107,14 @@
         "price_new": 16500,
         "img": "image-phone.jpg",
         "photo": [
-          "image-phone.jpg",
-          "image-phone1.jpg",
-          "image-phone2.jpg"
+          {
+            "src": "image-phone2.jpg",
+            "alt": "17\""
+          },
+          {
+            "src": "phone.png",
+            "alt": "30\""
+          }
         ],
         "features": "Здесь вписываем особенности товара",
         "description": "Отличный смартфон с OS от разработчиков железа",
@@ -132,9 +147,14 @@
         "price_new": 16500,
         "img": "image-phone.jpg",
         "photo": [
-          "image-phone.jpg",
-          "image-phone1.jpg",
-          "image-phone2.jpg"
+          {
+            "src": "phone.png",
+            "alt": "1d3\""
+          },
+          {
+            "src": "phone.png",
+            "alt": "1a0\""
+          }
         ],
         "features": "Здесь вписываем особенности товара",
         "description": "Отличный смартфон с OS от разработчиков железа",

@@ -1,6 +1,6 @@
 <template>
-  <router-link class="product-card" :to="{name: 'product', params: {id: product.id}}">
-    <img class="product-card__img" :src="'db/images/' + product.img" alt="photo" />
+  <router-link @click="test()" class="product-card" :to="{name: 'product', params: {id: product.id}}">
+    <img @click="test()" class="product-card__img" :src="'db/images/' + product.img" alt="photo" />
     <div class="product-card__title">{{product.title}}</div>
   </router-link>
 </template>
@@ -9,7 +9,13 @@
 export default {
   props: [
     'product'
-  ]
+  ],
+  methods: {
+    test() {
+      // setTimeout(()=>location.reload())
+      
+    }
+  }
 }
 </script>
 
