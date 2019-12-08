@@ -97,7 +97,7 @@ button {
     .fa-star,
     .fa-star-o {
       font-size: 1.3em;
-      color: gold;
+      color: @gold;
     }
   }
   &__name {

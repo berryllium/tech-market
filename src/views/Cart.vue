@@ -28,7 +28,7 @@
           <textarea rows="4" class="form__address" name="address" placeholder="Адрес доставки"></textarea>
         </div>
       </div>
-        <submit class="form__button">Заказать</submit>
+        <input type="submit" class="form__button" name="order" value="Оформить заказ">
     </div>
   </div>
 </template>

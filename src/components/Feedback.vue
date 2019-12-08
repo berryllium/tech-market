@@ -47,7 +47,7 @@ export default {
   .fa-star,
   .fa-star-o {
     font-size: 1.3em;
-    color: gold;
+    color: @gold;
   }
   .text {
     margin-top: 10px;

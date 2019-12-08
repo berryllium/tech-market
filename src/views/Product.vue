@@ -54,8 +54,9 @@
           </div>
         </div>
         <div class="block-btn">
-          <button class="buy-btn" @click="buyOneClick">Купить в 1 клик</button>
-          <button class="cart-btn" @click="addToCart">В корзину</button>
+          <button class="buy-btn" @click="buyOneClick" :data-id="oneProduct.id">Купить в 1 клик</button>
+          <router-link tag="button" to="cart" v-if="isBuy" class="cart-btn cart-btn_is-buy" @click="toCart" :data-id="oneProduct.id">В корзине</router-link>
+          <button v-else class="cart-btn" @click="toCart" :data-id="oneProduct.id">Купить</button>
         </div>
         <div class="properties">
           <header class="properties__header">Особенности товара</header>
@@ -130,7 +131,7 @@
 <script>
 import Feedback from "@/components/Feedback";
 import FeedbackForm from "@/components/FeedbackForm";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     Feedback,
@@ -143,15 +144,23 @@ export default {
       key: 0
     };
   },
+  computed: {
+    ...mapGetters(['allCart']),
+        isBuy() {
+          return this.allCart.find(el => el.id == this.oneProduct.id) ? true : false
+        }
+  },
   methods: {
+    ...mapMutations(['addToCart']),
     changeTab(tab) {
       this.tab = tab;
     },
     buyOneClick(event) {
       alert("Покупка в 1 клик товара с id=" + this.oneProduct.id);
     },
-    addToCart() {
-      alert("Добавление в корзину товара с id=" + this.oneProduct.id);
+    toCart() {
+      this.addToCart(event.target.dataset.id)
+      // this.isBuy = true
     },
     slider() {
       setTimeout(() => {
@@ -176,6 +185,8 @@ export default {
     this.slider()
   },
   mounted() {
+    console.log(this.allCart)
+    console.log(this.isBuy)
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require("fotorama/fotorama");
@@ -210,7 +221,7 @@ h1 {
   .fa-star,
   .fa-star-o {
     font-size: 1.5em;
-    color: gold;
+    color: @gold;
   }
   .counter {
     font-style: italic;
@@ -267,6 +278,10 @@ h1 {
     background: none;
     margin-bottom: 10px;
     &:hover {
+      color: white;
+      background-color: @red;
+    }
+    &_is-buy {
       color: white;
       background-color: @red;
     }

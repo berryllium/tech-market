@@ -22,17 +22,26 @@
       <router-link class="menu__item" :to="'/product'+product.id">
         <button class="more-btn">Подробнее</button>
       </router-link>
-      <button class="buy-btn" :data-id="product.id" @click="addToCart">В корзину</button>
+      <router-link to="/cart" v-if="isBuy" tag="button" class="buy-btn is-buy" :data-id="product.id" @click="toCart">В корзине</router-link>
+      <button v-else class="buy-btn" :data-id="product.id" @click="toCart">Купить</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
 export default {
   props: ["product"],
+  computed: {
+    ...mapGetters(['allCart']),
+    isBuy() {
+          return this.allCart.find(el => el.id == this.product.id) ? true : false
+        }
+  },
   methods: {
-    addToCart() {
-      alert(event.target.dataset.id)
+    ...mapMutations(['addToCart']),
+    toCart() {
+      this.addToCart(event.target.dataset.id);
     }
   }
 };
@@ -72,10 +81,10 @@ export default {
     font-size: 1.2em;
     margin-right: 10px;
     .fa-star {
-      color: gold;
+      color: @gold;
     }
     .fa-star-o {
-      color: gold;
+      color: @gold;
     }
   }
   &__counter {
@@ -104,6 +113,7 @@ export default {
     justify-content: space-between;
     .buy-btn,
     .more-btn {
+      min-width: 45%;
       transition-duration: 0.3s;
       border-radius: 5px;
       padding: 5px 5px;
@@ -117,10 +127,16 @@ export default {
       }
     }
     .buy-btn {
-      background: @blue;
+      background-color: @blue;
       color: white;
       &:hover {
         background: darken(@blue, 10%);
+      }
+    }
+    .is-buy {
+      background-color: @gold;
+      &:hover {
+        background-color: darken(@gold, 10%);
       }
     }
     .more-btn {

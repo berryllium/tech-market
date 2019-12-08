@@ -1,27 +1,25 @@
+import { stat } from "fs"
+
 export default {
   mutations: {
-    clickBuy(state, item) {
-      let product = state.cart.find((el) => el.id === item.id)
-      if (product) state.cart = state.cart.filter(function(el) {return el !== product})
-      else {
-        product = Object.assign({count: 1},item)
-        state.cart.push(product)
-      }
-      state.jsonCart=JSON.stringify(state.cart)
-    },
-    addToCart(state, item) {
-      let product = state.cart.find((el) => el.id === item.id)
+    addToCart(state, id) {
+      let product = state.cart.find(el => el.id === id)
       if (product) product.count ++
       else {
-        product = Object.assign({count: 1},item)
+        product = {id: id, count: 1}
         state.cart.push(product)
       }
       state.jsonCart=JSON.stringify(state.cart)
+      console.log (state.jsonCart)
+      alert("Добавление в корзину товара с id=" + id);
     },
-    removeFromCart(state, item) {
-      let product = state.cart.find((el) => el.id === item.id)
+    decCartProduct(state, id) {
+      let product = state.cart.find(el => el.id === id)
       if (product.count > 1) product.count --
-      else state.cart = state.cart.filter(function(el) {return el !== product})
+      state.jsonCart=JSON.stringify(state.cart)
+    },
+    removeFromCart(state, id) {
+      state.cart = state.cart.filter(el => el.id !== id)
       state.jsonCart=JSON.stringify(state.cart)
     },
     setCart(state) {
@@ -42,6 +40,6 @@ export default {
     },
     getJsonCart(state) {
       return state.jsonCart
-    },
+    }
   }
 }

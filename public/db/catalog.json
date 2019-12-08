@@ -148,11 +148,11 @@
         "img": "image-phone.jpg",
         "photo": [
           {
-            "src": "phone.png",
+            "src": "image-phone1.jpg",
             "alt": "1d3\""
           },
           {
-            "src": "image-phone1.jpg",
+            "src": "phone.png",
             "alt": "1a0\""
           }
         ],
