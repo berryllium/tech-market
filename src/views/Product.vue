@@ -160,7 +160,6 @@ export default {
     },
     toCart() {
       this.addToCart(event.target.dataset.id)
-      // this.isBuy = true
     },
     slider() {
       setTimeout(() => {
@@ -169,6 +168,7 @@ export default {
           nav: "thumbs",
           height: 450
         });
+        jQuery(".slider-wrap").css('opacity', '1')
       });
     }
   },
@@ -210,6 +210,7 @@ h1 {
 .slider-wrap {
   width: 50%;
   height: 550px;
+  opacity: 0;
 }
 .product-card {
   box-sizing: border-box;
