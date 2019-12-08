@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <section class="section-buy">
-      <div class="slider-wrap">
+      <div :key="key" class="slider-wrap">
         <h2>{{oneProduct.title}}</h2>
         <div class="slider" data-auto="false">
           <img
@@ -139,7 +139,8 @@ export default {
   data() {
     return {
       tab: "desc",
-      oneProduct: []
+      oneProduct: [],
+      key: 0
     };
   },
   methods: {
@@ -151,29 +152,34 @@ export default {
     },
     addToCart() {
       alert("Добавление в корзину товара с id=" + this.oneProduct.id);
+    },
+    slider() {
+      setTimeout(() => {
+        jQuery(".slider").fotorama({
+          allowfullscreen: true,
+          nav: "thumbs",
+          height: 450
+        });
+      });
     }
   },
   watch: {
     "$route.params.id": {
       immediate: true,
       handler() {
-        this.oneProduct = this.$store.getters.oneProduct(this.$route.params.id)
-    console.log('change')
-
-    // setTimeout(() => {
-      jQuery(".slider").fotorama({
-        allowfullscreen: true,
-        nav: "thumbs",
-        height: 450
-      })
-    // },2000);
+        this.oneProduct = this.$store.getters.oneProduct(this.$route.params.id);
+        this.key = Math.random();
       }
     }
+  },
+  updated() {
+    this.slider()
   },
   mounted() {
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require("fotorama/fotorama");
+    this.slider();
   }
 };
 </script>
@@ -192,6 +198,7 @@ h1 {
 }
 .slider-wrap {
   width: 50%;
+  height: 550px;
 }
 .product-card {
   box-sizing: border-box;
