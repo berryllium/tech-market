@@ -1,7 +1,9 @@
 <template>
   <div class="cart-product">
-    <img :src="'db/images/' + product.img" alt="photo" class="cart-product__img" />
-    <a :href="'/product'+ id " class="cart-product__name">{{product.title}}</a>
+    <router-link :to="'/product'+ id " class="cart-product__img">
+      <img :src="'db/images/' + product.img" alt="photo" class="cart-product__img" />
+    </router-link>
+    <router-link :to="'/product'+ id " class="cart-product__name">{{product.title}}</router-link>
     <div class="cart-product__count">
       <input
         type="number"
@@ -35,16 +37,16 @@ export default {
       return this.$store.getters.oneProduct(this.id);
     },
     price() {
-      return this.count * this.product.price_new
+      return this.count * this.product.price_new;
     }
   },
   methods: {
-    ...mapMutations(['getCount', 'setCount','removeFromCart']),
+    ...mapMutations(["getCount", "setCount", "removeFromCart"]),
     changeCount() {
-      this.setCount({id: this.id, count: this.count})
+      this.setCount({ id: this.id, count: this.count });
     },
     rem() {
-      this.removeFromCart(this.id)
+      this.removeFromCart(this.id);
     }
   },
   mounted() {

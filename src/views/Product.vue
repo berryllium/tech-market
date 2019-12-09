@@ -55,7 +55,14 @@
         </div>
         <div class="block-btn">
           <button class="buy-btn" @click="buyOneClick" :data-id="oneProduct.id">Купить в 1 клик</button>
-          <router-link tag="button" to="cart" v-if="isBuy" class="cart-btn cart-btn_is-buy" @click="toCart" :data-id="oneProduct.id">В корзине</router-link>
+          <router-link
+            tag="button"
+            to="cart"
+            v-if="isBuy"
+            class="cart-btn cart-btn_is-buy"
+            @click="toCart"
+            :data-id="oneProduct.id"
+          >В корзине</router-link>
           <button v-else class="cart-btn" @click="toCart" :data-id="oneProduct.id">Купить</button>
         </div>
         <div class="properties">
@@ -125,41 +132,51 @@
         </div>
       </div>
     </section>
+    <OrderForm v-if="showForm" @closeForm="closeForm" />
   </div>
 </template>
 
 <script>
 import Feedback from "@/components/Feedback";
+import OrderForm from "@/components/OrderForm";
 import FeedbackForm from "@/components/FeedbackForm";
 import { mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     Feedback,
-    FeedbackForm
+    FeedbackForm,
+    OrderForm
   },
   data() {
     return {
       tab: "desc",
       oneProduct: [],
-      key: 0
+      key: 0,
+      showForm: false
     };
   },
   computed: {
-    ...mapGetters(['allCart']),
-        isBuy() {
-          return this.allCart.find(el => el.id == this.oneProduct.id) ? true : false
-        }
+    ...mapGetters(["allCart"]),
+    isBuy() {
+      return this.allCart.find(el => el.id == this.oneProduct.id)
+        ? true
+        : false;
+    }
   },
   methods: {
-    ...mapMutations(['addToCart']),
+    ...mapMutations(["addToCart"]),
     changeTab(tab) {
       this.tab = tab;
     },
     buyOneClick(event) {
-      alert("Покупка в 1 клик товара с id=" + this.oneProduct.id);
+      this.showForm = true;
+    },
+    closeForm(target) {
+      if (target == "form-wrap" || target == "form__close")
+        this.showForm = false;
     },
     toCart() {
-      this.addToCart(event.target.dataset.id)
+      this.addToCart(event.target.dataset.id);
     },
     slider() {
       setTimeout(() => {
@@ -168,7 +185,7 @@ export default {
           nav: "thumbs",
           height: 450
         });
-        jQuery(".slider-wrap").css('opacity', '1')
+        jQuery(".slider-wrap").css("opacity", "1");
       });
     }
   },
@@ -182,11 +199,11 @@ export default {
     }
   },
   updated() {
-    this.slider()
+    this.slider();
   },
   mounted() {
-    console.log(this.allCart)
-    console.log(this.isBuy)
+    console.log(this.allCart);
+    console.log(this.isBuy);
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require("fotorama/fotorama");

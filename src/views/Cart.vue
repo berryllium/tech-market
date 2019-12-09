@@ -13,7 +13,10 @@
       Итого:
       <span class="sum">{{sum}}</span> руб.
     </div>
-    <OrderForm />
+    <div class="button-wrap">
+      <button @click="showForm = true" class="order-btn">Оформить заказ</button>
+    </div>
+    <OrderForm v-if="showForm" @closeForm="closeForm" />
   </div>
 </template>
 <script>
@@ -25,6 +28,11 @@ export default {
     "cart-product": CartProduct,
     OrderForm
   },
+  data() {
+    return {
+      showForm: false
+    };
+  },
   computed: {
     ...mapGetters(["allCart", "oneProduct"]),
     sum() {
@@ -35,15 +43,48 @@ export default {
       return sum;
     }
   },
+  methods: {
+    closeForm(target) {
+      if(target == 'form-wrap' || target == 'form__close') this.showForm = false;
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
 @import url("../style/variables.less");
+.bottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button-wrap {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
 .amount {
+  align-self: right;
   text-align: right;
   font-size: 1.2em;
   span {
     font-weight: bold;
+  }
+}
+.order-btn {
+  display: block;
+  text-align: center;
+  border: none;
+  outline: none;
+  padding: 10px;
+  background-color: @blue;
+  color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: darken(@blue, 10%);
+  }
+  &:active {
+    transform: scale(0.95);
   }
 }
 </style>

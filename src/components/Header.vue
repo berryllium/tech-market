@@ -18,7 +18,7 @@
         />
         <router-link class="menu__item" to="/cart">
           <i class="fa fa-shopping-cart" aria-hidden="true">
-            <div class="cart-count">{{this.getAllCount}}</div>
+            <div v-if="getAllCount" class="cart-count">{{getAllCount}}</div>
           </i>
         </router-link>
       </nav>
