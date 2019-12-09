@@ -10,12 +10,10 @@ export default {
         state.cart.push(product)
       }
       state.jsonCart=JSON.stringify(state.cart)
-      console.log (state.jsonCart)
-      alert("Добавление в корзину товара с id=" + id);
     },
-    decCartProduct(state, id) {
-      let product = state.cart.find(el => el.id === id)
-      if (product.count > 1) product.count --
+    setCount(state, item) {
+      let product = state.cart.find(el => el.id === item.id)
+      if (item.count > 0) product.count = item.count
       state.jsonCart=JSON.stringify(state.cart)
     },
     removeFromCart(state, id) {
@@ -40,6 +38,12 @@ export default {
     },
     getJsonCart(state) {
       return state.jsonCart
+    },
+    getCount: (state) => (id) => {
+      return state.cart.find(element=> element.id == id).count
+    },
+    getAllCount: (state) => {
+      return state.cart.length ? state.cart.length : ''
     }
   }
 }

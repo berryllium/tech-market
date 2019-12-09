@@ -2,12 +2,16 @@
   <div class="content">
     <h1>Корзина товаров</h1>
     <div class="cart-products">
-      <cart-product />
-      <cart-product />
+      <cart-product
+        v-for="product in allCart"
+        :id="product.id"
+        :count="product.count"
+        :key="product.id"
+      />
     </div>
     <div class="amount">
       Итого:
-      <span class="sum">11600</span> руб.
+      <span class="sum">{{sum}}</span> руб.
     </div>
     <div class="form">
       <h3 class="form__header">Оформление заказа</h3>
@@ -28,20 +32,33 @@
           <textarea rows="4" class="form__address" name="address" placeholder="Адрес доставки"></textarea>
         </div>
       </div>
-        <input type="submit" class="form__button" name="order" value="Оформить заказ">
+      <input type="submit" class="form__button" name="order" value="Оформить заказ" />
     </div>
   </div>
 </template>
 <script>
 import CartProduct from "@/components/CartProduct";
+import { mapGetters } from 'vuex';
 export default {
   components: {
     "cart-product": CartProduct
+  },
+  computed: {
+    ...mapGetters(['allCart', 'oneProduct']),
+    sum() {
+      let sum = 0
+      this.allCart.forEach(element => {
+        sum += this.oneProduct(element.id).price_new * element.count
+      });
+      return sum
+    }
+  },
+  methods: {
   }
 };
 </script>
 <style lang="less" scoped>
-@import url('../style/variables.less');
+@import url("../style/variables.less");
 .amount {
   text-align: right;
   font-size: 1.2em;

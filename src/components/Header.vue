@@ -8,17 +8,24 @@
         <router-link class="menu__item" to="/contacts">Контакты</router-link>
         <router-link class="menu__item" to="/guarantee">Гарантия</router-link>
         <router-link class="menu__item" to="/feedback">Отзывы</router-link>
-        <input v-model="searchStr" @keyup="search" type="text" name="search" id="top-search" placeholder="Поиск" />
+        <input
+          v-model="searchStr"
+          @keyup="search"
+          type="text"
+          name="search"
+          id="top-search"
+          placeholder="Поиск"
+        />
         <router-link class="menu__item" to="/cart">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <i class="fa fa-shopping-cart" aria-hidden="true">
+            <div class="cart-count">{{this.getAllCount}}</div>
+          </i>
         </router-link>
       </nav>
       <div class="header-info">
         <div class="header-info__item header-logo">
           <a href="/">
-            <img
-              src="images/logo.png"
-            />
+            <img src="images/logo.png" />
           </a>
         </div>
         <div class="header-info__item">
@@ -61,19 +68,23 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      searchStr: ''
-    }
+      searchStr: ""
+    };
+  },
+  computed: {
+    ...mapGetters(["getAllCount"])
   },
   methods: {
     search() {
-      this.$store.dispatch('search', this.searchStr)
-      if(this.$route.fullPath != '/') this.$router.push('/')
+      this.$store.dispatch("search", this.searchStr);
+      if (this.$route.fullPath != "/") this.$router.push("/");
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -95,7 +106,23 @@ export default {
       color: @blue;
     }
     .fa-shopping-cart {
+      position: relative;
       font-size: 2em;
+      margin-right: 15px;
+      .cart-count {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: .6em;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        color: white;
+        background-color: @blue;
+        position: absolute;
+        right: -10px;
+        top: -5px;
+      }
     }
   }
   #top-search {
