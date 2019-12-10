@@ -1,9 +1,10 @@
 export default {
   actions: {
     fetchCatalog(ctx) {
-      fetch("db/catalog.json")
-        .then(response => response.json())
-        .then(json => ctx.commit('updateCatalog', json))
+      fetch("admin/api.php")
+        // .then(response => response.json())
+        .then(json => console.log(json))
+        // .then(json => ctx.commit('updateCatalog', json))
     },
     selectCategory(ctx, category) {
       ctx.commit('setCategory', category)

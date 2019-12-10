@@ -19,7 +19,6 @@
 export default {
   props: ["feedback"],
   mounted() {
-    console.log(this.feedback)
   }
 };
 </script>

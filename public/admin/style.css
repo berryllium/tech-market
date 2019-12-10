@@ -1,0 +1,61 @@
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css';
+
+nav {
+  margin-bottom: 20px;
+}
+h1, h2, h3 {
+  text-align: center;
+  margin: 20px 0;
+}
+.form {
+  padding: 20px;
+  margin: 0 auto;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea, select {
+  margin: 10px 0;
+}
+
+img {
+  width: 200px;
+  height: 100px;
+  object-fit: cover;
+}
+.login-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu-link {
+  display: inline-block;
+  margin-right: 20px;
+  padding: 10px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.delete-link {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: bold;
+  color: red;
+}
+
+.delete-link:hover {
+  text-decoration: none!important;
+  color: red;
+  transform: scale(1.5);
+}
