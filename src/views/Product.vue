@@ -6,8 +6,8 @@
         <div class="slider" data-auto="false">
           <img
             v-for="image in oneProduct.photos"
-            :key="image.alt"
-            :src="'db/images/products/'+image.src"
+            :key="image.id"
+            :src="`db/images/products/${oneProduct.id}/${image.src}`"
             :alt="image.alt"
           />
         </div>

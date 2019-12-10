@@ -36,6 +36,9 @@ export default {
       if(this.$route.fullPath != '/')
       this.$router.push('/')
     },
+  },
+  mounted() {
+    console.log(this.allCatalog);
   }
 }
 </script>
