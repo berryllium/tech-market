@@ -16,8 +16,7 @@ export default new Vuex.Store({
   },
   modules: {
     catalog,
-    cart,
-    feedbacks
+    cart
   },
   plugins: [createPersistedState({
     paths: ['cart'],

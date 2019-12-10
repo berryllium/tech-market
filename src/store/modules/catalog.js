@@ -2,9 +2,8 @@ export default {
   actions: {
     fetchCatalog(ctx) {
       fetch("admin/api.php")
-        // .then(response => response.json())
-        .then(json => console.log(json))
-        // .then(json => ctx.commit('updateCatalog', json))
+        .then(response => response.json())
+        .then(json => ctx.commit('updateCatalog', json))
     },
     selectCategory(ctx, category) {
       ctx.commit('setCategory', category)
@@ -14,9 +13,13 @@ export default {
     }
   },
   mutations: {
+    updateFeedbacks(state, feedbacks) {
+      state.feedbacks = feedbacks
+    },
     updateCatalog(state, catalog) {
-      state.categories = catalog[0].categories
-      state.catalog = catalog[1].products
+      console.log(catalog)
+      state.catalog = catalog.products
+      state.categories = catalog.categories
       state.filteredCatalog = state.catalog
       state.loading = false
     },
@@ -32,6 +35,7 @@ export default {
     }
   },
   state: {
+    feedbacks: [],
     catalog: [],
     filteredCatalog: [],
     categories: [],
@@ -39,6 +43,9 @@ export default {
     loading: true
   },
   getters: {
+    globalFeedbacks(state) {
+      return state.feedbacks
+    },
     allCategories(state) {
       return state.categories
     },

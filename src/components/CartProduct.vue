@@ -1,7 +1,7 @@
 <template>
   <div class="cart-product">
     <router-link :to="'/product'+ id " class="cart-product__img">
-      <img :src="'db/images/' + product.img" alt="photo" class="cart-product__img" />
+      <img :src="`db/images/products/${product.id}/${product.photos[0].src}`" alt="photo" class="cart-product__img" />
     </router-link>
     <router-link :to="'/product'+ id " class="cart-product__name">{{product.title}}</router-link>
     <div class="cart-product__count">

@@ -5,10 +5,10 @@
         <h2>{{oneProduct.title}}</h2>
         <div class="slider" data-auto="false">
           <img
-            v-for="image in oneProduct.photo"
+            v-for="image in oneProduct.photos"
             :key="image.alt"
-            :src="'db/images/'+image.src"
-            alt="photo"
+            :src="'db/images/products/'+image.src"
+            :alt="image.alt"
           />
         </div>
       </div>

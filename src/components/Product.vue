@@ -2,7 +2,7 @@
   <div href="#" class="product-card">
     <router-link class="product-card__link" :to="'/product'+product.id">
       <div class="product-card__title">{{product.title}}</div>
-      <img class="product-card__img" :src="'db/images/' + product.img" alt="photo" />
+      <img class="product-card__img" :src="`db/images/products/${product.id}/${product.photos[0].src}`" alt="photo" />
     </router-link>
     <div class="product-card__feedback">
       <div class="product-card__stars product-card__stars_four">
