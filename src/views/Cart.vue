@@ -17,13 +17,13 @@
       <button @click="showForm = true" class="order-btn">Оформить заказ</button>
     </div>
      <div v-else class="empty">Корзина пуста</div>
-    <OrderForm v-if="showForm" @closeForm="closeForm" />
+    <OrderForm v-if="showForm" @closeForm="closeForm" @order="clearCart"/>
   </div>
 </template>
 <script>
 import CartProduct from "@/components/CartProduct";
 import OrderForm from "@/components/OrderForm";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     "cart-product": CartProduct,
@@ -45,9 +45,10 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['clearCart']),
     closeForm(target) {
       if(target == 'form-wrap' || target == 'form__close') this.showForm = false;
-    }
+    },
   }
 };
 </script>

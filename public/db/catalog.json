@@ -21,8 +21,6 @@
         "id": 1,
         "category": "Телефоны",
         "title": "Iphone 18s",
-        "rating": 2,
-        "vote": 20,
         "price_old": 18900,
         "price_new": 16500,
         "img": "image-phone1.jpg",
@@ -52,8 +50,8 @@
           {
             "name": "Вася",
             "date": "18.12.2019",
-            "rating": 4,
-            "text": "Текст отзыва"
+            "rating": 3,
+            "text": "Фу какой"
           }
         ]
       },
@@ -61,8 +59,6 @@
         "id": 2,
         "category": "Автотовары",
         "title": "Колесо",
-        "rating": 5,
-        "vote": 50,
         "price_old": 18900,
         "price_new": 16500,
         "img": "image-phone.jpg",
@@ -92,7 +88,7 @@
           {
             "name": "Антон",
             "date": "18.12.2019",
-            "rating": 4,
+            "rating": 5,
             "text": "Текст отзыва"
           }
         ]
@@ -101,10 +97,8 @@
         "id": 3,
         "category": "Аксессуары",
         "title": "Чехол",
-        "rating": 4,
-        "vote": 20,
-        "price_old": 18900,
-        "price_new": 16500,
+        "price_old": 20000,
+        "price_new": 17800,
         "img": "image-phone.jpg",
         "photo": [
           {
@@ -132,8 +126,14 @@
           {
             "name": "Антон",
             "date": "18.12.2019",
-            "rating": 4,
+            "rating": 3,
             "text": "Текст отзыва"
+          },
+          {
+            "name": "Володя",
+            "date": "18.12.2017",
+            "rating": 5,
+            "text": "Отличный товар"
           }
         ]
       },
@@ -141,10 +141,8 @@
         "id": 4,
         "category": "Аксессуары",
         "title": "Защитное стекло",
-        "rating": 4,
-        "vote": 20,
-        "price_old": 18900,
-        "price_new": 16500,
+        "price_old": 1000,
+        "price_new": 500,
         "img": "image-phone.jpg",
         "photo": [
           {

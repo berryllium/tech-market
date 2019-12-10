@@ -60,9 +60,8 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.user);
       this.done = true;
-      console.log(this.done);
+      this.$emit('order')
     },
     close() {
       this.$emit("closeForm", event.target.className);

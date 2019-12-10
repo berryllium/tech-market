@@ -18,26 +18,26 @@
             <i class="fa fa-star" aria-hidden="true"></i>
             <i
               class="fa"
-              :class="oneProduct.rating > 1 ? 'fa-star' : 'fa-star-o'"
+              :class="rating > 1 ? 'fa-star' : 'fa-star-o'"
               aria-hidden="true"
             ></i>
             <i
               class="fa"
-              :class="oneProduct.rating > 2 ? 'fa-star' : 'fa-star-o'"
+              :class="rating > 2 ? 'fa-star' : 'fa-star-o'"
               aria-hidden="true"
             ></i>
             <i
               class="fa"
-              :class="oneProduct.rating > 3 ? 'fa-star' : 'fa-star-o'"
+              :class="rating > 3 ? 'fa-star' : 'fa-star-o'"
               aria-hidden="true"
             ></i>
             <i
               class="fa"
-              :class="oneProduct.rating > 4 ? 'fa-star' : 'fa-star-o'"
+              :class="rating > 4 ? 'fa-star' : 'fa-star-o'"
               aria-hidden="true"
             ></i>
           </div>
-          <div class="counter">Рейтинг: {{oneProduct.vote}} голосов</div>
+          <div class="counter">Отзывы: {{oneProduct.feedbacks.length}}</div>
         </div>
         <div class="block-price">
           <div class="price-line price-line_rec">
@@ -156,11 +156,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["allCart"]),
+    ...mapGetters(["allCart", "ratingProduct"]),
     isBuy() {
       return this.allCart.find(el => el.id == this.oneProduct.id)
         ? true
         : false;
+    },
+    rating() {
+      return this.$store.getters.ratingProduct(this.oneProduct.id);
     }
   },
   methods: {

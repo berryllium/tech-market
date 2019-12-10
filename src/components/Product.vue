@@ -6,13 +6,13 @@
     </router-link>
     <div class="product-card__feedback">
       <div class="product-card__stars product-card__stars_four">
-        <i class="fa fa-star" aria-hidden="true"></i>
-        <i class="fa" :class="product.rating > 1 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
-        <i class="fa" :class="product.rating > 2 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
-        <i class="fa" :class="product.rating > 3 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
-        <i class="fa" :class="product.rating > 4 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="rating > 0 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="rating > 1 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="rating > 2 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="rating > 3 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+        <i class="fa" :class="rating > 4 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
       </div>
-      <span class="product-card__counter">({{product.vote}})</span>
+      <span class="product-card__counter">({{product.feedbacks.length}})</span>
     </div>
     <div class="product-card__price">
       <div class="product-card__new-price">{{product.price_new}} руб.</div>
@@ -22,24 +22,34 @@
       <router-link class="menu__item" :to="'/product'+product.id">
         <button class="more-btn">Подробнее</button>
       </router-link>
-      <router-link to="/cart" v-if="isBuy" tag="button" class="buy-btn is-buy" :data-id="product.id" @click="toCart">В корзине</router-link>
+      <router-link
+        to="/cart"
+        v-if="isBuy"
+        tag="button"
+        class="buy-btn is-buy"
+        :data-id="product.id"
+        @click="toCart"
+      >В корзине</router-link>
       <button v-else class="buy-btn" :data-id="product.id" @click="toCart">Купить</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations, mapGetters } from "vuex";
 export default {
   props: ["product"],
   computed: {
-    ...mapGetters(['allCart']),
+    ...mapGetters(["allCart", "ratingProduct"]),
     isBuy() {
-          return this.allCart.find(el => el.id == this.product.id) ? true : false
-        }
+      return this.allCart.find(el => el.id == this.product.id) ? true : false;
+    },
+    rating() {
+      return this.$store.getters.ratingProduct(this.product.id);
+    }
   },
   methods: {
-    ...mapMutations(['addToCart']),
+    ...mapMutations(["addToCart"]),
     toCart() {
       this.addToCart(event.target.dataset.id);
     }

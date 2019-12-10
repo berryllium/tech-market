@@ -56,6 +56,15 @@ export default {
     categoryProducts: (state) => (category) => {
       return state.catalog.find(element=> element.category == category)
     },
+    ratingProduct: (state) => (id) => {
+      let rating = 0
+      const product = state.catalog.find(element=> element.id == id)
+      if (!product.feedbacks.length) return 0
+      product.feedbacks.forEach(el=>{
+        rating += +el.rating
+      })
+      return rating/product.feedbacks.length
+    },
     allFeedbacks(state) {
       return state.catalog.filter(element=> element.id == 1)[0].feedbacks
     },

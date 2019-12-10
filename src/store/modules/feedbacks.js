@@ -9,7 +9,6 @@ export default {
   mutations: {
     updateFeedbacks(state, feedbacks) {
       state.feedbacks = feedbacks
-      console.log(state.feedbacks)
     },
   },
   state: {
