@@ -1,36 +1,39 @@
 <template>
   <div class="form">
-    <h3 class="form__header">Оставьте свой отзыв</h3>
-    <form action="#">
-      <div class="form__name">
-        <label for="name">Ваше имя</label>
-        <br />
-        <input type="name" id="name" name="name" />
-      </div>
-      <div class="form__email">
-        <label for="email">Ваша электронная почта</label>
-        <br />
-        <input type="email" id="email" name="email" />
-      </div>
-      <div class="form__header">
-        <label for="header">Заголовок отзыва</label>
-        <br />
-        <input type="text" id="header" name="header" />
-      </div>
-      <div class="form__rating">
-        <label>Ваша оценка</label>
-        <br />
-        <div class="stars stars_four">
-          <star-rating v-model="rating" text-class="custom-text" />
+    <div v-if="done" class="form__thanks">Спасибо за отзыв!</div>
+    <div v-else class="form-wrap">
+      <h3 class="form__header">Оставьте свой отзыв</h3>
+      <form action="#" @submit.prevent="onSubmit">
+        <div class="form__name">
+          <label for="name">Ваше имя</label>
+          <br />
+          <input v-model="feedback.name" type="name" id="name" name="name" required/>
         </div>
-      </div>
-      <div class="form__feedback">
-        <label for="feedback">Ваш отзыв</label>
-        <br />
-        <textarea id="feedback" name="feedback" rows="10"></textarea>
-      </div>
-      <input type="submit" class="form__button" value="Отправить" />
-    </form>
+        <div class="form__email">
+          <label for="email">Ваша электронная почта</label>
+          <br />
+          <input v-model="feedback.email" type="email" id="email" name="email" />
+        </div>
+        <div class="form__header">
+          <label for="header">Заголовок отзыва</label>
+          <br />
+          <input v-model="feedback.header" type="text" id="header" name="header" required/>
+        </div>
+        <div class="form__rating">
+          <label>Ваша оценка</label>
+          <br />
+          <div class="stars stars_four">
+            <star-rating v-model="feedback.rating" text-class="custom-text" required/>
+          </div>
+        </div>
+        <div class="form__feedback">
+          <label for="feedback">Ваш отзыв</label>
+          <br />
+          <textarea v-model="feedback.text" id="feedback" name="feedback" rows="10" required></textarea>
+        </div>
+        <input type="submit" class="form__button" value="Отправить" />
+      </form>
+    </div>
   </div>
 </template>
 
@@ -39,8 +42,25 @@ import StarRating from "vue-star-rating";
 export default {
   data() {
     return {
-      rating: 5
+      feedback: {
+        name: "",
+        email: "",
+        header: "",
+        rating: 5,
+        text: ""
+      },
+      done: false
     };
+  },
+  methods: {
+    onSubmit() {
+      console.log(this.feedback);
+      this.done = true;
+      console.log(this.done);
+    },
+    close() {
+      this.$emit("closeForm", event.target.className);
+    }
   },
   components: {
     "star-rating": StarRating
@@ -103,5 +123,11 @@ export default {
   &__feedback {
     grid-area: feedback;
   }
+}
+.form__thanks {
+  font-size: 1.5em;
+  text-align: center;
+  padding: 20px 0;
+  color: @blue;
 }
 </style>
