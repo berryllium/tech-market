@@ -9,13 +9,14 @@
         :key="product.id"
       />
     </div>
-    <div class="amount">
+    <div v-if="getAllCount" class="amount">
       Итого:
       <span class="sum">{{sum}}</span> руб.
     </div>
-    <div class="button-wrap">
+    <div  v-if="getAllCount" class="button-wrap">
       <button @click="showForm = true" class="order-btn">Оформить заказ</button>
     </div>
+     <div v-else class="empty">Корзина пуста</div>
     <OrderForm v-if="showForm" @closeForm="closeForm" />
   </div>
 </template>
@@ -34,7 +35,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["allCart", "oneProduct"]),
+    ...mapGetters(["allCart", "oneProduct", "getAllCount"]),
     sum() {
       let sum = 0;
       this.allCart.forEach(element => {
@@ -86,5 +87,8 @@ export default {
   &:active {
     transform: scale(0.95);
   }
+}
+.empty {
+  text-align: center;
 }
 </style>

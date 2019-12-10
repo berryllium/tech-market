@@ -1,11 +1,15 @@
 <template>
   <div class="modal" @click="close">
-      <div class="bg"></div>
+    <div class="bg"></div>
     <div class="form-wrap">
       <form class="form" @submit.prevent="onSubmit">
         <div class="form__close">&times;</div>
         <h3 class="form__header">Оформление заказа</h3>
-        <div class="form__content">
+        <div v-if="done" class="form__done">
+          Заказ оформлен.
+          <br />Мы с вами свяжемся!
+        </div>
+        <div v-else class="form__content">
           <div class="form__user">
             <label for="name">Ваше имя</label>
             <input v-model="user.name" type="name" class="form__name" name="name" placeholder="Имя" />
@@ -34,8 +38,8 @@
               placeholder="Адрес доставки"
             ></textarea>
           </div>
-        </div>
         <input type="submit" class="form__button" name="order" value="Оформить заказ" />
+        </div>
       </form>
     </div>
   </div>
@@ -50,15 +54,18 @@ export default {
         email: "",
         phone: "",
         address: ""
-      }
+      },
+      done: false
     };
   },
   methods: {
     onSubmit() {
       console.log(this.user);
+      this.done = true;
+      console.log(this.done);
     },
     close() {
-      this.$emit('closeForm', event.target.className)
+      this.$emit("closeForm", event.target.className);
     }
   }
 };
@@ -104,6 +111,17 @@ export default {
   }
   &__header {
     margin: 20px 0;
+  }
+  &__done {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    text-align: center;
+    color: @blue;
+    font-size: 1.2em;
   }
   input,
   textarea {
