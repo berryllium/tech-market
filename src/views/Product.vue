@@ -15,7 +15,11 @@
       <div class="product-card">
         <div class="block-feedback">
           <div class="stars stars_four">
-            <i class="fa fa-star" aria-hidden="true"></i>
+                        <i
+              class="fa"
+              :class="rating > 0 ? 'fa-star' : 'fa-star-o'"
+              aria-hidden="true"
+            ></i>
             <i
               class="fa"
               :class="rating > 1 ? 'fa-star' : 'fa-star-o'"
@@ -101,12 +105,12 @@
           >Отзывы</li>
         </ul>
         <div class="tabs__content">
-          <div class="tabs__item" v-if="this.tab=='desc'">{{oneProduct.description}}</div>
+          <div class="tabs__item" v-if="this.tab=='desc'">{{oneProduct.desc}}</div>
           <div class="tabs__item" v-if="this.tab=='prop'">
             <table class="tabs__table">
-              <tr v-for="property in oneProduct.properties" :key="property.name">
-                <td>{{property.name}}</td>
-                <td>{{property.value}}</td>
+              <tr v-for="spec in oneProduct.spec" :key="spec.id">
+                <td>{{spec.prop}}</td>
+                <td>{{spec.value}}</td>
               </tr>
             </table>
           </div>

@@ -2,7 +2,6 @@
   <router-link class="product-card" :to="{name: 'product', params: {id: product.id}}">
     <img class="product-card__img" :src="`db/images/products/${product.id}/${product.photos[0].src}`" alt="photo" />
     <div class="product-card__title">{{product.title}}</div>
-    <div class="id">{{product.id}}</div>
   </router-link>
 </template>
 

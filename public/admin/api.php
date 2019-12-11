@@ -3,7 +3,7 @@
 require_once('connection.php');
 
 function getProducts($connection) {
-$query = 'SELECT *, products.title AS title, categories.name AS category FROM products 
+$query = 'SELECT *, products.id AS id, products.title AS title, categories.name AS category FROM products 
 INNER JOIN categories ON products.id_cat = categories.id';
 
 $result = mysqli_query($connection, $query);
@@ -11,11 +11,13 @@ $products = [];
 while ($row = mysqli_fetch_assoc($result)) {
   $product = [];
   $photos = getPhotos($connection, $row['id']);
+  $spec = getSpecifications($connection, $row['id']);
   $feedbacks = getFeedbacks($connection, $row['id']);
   foreach($row as $k=>$v) {
      $product[$k] = $v;
      $product['photos'] = $photos;
      $product['feedbacks'] = $feedbacks;
+     $product['spec'] = $spec;
     }
     $products[] = $product;
 }
@@ -35,6 +37,20 @@ function getPhotos($connection, $id) {
      $photos[] = $photo;
   }
   return $photos;
+}
+
+function getSpecifications($connection, $id) {
+  $query = "SELECT `prop`, `value`  FROM `specifications` WHERE `id_prod` = '$id'";
+  $result = mysqli_query($connection, $query);
+  $specifications = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $spec = [];
+    foreach($row as $k=>$v) {
+     $spec[$k] = $v;
+    }
+     $specifications[] = $spec;
+  }
+  return $specifications;
 }
 
 function getFeedbacks($connection, $id) {
@@ -80,3 +96,4 @@ $feedbacks = getShopFeedbacks($connection);
 $data = ['products' => $products, 'categories' => $categories, 'feedbacks' => $feedbacks];
 
 echo json_encode($data, JSON_UNESCAPED_UNICODE);
+// print_r($data);
