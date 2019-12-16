@@ -48,9 +48,7 @@ switch ($page) {
     }
   default: {
       $view = 'v_catalog.tmpl';
-      require_once('models/Catalog.php');
-      $catalog = new Catalog($db);
-      $data = array('products' => $catalog->getAll());
+      require_once('controllers/c_catalog.php');
       break;
     }
 }

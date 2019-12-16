@@ -13,7 +13,10 @@ if ($act == 'del') {
   $id = $catalog->addProduct($_POST, $_FILES);
   $data = $catalog->getProduct($id);
   $view = 'v_product.tmpl';
-} else {
+} elseif ($id) {
   $data = $catalog->getProduct($id_prod);
   $view = 'v_product.tmpl';
+} else {
+  $data = array('products' => $catalog->getAll());
+  $view = 'v_catalog.tmpl';
 }
