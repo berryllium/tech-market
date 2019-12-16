@@ -71,20 +71,23 @@ class Catalog
       'price_old' => $price_old,
       'id_cat' => $id_cat
     ];
+
+    echo $this->db->Insert('products', $product);
+
     if ($id) $product['id'] = $id;
     $photo = $files['photo'];
     if ($photo['tmp_name']) {
       $photo_name = substr(md5_file($photo['tmp_name']), -10) . '_' . translit($photo['name']);
-      $path_big = 'img/big/';
-      $path_small = 'img/small/';
+      $path_big = "../db/images/big/$id/";
+      $path_small = "../db/images/small/$id/";
+      if ( ! is_dir($path_big) && ! is_dir($path_small)) {
+        mkdir($path_big);
+        mkdir($path_small);
+    }
       $mas = ['image/jpeg', 'image/png', 'image/gif'];
       if (in_array($photo['type'], $mas)) {
         if (move_uploaded_file($photo['tmp_name'], $path_big . $photo_name)) {
           imageresize($path_small . $photo_name, $path_big . $photo_name, 400, 250, 75);
-          $big = $path_big . $photo_name;
-          $small = $path_small . $photo_name;
-          $product['path_big'] = $big;
-          $product['path_small'] = $small;
         }
       } else return 'Можно загрузить только изображения в формате .jpg, .png или .gif';
     }

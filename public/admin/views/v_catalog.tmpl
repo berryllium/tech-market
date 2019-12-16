@@ -1,14 +1,20 @@
 <div class="form col-md-6 col-12">
-  <form action="?page=single&act=add" method="POST" enctype="multipart/form-data" class="flex columns">
-    <input type="text" name="title" id="title" placeholder="Название" required>
-    <select name="category" id="category" required>
+  <form action="?page=catalog&act=add" method="POST" enctype="multipart/form-data" class="flex columns">
+    <input hidden name="id" value="{{product.id}}">
+    <input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required>
+    <select name="ic_cat" id="id_cat" required>
       {% for category in categories %}
-        <option value="{{category.id}}">{{category.name}}</option>
+        <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}</option>
       {% endfor %}
-    </select>
-    <input type="number" name="price" id="price" placeholder="Цена" required>
-    <textarea type="text" name="desc" id="decs" placeholder="Описание" required></textarea>
-    <input type="file" name="photo" id="photo" accept="image/jpeg" required>
+      {% for spec in specifications %}
+      <input type="text" name="spec[]" placeholder="Параметр" value="{{spec.prop}}" required>
+      <input type="text" name="spec[]" placeholder="Значение" value="{{spec.value}}" required>
+      {% endfor %}
+    <input type="number" name="price_new" id="price_new" placeholder="Цена новая" value="{{product.price_new}}" required>
+    <input type="number" name="price_old" id="price_old" placeholder="Цена старая" value="{{product.price_old}}" required>
+    <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.desc}}</textarea>
+    <textarea type="text" name="features" id="features" placeholder="Особенности" required>{{product.features}}</textarea>
+    <input type="file" name="photo" id="photo" accept="image/jpeg" multiple>
     <input type="submit" value="Добавить товар">
   </form>
 </div>

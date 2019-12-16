@@ -4,17 +4,18 @@
     <input hidden name="id" value="{{product.id}}">
     <input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required>
     <select name="ic_cat" id="id_cat" required>
-      {% for category in categories}
-        <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''></option>
+      
+      {% for category in categories %}
+      <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}</option>
       {% endfor %}
-      {% for spec in specifications}
+
       <input type="text" name="spec[]" placeholder="Параметр" value="{{spec.prop}}" required>
       <input type="text" name="spec[]" placeholder="Значение" value="{{spec.value}}" required>
-      {% endfor %}
-    <input type="number" name="price_new" id="price_new" placeholder="Цена" value="{{product.price_new}}" required>
-    <input type="number" name="price_old" id="price_old" placeholder="Цена" value="{{product.price_old}}" required>
-    <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.desc}}</textarea>
-    <input type="file" name="photo" id="photo" accept="image/jpeg" multiple>
-    <input type="submit" value="Внести изменения">
+
+      <input type="number" name="price_new" id="price_new" placeholder="Цена" value="{{product.price_new}}" required>
+      <input type="number" name="price_old" id="price_old" placeholder="Цена" value="{{product.price_old}}" required>
+      <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.desc}}</textarea>
+      <input type="file" name="photo" id="photo" accept="image/jpeg" multiple>
+      <input type="submit" value="Внести изменения">
   </form>
 </div>

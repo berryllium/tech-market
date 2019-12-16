@@ -46,6 +46,11 @@ switch ($page) {
       $data = array('isAdmin' => $isAdmin);
       break;
     }
+    case 'single': {
+      $view = 'v_single.tmpl';
+      require_once('controllers/c_single.php');
+      break;
+    }
   default: {
       $view = 'v_catalog.tmpl';
       require_once('controllers/c_catalog.php');

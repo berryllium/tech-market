@@ -8,15 +8,15 @@ if ($act == 'del') {
 } elseif ($act == 'edit') {
   $catalog->updateProduct($_POST, $_FILES);
   $data = $catalog->getProduct($id_prod);
-  $view = 'v_product.tmpl';
+  $view = 'v_single.tmpl';
 } elseif ($act == 'add') {
   $id = $catalog->addProduct($_POST, $_FILES);
   $data = $catalog->getProduct($id);
-  $view = 'v_product.tmpl';
+  $view = 'v_catalog.tmpl';
 } elseif ($id) {
   $data = $catalog->getProduct($id_prod);
   $view = 'v_product.tmpl';
 } else {
-  $data = array('products' => $catalog->getAll());
+  $data = array('products' => $catalog->getAll(), 'categories' => $catalog->getCategories());
   $view = 'v_catalog.tmpl';
 }
