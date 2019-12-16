@@ -2,6 +2,7 @@
 node_modules
 Материалы
 /dist
+/public/admin/Twig
 
 # local env files
 .env.local
