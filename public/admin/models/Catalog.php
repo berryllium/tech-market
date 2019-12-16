@@ -62,13 +62,14 @@ class Catalog
   public function prepareProduct($post, $files)
   {
     extract($post);
+
     $product = [
       'title' => $title,
-      'category' => $category,
-      'short_desc' => $short_desc,
-      'full_desc' => $full_desc,
-      'price' => $price,
-      'complect' => $complect
+      'desc' => $desc,
+      'features' => $features,
+      'price_new' => $price_new,
+      'price_old' => $price_old,
+      'id_cat' => $id_cat
     ];
     if ($id) $product['id'] = $id;
     $photo = $files['photo'];
