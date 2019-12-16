@@ -136,7 +136,7 @@
         </div>
       </div>
     </section>
-    <OrderForm v-if="showForm" @closeForm="closeForm" />
+    <OrderForm v-if="showForm" @closeForm="closeForm" :id_prod="oneProduct.id" @quickOrder="quickBuy($event, oneProduct.id)"/>
   </div>
 </template>
 
@@ -144,7 +144,7 @@
 import Feedback from "@/components/Feedback";
 import OrderForm from "@/components/OrderForm";
 import FeedbackForm from "@/components/FeedbackForm";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   components: {
     Feedback,
@@ -172,6 +172,7 @@ export default {
   },
   methods: {
     ...mapMutations(["addToCart"]),
+    ...mapActions(["quickBuy"]),
     changeTab(tab) {
       this.tab = tab;
     },

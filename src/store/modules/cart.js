@@ -15,8 +15,21 @@ export default {
           ctx.commit('clearCart')
         }
       })
-    }
-  },
+    },
+  quickBuy(ctx, user, id) {
+    $.ajax({
+      type: "POST",
+      url: "/admin/index.php?page=api&act=order",
+      data: {
+        user: user,
+        cart: [{id: id, count: 1}]
+      },
+      success: function (msg) { 
+        alert(msg)
+      }
+    })
+  }
+},
   mutations: {
     addToCart(state, id) {
       let product = state.cart.find(el => el.id === id)

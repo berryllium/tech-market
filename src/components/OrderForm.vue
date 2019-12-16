@@ -46,7 +46,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
+  props: ['id_prod'],
   data() {
     return {
       user: {
@@ -59,9 +61,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions['quickBuy', 'sendCart'],
     onSubmit() {
       this.done = true;
-      this.$emit('order', this.user)
+      if (this.id_prod) {
+        this.$emit('quickOrder', this.user)
+      }
+       else this.$emit('order', this.user)
     },
     close() {
       this.$emit("closeForm", event.target.className);
