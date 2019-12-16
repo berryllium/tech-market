@@ -17,6 +17,7 @@ $id_prod = $_GET['id'];
 
 switch ($page) {
   case 'api': {
+    if ($_GET['act'] == 'order') $cart = $_POST;
     require_once('controllers/c_api.php');
     exit;
     break;

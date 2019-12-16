@@ -20,18 +20,16 @@
     <th>Категория</th>
     <th>Описание</th>
     <th>Цена</th>
-    <th>Единицы</th>
     <th>Редактировать</th>
     <th>Удалить</th>
   </tr>
  {% for product in products %}
       <tr>
-        <td> <img class="example-image" src="<{{product.title}}" alt="{{product.title}}" /> </td>
+        <td> <img class="example-image" src="../db/images/products/{{product.id}}/{{product.photos[0].src}}" alt="{{product.title}}" /> </td>
         <td>{{product.title}}</td>
         <td>{{product.category}}</td>
         <td>{{product.desc}}</td>
-        <td>{{product.old_price}}</td>
-        <td>{{product.new_prie}}</td>
+        <td>{{product.price_new}}</td>
         <td> <a class="edit-link" href="?page=single&act=edit&id={{product.id}}" target="_blank">Редактировать</a></td>
         <td> <a class="delete-link" href="?page=single&act=del&id={{product.id}}">&times;</a></td>
 

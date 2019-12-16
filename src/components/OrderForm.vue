@@ -61,7 +61,7 @@ export default {
   methods: {
     onSubmit() {
       this.done = true;
-      this.$emit('order')
+      this.$emit('order', this.user)
     },
     close() {
       this.$emit("closeForm", event.target.className);
