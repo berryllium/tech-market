@@ -1,83 +1,73 @@
 <h2 class="col-12">Редактирование товара {{product.id}}</h2>
-<div class="form col-md-6 col-12">
-  <form action="?page=catalog&act=add&id={{product.id}}" method="POST" enctype="multipart/form-data"
-    class="flex columns">
-    <input hidden name="id" value="{{product.id}}">
-    <table>
-      <tr>
-        <td><label>Название</label></td>
-        <td><input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required></td>
-      </tr>
-      <tr>
-        <td><label>Категория</label></td>
-        <td><select name="id_cat" id="id_cat" required>
-            {% for category in categories %}
-            <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}
-            </option>
-            {% endfor %}
-          </select></td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center">Характеристики</td>
-      </tr>
-      {% for spec in specifications %}
-      <tr>
-        <td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td>
-        <td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
-        <input type="hidden" name="id_spec[]" value="{{spec.id}}">
-      </tr>
-      {% endfor %}
-      <tr id="add-tr">
-        <td colspan="2" class="text-center"><button id="addspec" class="btn btn-warning m-auto">Добавить
-            характеристику</button></td>
-      </tr>
+<div class="form col-md-12 col-12"></div>
+<form action="?page=catalog&act=add&id={{product.id}}" method="POST" enctype="multipart/form-data" class="flex columns">
+  <input hidden name="id" value="{{product.id}}">
+  <table>
+    <tr>
+      <td><label>Название</label></td>
+      <td><input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required></td>
+    </tr>
+    <tr>
+      <td><label>Категория</label></td>
+      <td><select name="id_cat" id="id_cat" required>
+          {% for category in categories %}
+          <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}
+          </option>
+          {% endfor %}
+        </select></td>
+    </tr>
+    <tr>
+      <td colspan="2" class="text-center">Характеристики</td>
+    </tr>
+    {% for spec in specifications %}
+    <tr>
+      <td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td>
+      <td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
+      <input type="hidden" name="id_spec[]" value="{{spec.id}}">
+    </tr>
+    {% endfor %}
+    <tr id="add-tr">
+      <td colspan="2" class="text-center"><button id="addspec" class="btn btn-warning m-auto">Добавить
+          характеристику</button></td>
+    </tr>
 
-      <tr>
-        <td>Новая цена</td>
-        <td><input type="number" name="price_new" id="price_new" placeholder="Цена новая" value="{{product.price_new}}"
-            required></td>
-      </tr>
+    <tr>
+      <td>Новая цена</td>
+      <td><input type="number" name="price_new" id="price_new" placeholder="Цена новая" value="{{product.price_new}}"
+          required></td>
+    </tr>
 
-      <tr>
-        <td>Старая цена</td>
-        <td><input type="number" name="price_old" id="price_old" placeholder="Цена старая" value="{{product.price_old}}"
-            required></td>
-      </tr>
+    <tr>
+      <td>Старая цена</td>
+      <td><input type="number" name="price_old" id="price_old" placeholder="Цена старая" value="{{product.price_old}}"
+          required></td>
+    </tr>
 
-      <tr>
-        <td>Описание</td>
-        <td><textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.detail}}</textarea>
-        </td>
-      </tr>
+    <tr>
+      <td>Описание</td>
+      <td><textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.detail}}</textarea>
+      </td>
+    </tr>
 
-      <tr>
-        <td>Особенности</td>
-        <td><textarea type="text" name="features" id="features" placeholder="Особенности"
-            required>{{product.features}}</textarea></td>
-      </tr>
+    <tr>
+      <td>Особенности</td>
+      <td><textarea type="text" name="features" id="features" placeholder="Особенности"
+          required>{{product.features}}</textarea></td>
+    </tr>
 
-      {% for photo in photos %}
-      <tr>
-        <td><img src="../db/images/products/small/{{product.id}}/{{photo.src}}" alt="{{photo.title}}"></td>
-        <td><a href="?page=single&act=del_img&id={{product.id}}&id_img={{photo.id}}">Удалить</a></td>
-      </tr>
-      {% endfor %}
+    {% for photo in photos %}
+    <tr>
+      <td><img src="../db/images/products/small/{{product.id}}/{{photo.src}}" alt="{{photo.title}}"></td>
+      <td><a href="?page=single&act=del_img&id={{product.id}}&id_img={{photo.id}}">Удалить</a></td>
+    </tr>
+    {% endfor %}
 
-      <tr>
-        <td><input type="file" name="photo[]" id="photo" accept="image/jpeg" multiple></td>
-        <td><input type="submit" value="Внести правки"></td>
-      </tr>
-
-
-    </table>
-
-
-
-
-
-
-
-  </form>
+    <tr>
+      <td><input type="file" name="photo[]" id="photo" accept="image/jpeg" multiple></td>
+      <td><input type="submit" value="Внести правки"></td>
+    </tr>
+  </table>
+</form>
 </div>
 
 <script>
@@ -92,12 +82,19 @@
 </script>
 
 <style>
-  input {
-    width: 100% !important;
+  td:first-child {
+    width: 30%;
+  }
+
+  form,
+  table {
+    width: 100%;
   }
 
   input,
   textarea {
+    display: block;
+    width: 100% !important;
     margin: 0 !important;
   }
 </style>
