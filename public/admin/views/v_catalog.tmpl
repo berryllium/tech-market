@@ -14,7 +14,7 @@
     <input type="number" name="price_old" id="price_old" placeholder="Цена старая" value="{{product.price_old}}" required>
     <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.desc}}</textarea>
     <textarea type="text" name="features" id="features" placeholder="Особенности" required>{{product.features}}</textarea>
-    <input type="file" name="photo" id="photo" accept="image/jpeg" multiple>
+    <input type="file" name="photo[]" id="photo" accept="image/jpeg" multiple>
     <input type="submit" value="Добавить товар">
   </form>
 </div>
@@ -31,7 +31,7 @@
   </tr>
  {% for product in products %}
       <tr>
-        <td> <img class="example-image" src="../db/images/products/{{product.id}}/{{product.photos[0].src}}" alt="{{product.title}}" /> </td>
+        <td> <img class="example-image" src="../db/images/products/small/{{product.id}}/{{product.photos[0].src}}" alt="{{product.title}}" /> </td>
         <td>{{product.title}}</td>
         <td>{{product.category}}</td>
         <td>{{product.desc}}</td>

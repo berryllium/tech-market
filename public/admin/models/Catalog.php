@@ -49,7 +49,7 @@ class Catalog
   public function addProduct($post, $files)
   {
     $product = $this->prepareProduct($post, $files);
-    return $this->db->Insert('products', $product);
+    // return $this->db->Insert('products', $product);
   }
   public function updateProduct($post, $files)
   {
@@ -63,7 +63,6 @@ class Catalog
   public function prepareProduct($post, $files)
   {
     extract($post);
-
     $product = [
       'title' => $title,
       'detail' => $desc,
@@ -73,24 +72,28 @@ class Catalog
       'id_cat' => $id_cat
     ];
 
-    $id = 1 + $this->db->Insert('products', $product);
+    $id = $this->db->Insert('products', $product);
     echo $id;
     // if ($id) $product['id'] = $id;
-    $photo = $files['photo'];
-    if ($photo['tmp_name']) {
-      $photo_name = substr(md5_file($photo['tmp_name']), -10) . '_' . translit($photo['name']);
+    $files = $files['photo'];
+
+    for ($i = 0; $i < count($files['name']); $i++) {
+      $photo['id_prod'] = $id;
+      $photo['alt'] = $files['name'][$i];
+      $photo['src'] = substr(md5_file($files['tmp_name'][$i]), -10) . '_' . translit($files['name'][$i]);
+      $this->db->Insert('photos', $photo);
       $path_big = "../db/images/products/big/$id/";
       $path_small = "../db/images/products/small/$id/";
-      mkdir($path_big, 0700, true);
-      mkdir($path_small, 0700, true);
-      if ( ! is_dir($path_big) && ! is_dir($path_small)) {
-    }
+      if (!file_exists("../db/images/products/small/$id/")) {
+        mkdir($path_big, 0700, true);
+        mkdir($path_small, 0700, true);
+      }
       $mas = ['image/jpeg', 'image/png', 'image/gif'];
-      if (in_array($photo['type'], $mas)) {
-        if (move_uploaded_file($photo['tmp_name'], $path_big . $photo_name)) {
-          imageresize($path_small . $photo_name, $path_big . $photo_name, 400, 250, 75);
-        }
-      } else return 'Можно загрузить только изображения в формате .jpg, .png или .gif';
+      if (in_array($files['type'][$i], $mas)) {
+        if (move_uploaded_file($files['tmp_name'][$i], $path_big . $photo['src'])) {
+          imageresize($path_small . $photo['src'], $path_big . $photo['src'], 400, 250, 75);
+        } else echo 'файлы не найдены';
+      } else echo 'Можно загрузить только изображения в формате .jpg, .png или .gif';
     }
     return $product;
   }
