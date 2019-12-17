@@ -7,7 +7,7 @@
           <img
             v-for="image in oneProduct.photos"
             :key="image.id"
-            :src="`db/images/products/${oneProduct.id}/${image.src}`"
+            :src="`db/images/products/big/${oneProduct.id}/${image.src}`"
             :alt="image.alt"
           />
         </div>
