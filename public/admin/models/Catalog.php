@@ -62,7 +62,9 @@ class Catalog
   }
   public function prepareProduct($post, $files)
   {
+    print_r($post);
     extract($post);
+
     $product = [
       'title' => $title,
       'detail' => $desc,
@@ -71,8 +73,17 @@ class Catalog
       'price_old' => $price_old,
       'id_cat' => $id_cat
     ];
-
+    $spec = [];
     $id = $this->db->Insert('products', $product);
+
+    for ($k = 0; $k < count($spec_prop); $k++) {
+      $this->db->Insert('specifications', [
+        'id_prod' => $id,
+        'prop' => $spec_prop[$k],
+        'value' => $spec_val[$k]
+      ]);
+    }
+
     echo $id;
     // if ($id) $product['id'] = $id;
     $files = $files['photo'];

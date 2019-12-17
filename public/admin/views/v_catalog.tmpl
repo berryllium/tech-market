@@ -4,18 +4,22 @@
     <input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required>
     <select name="id_cat" id="id_cat" required>
       {% for category in categories %}
-        <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}</option>
+      <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}</option>
       {% endfor %}
-      {% for spec in specifications %}
-      <input type="text" name="spec[]" placeholder="Параметр" value="{{spec.prop}}" required>
-      <input type="text" name="spec[]" placeholder="Значение" value="{{spec.value}}" required>
-      {% endfor %}
-    <input type="number" name="price_new" id="price_new" placeholder="Цена новая" value="{{product.price_new}}" required>
-    <input type="number" name="price_old" id="price_old" placeholder="Цена старая" value="{{product.price_old}}" required>
-    <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.desc}}</textarea>
-    <textarea type="text" name="features" id="features" placeholder="Особенности" required>{{product.features}}</textarea>
-    <input type="file" name="photo[]" id="photo" accept="image/jpeg" multiple>
-    <input type="submit" value="Добавить товар">
+
+      <input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required>
+      <input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required>
+
+      <button id="addspec">+</button>
+      <input type="number" name="price_new" id="price_new" placeholder="Цена новая" value="{{product.price_new}}"
+        required>
+      <input type="number" name="price_old" id="price_old" placeholder="Цена старая" value="{{product.price_old}}"
+        required>
+      <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.desc}}</textarea>
+      <textarea type="text" name="features" id="features" placeholder="Особенности"
+        required>{{product.features}}</textarea>
+      <input type="file" name="photo[]" id="photo" accept="image/jpeg" multiple>
+      <input type="submit" value="Добавить товар">
   </form>
 </div>
 {% if products %}
@@ -29,20 +33,30 @@
     <th>Редактировать</th>
     <th>Удалить</th>
   </tr>
- {% for product in products %}
-      <tr>
-        <td> <img class="example-image" src="../db/images/products/small/{{product.id}}/{{product.photos[0].src}}" alt="{{product.title}}" /> </td>
-        <td>{{product.title}}</td>
-        <td>{{product.category}}</td>
-        <td>{{product.desc}}</td>
-        <td>{{product.price_new}}</td>
-        <td> <a class="edit-link" href="?page=single&act=edit&id={{product.id}}" target="_blank">Редактировать</a></td>
-        <td> <a class="delete-link" href="?page=catalog&act=del&id={{product.id}}">&times;</a></td>
+  {% for product in products %}
+  <tr>
+    <td> <img class="example-image" src="../db/images/products/small/{{product.id}}/{{product.photos[0].src}}"
+        alt="{{product.title}}" /> </td>
+    <td>{{product.title}}</td>
+    <td>{{product.category}}</td>
+    <td>{{product.desc}}</td>
+    <td>{{product.price_new}}</td>
+    <td> <a class="edit-link" href="?page=single&act=edit&id={{product.id}}" target="_blank">Редактировать</a></td>
+    <td> <a class="delete-link" href="?page=catalog&act=del&id={{product.id}}">&times;</a></td>
 
-      </tr>
+  </tr>
   {% endfor %}
 
 </table>
 {% else %}
 <h3 class="col-12">добавьте товары</h3>';
 {% endif %}
+
+<script>
+  let fields = `<input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required>`;
+  let specButton = document.querySelector('#addspec')
+  specButton.addEventListener('click', event => {
+    event.preventDefault()
+    event.target.insertAdjacentHTML('beforebegin', fields);
+  })
+</script>
