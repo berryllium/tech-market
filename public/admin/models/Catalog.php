@@ -13,6 +13,10 @@ class Catalog
   {
     return $this->db->Select('feedbacks', 'id_prod', '-1', true);
   }
+  public function saveFeedback($feedback) {
+    print_r($feedback);
+      $this->db->Insert('feedbacks', $feedback);
+  }
   public function getAll()
   {
     $result = $this->db->CompositeQuery('SELECT 

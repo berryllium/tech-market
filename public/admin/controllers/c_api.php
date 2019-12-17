@@ -11,9 +11,7 @@ if ($_GET['act'] == 'order') {
 }
 
 if ($_GET['act'] == 'feedback') {
-  require_once('models/Feedback.php');
-  $feedback = new Feedback;
-  $feedback->save($_POST['feedback']);
+  $catalog->saveFeedback($_POST['feedback']);
   echo 'Отзыв записан';
   exit;
 }

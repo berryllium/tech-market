@@ -51,6 +51,11 @@ switch ($page) {
       require_once('controllers/c_single.php');
       break;
     }
+    case 'categories': {
+      $view = 'v_categories.tmpl';
+      require_once('controllers/c_categories.php');
+      break;
+    }
   default: {
       $view = 'v_catalog.tmpl';
       require_once('controllers/c_catalog.php');
