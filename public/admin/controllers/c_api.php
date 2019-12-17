@@ -10,6 +10,14 @@ if ($_GET['act'] == 'order') {
   exit;
 }
 
+if ($_GET['act'] == 'feedback') {
+  require_once('models/Feedback.php');
+  $feedback = new Feedback;
+  $feedback->save($_POST['feedback']);
+  echo 'Отзыв записан';
+  exit;
+}
+
 $products = $catalog->getAll();
 $categories = $catalog->getCategories();
 $feedbacks = $catalog->getShopFeedbacks();

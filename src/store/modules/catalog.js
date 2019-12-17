@@ -1,9 +1,24 @@
+import $ from 'jquery'
 export default {
   actions: {
     fetchCatalog(ctx) {
       fetch("admin?page=api")
         .then(response => response.json())
         .then(json => ctx.commit('updateCatalog', json))
+    },
+    sendFeedback(ctx, feedback) {
+      alert(feedback)
+      $.ajax({
+        type: "POST",
+        url: "/admin/index.php?page=api&act=feedback",
+        data: {
+          feedback: feedback,
+        },
+        success: function (msg) {
+          alert(msg)
+          ctx.commit('clearCart')
+        }
+      })
     },
     selectCategory(ctx, category) {
       ctx.commit('setCategory', category)
@@ -19,6 +34,7 @@ export default {
     updateCatalog(state, catalog) {
       console.log(catalog)
       state.catalog = catalog.products
+      state.feedbacks = catalog.feedbacks
       state.categories = catalog.categories
       state.filteredCatalog = state.catalog
       state.loading = false
@@ -59,28 +75,28 @@ export default {
       return state.filteredCatalog
     },
     oneProduct: (state) => (id) => {
-      return state.catalog.find(element=> element.id == id)
+      return state.catalog.find(element => element.id == id)
     },
     categoryProducts: (state) => (category) => {
-      return state.catalog.find(element=> element.category == category)
+      return state.catalog.find(element => element.category == category)
     },
     ratingProduct: (state) => (id) => {
       let rating = 0
-      const product = state.catalog.find(element=> element.id == id)
+      const product = state.catalog.find(element => element.id == id)
       if (!product.feedbacks.length) return 0
-      product.feedbacks.forEach(el=>{
+      product.feedbacks.forEach(el => {
         rating += +el.rating
       })
-      return rating/product.feedbacks.length
+      return rating / product.feedbacks.length
     },
     allFeedbacks(state) {
-      return state.catalog.filter(element=> element.id == 1)[0].feedbacks
+      return state.catalog.filter(element => element.id == 1)[0].feedbacks
     },
     loadingState(state) {
       return state.loading
     },
     photoProduct: (state) => (id) => {
-      return state.catalog.find(element=> element.id == id).photo
+      return state.catalog.find(element => element.id == id).photo
     }
   }
 }

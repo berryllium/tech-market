@@ -11,7 +11,7 @@ class Catalog
   }
   public function getShopFeedbacks()
   {
-    return $this->db->Select('feedbacks', 'id_prod', 0, true);
+    return $this->db->Select('feedbacks', 'id_prod', '-1', true);
   }
   public function getAll()
   {
@@ -29,14 +29,11 @@ class Catalog
     foreach ($result as $k => $v) {
       $product = [];
       $product['desc'] = $v['detail'];
-      $photos = $this->db->Select('photos', 'id_prod', $v['id'], true);
-      $spec = $this->db->Select('specifications', 'id_prod', $v['id'], true);
-      $feedbacks = $this->db->Select('feedbacks', 'id_prod', $v['id'], true);
+      $product['photos'] = $this->db->Select('photos', 'id_prod', $v['id'], true);
+      $product['feedbacks'] = $this->db->Select('feedbacks', 'id_prod', $v['id'], true);
+      $product['spec'] = $this->db->Select('specifications', 'id_prod', $v['id'], true);
       foreach ($v as $key => $value) {
         $product[$key] = $value;
-        $product['photos'] = $photos;
-        $product['feedbacks'] = $feedbacks;
-        $product['spec'] = $spec;
       }
       $products[] = $product;
     }

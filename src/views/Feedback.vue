@@ -5,7 +5,7 @@
       class="page-text"
     >Уважаемые покупатели, Ваши отзывы очень важны для нас! Пожалуйста, пишите нам любые пожелания, отзывы о работе нашего магазина и товарах, мы будем Вам очень благодарны и наградим Вас скидкой!</div>
     <button class="send-feedback" v-if="!formVisible" @click="formVisible = !formVisible">Оставить отзыв</button>
-    <FeedbackForm v-if="formVisible"/>
+    <FeedbackForm v-if="formVisible" :id="-1"/>
     <div class="feedbacks">
       <Feedback v-for="feedback in globalFeedbacks" :key="feedback.date" :feedback="feedback"/>
     </div>

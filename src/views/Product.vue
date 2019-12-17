@@ -125,7 +125,7 @@
           </div>
           <div class="tabs__item" v-if="this.tab=='feed'">
             <div class="feedback-wrap">
-              <FeedbackForm />
+              <FeedbackForm :id="oneProduct.id"/>
               <Feedback
                 v-for="feedback in oneProduct.feedbacks"
                 :key="feedback.date"

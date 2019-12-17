@@ -5,9 +5,9 @@
       <h3 class="form__header">Оставьте свой отзыв</h3>
       <form action="#" @submit.prevent="onSubmit">
         <div class="form__name">
-          <label for="name">Ваше имя</label>
+          <label for="user">Ваше имя</label>
           <br />
-          <input v-model="feedback.name" type="name" id="name" name="name" required/>
+          <input v-model="feedback.user" type="name" id="user" name="user" required/>
         </div>
         <div class="form__email">
           <label for="email">Ваша электронная почта</label>
@@ -15,9 +15,9 @@
           <input v-model="feedback.email" type="email" id="email" name="email" />
         </div>
         <div class="form__header">
-          <label for="header">Заголовок отзыва</label>
+          <label for="title">Заголовок отзыва</label>
           <br />
-          <input v-model="feedback.header" type="text" id="header" name="header" required/>
+          <input v-model="feedback.title" type="text" id="title" name="title" required/>
         </div>
         <div class="form__rating">
           <label>Ваша оценка</label>
@@ -39,13 +39,16 @@
 
 <script>
 import StarRating from "vue-star-rating";
+import { mapActions } from "vuex";
 export default {
+  props: ['id'],
   data() {
     return {
       feedback: {
-        name: "",
+        id_prod: this.id,
+        user: "",
         email: "",
-        header: "",
+        title: "",
         rating: 5,
         text: ""
       },
@@ -53,10 +56,11 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['sendFeedback']),
     onSubmit() {
       console.log(this.feedback);
+      this.sendFeedback(this.feedback);
       this.done = true;
-      console.log(this.done);
     },
     close() {
       this.$emit("closeForm", event.target.className);
