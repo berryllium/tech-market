@@ -62,7 +62,6 @@ class Catalog
   }
   public function prepareProduct($post, $files)
   {
-    print_r($post);
     extract($post);
 
     $product = [
@@ -73,38 +72,50 @@ class Catalog
       'price_old' => $price_old,
       'id_cat' => $id_cat
     ];
-    $spec = [];
-    $id = $this->db->Insert('products', $product);
 
-    for ($k = 0; $k < count($spec_prop); $k++) {
-      $this->db->Insert('specifications', [
-        'id_prod' => $id,
-        'prop' => $spec_prop[$k],
-        'value' => $spec_val[$k]
-      ]);
+    if ($id) {
+      $this->db->Update('products', $product, 'id', $id);
+    } else {
+      $id = $this->db->Insert('products', $product);
     }
 
-    echo $id;
-    // if ($id) $product['id'] = $id;
-    $files = $files['photo'];
 
-    for ($i = 0; $i < count($files['name']); $i++) {
-      $photo['id_prod'] = $id;
-      $photo['alt'] = $files['name'][$i];
-      $photo['src'] = substr(md5_file($files['tmp_name'][$i]), -10) . '_' . translit($files['name'][$i]);
-      $this->db->Insert('photos', $photo);
-      $path_big = "../db/images/products/big/$id/";
-      $path_small = "../db/images/products/small/$id/";
-      if (!file_exists("../db/images/products/small/$id/")) {
-        mkdir($path_big, 0700, true);
-        mkdir($path_small, 0700, true);
+    for ($k = 0; $k < count($id_spec); $k++) {
+      if ($id_spec[$k]) {
+        $this->db->Update('specifications', [
+          'id_prod' => $id,
+          'prop' => $spec_prop[$k],
+          'value' => $spec_val[$k]
+        ], 'id', $id_spec[$k]);
+      } else {
+        $this->db->Insert('specifications', [
+          'id_prod' => $id,
+          'prop' => $spec_prop[$k],
+          'value' => $spec_val[$k]
+        ]);
       }
-      $mas = ['image/jpeg', 'image/png', 'image/gif'];
-      if (in_array($files['type'][$i], $mas)) {
-        if (move_uploaded_file($files['tmp_name'][$i], $path_big . $photo['src'])) {
-          imageresize($path_small . $photo['src'], $path_big . $photo['src'], 400, 250, 75);
-        } else echo 'файлы не найдены';
-      } else echo 'Можно загрузить только изображения в формате .jpg, .png или .gif';
+    }
+
+    if (($files['photo']['name'][0])) {
+      $files = $files['photo'];
+      for ($i = 0; $i < count($files['name']); $i++) {
+        $photo['id_prod'] = $id;
+        $photo['alt'] = $files['name'][$i];
+        $photo['src'] = substr(md5_file($files['tmp_name'][$i]), -10) . '_' . translit($files['name'][$i]);
+        $this->db->Insert('photos', $photo);
+        $path_big = "../db/images/products/big/$id/";
+        $path_small = "../db/images/products/small/$id/";
+        if (!file_exists("../db/images/products/small/$id/")) {
+          mkdir($path_big, 0700, true);
+          mkdir($path_small, 0700, true);
+        }
+        $mas = ['image/jpeg', 'image/png', 'image/gif'];
+        if (in_array($files['type'][$i], $mas)) {
+          if (move_uploaded_file($files['tmp_name'][$i], $path_big . $photo['src'])) {
+            imageresize($path_small . $photo['src'], $path_big . $photo['src'], 400, 250, 75);
+          } else echo 'файлы не найдены';
+        } else echo 'Можно загрузить только изображения в формате .jpg, .png или .gif';
+      }
     }
     return $product;
   }
