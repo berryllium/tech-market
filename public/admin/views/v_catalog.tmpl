@@ -2,7 +2,7 @@
   <form action="?page=catalog&act=add" method="POST" enctype="multipart/form-data" class="flex columns">
     <input hidden name="id" value="{{product.id}}">
     <input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required>
-    <select name="ic_cat" id="id_cat" required>
+    <select name="id_cat" id="id_cat" required>
       {% for category in categories %}
         <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}</option>
       {% endfor %}

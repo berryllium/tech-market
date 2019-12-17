@@ -18,7 +18,7 @@ class Catalog
     $result = $this->db->CompositeQuery('SELECT 
     products.id AS id, 
     products.title AS title,   
-    products.desc,   
+    products.detail AS detail,   
     products.features AS features, 
     products.price_new AS price_new, 
     products.price_old AS price_old, 
@@ -28,6 +28,7 @@ class Catalog
     $products = [];
     foreach ($result as $k => $v) {
       $product = [];
+      $product['desc'] = $v['detail'];
       $photos = $this->db->Select('photos', 'id_prod', $v['id'], true);
       $spec = $this->db->Select('specifications', 'id_prod', $v['id'], true);
       $feedbacks = $this->db->Select('feedbacks', 'id_prod', $v['id'], true);
@@ -65,24 +66,24 @@ class Catalog
 
     $product = [
       'title' => $title,
-      'desc' => $desc,
+      'detail' => $desc,
       'features' => $features,
       'price_new' => $price_new,
       'price_old' => $price_old,
       'id_cat' => $id_cat
     ];
 
-    echo $this->db->Insert('products', $product);
-
-    if ($id) $product['id'] = $id;
+    $id = 1 + $this->db->Insert('products', $product);
+    echo $id;
+    // if ($id) $product['id'] = $id;
     $photo = $files['photo'];
     if ($photo['tmp_name']) {
       $photo_name = substr(md5_file($photo['tmp_name']), -10) . '_' . translit($photo['name']);
-      $path_big = "../db/images/big/$id/";
-      $path_small = "../db/images/small/$id/";
+      $path_big = "../db/images/products/big/$id/";
+      $path_small = "../db/images/products/small/$id/";
+      mkdir($path_big, 0700, true);
+      mkdir($path_small, 0700, true);
       if ( ! is_dir($path_big) && ! is_dir($path_small)) {
-        mkdir($path_big);
-        mkdir($path_small);
     }
       $mas = ['image/jpeg', 'image/png', 'image/gif'];
       if (in_array($photo['type'], $mas)) {
