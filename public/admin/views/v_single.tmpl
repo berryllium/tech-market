@@ -1,21 +1,25 @@
-<h2 class="col-12">Редактирование товара</h2>
+<h2 class="col-12">Редактирование товара {{product.id}}</h2>
 <div class="form col-md-6 col-12">
-  <form action="?page=catalog&act=add" method="POST" enctype="multipart/form-data" class="flex columns">
+  <form action="?page=single&act=edit&id={{product.id}}" method="POST" enctype="multipart/form-data" class="flex columns">
     <input hidden name="id" value="{{product.id}}">
     <input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required>
-    <select name="ic_cat" id="id_cat" required>
-      
+    <select name="id_cat" id="id_cat" required>
       {% for category in categories %}
       <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}</option>
       {% endfor %}
 
-      <input type="text" name="spec[]" placeholder="Параметр" value="{{spec.prop}}" required>
-      <input type="text" name="spec[]" placeholder="Значение" value="{{spec.value}}" required>
+      <input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required>
+      <input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required>
 
-      <input type="number" name="price_new" id="price_new" placeholder="Цена" value="{{product.price_new}}" required>
-      <input type="number" name="price_old" id="price_old" placeholder="Цена" value="{{product.price_old}}" required>
-      <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.desc}}</textarea>
-      <input type="file" name="photo" id="photo" accept="image/jpeg" multiple>
-      <input type="submit" value="Внести изменения">
+      <button id="addspec">+</button>
+      <input type="number" name="price_new" id="price_new" placeholder="Цена новая" value="{{product.price_new}}"
+        required>
+      <input type="number" name="price_old" id="price_old" placeholder="Цена старая" value="{{product.price_old}}"
+        required>
+      <textarea type="text" name="desc" id="decs" placeholder="Описание" required>{{product.detail}}</textarea>
+      <textarea type="text" name="features" id="features" placeholder="Особенности"
+        required>{{product.features}}</textarea>
+      <input type="file" name="photo[]" id="photo" accept="image/jpeg" multiple>
+      <input type="submit" value="Добавить товар">
   </form>
 </div>
