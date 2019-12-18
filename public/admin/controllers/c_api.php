@@ -19,8 +19,9 @@ if ($_GET['act'] == 'feedback') {
 $products = $catalog->getAll();
 $categories = $catalog->getCategories();
 $feedbacks = $catalog->getShopFeedbacks();
+$contacts = $catalog->db->Select('contacts', 'id', '1');
 
 
-$data = ['products' => $products, 'categories' => $categories, 'feedbacks' => $feedbacks];
+$data = ['products' => $products, 'categories' => $categories, 'feedbacks' => $feedbacks, 'contacts' => $contacts];
 
 echo json_encode($data, JSON_UNESCAPED_UNICODE);

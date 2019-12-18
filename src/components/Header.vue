@@ -30,22 +30,22 @@
         </div>
         <div class="header-info__item">
           <i class="fa fa-map-marker left-icon" aria-hidden="true"></i>
-          <p>Москва, ул. Лермонтова</p>
+          <p>{{getContacts.city}}, {{getContacts.street}}</p>
           <p>Доставка по всей России</p>
         </div>
         <div class="header-info__item">
           <i class="fa fa-phone left-icon" aria-hidden="true"></i>
           <p>
-            <a href="tel: 89999999999">8(999)999-99-99</a>
+            <a :href="'tel: '+ getContacts.phone">{{getContacts.phone}}</a>
           </p>
           <p>
-            <a href="tel: 89999999999">8(999)999-99-99</a>
+            <a :href="'mailto: '+ getContacts.email">{{getContacts.email}}</a>
           </p>
           <div class="soc-icons">
-            <a href="#">
+            <a :href="getContacts.whatsapp">
               <i class="fa fa-whatsapp" aria-hidden="true"></i>
             </a>
-            <a href="#">
+            <a :href="getContacts.telegram">
               <i class="fa fa-telegram" aria-hidden="true"></i>
             </a>
           </div>
@@ -54,11 +54,11 @@
           <i class="fa fa-clock-o left-icon" aria-hidden="true"></i>
           <p>
             Прием заказов и доставка
-            <b>8.00-24.00</b>
+            <b>{{getContacts.time1}}</b>
           </p>
           <p>
             Самовывоз
-            <b>10.00-19.00</b>
+            <b>{{getContacts.time2}}</b>
           </p>
           <p>Работаем без выходных</p>
         </div>
@@ -76,13 +76,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getAllCount"])
+    ...mapGetters(["getAllCount", "getContacts"])
   },
   methods: {
     search() {
       this.$store.dispatch("search", this.searchStr);
       if (this.$route.fullPath != "/") this.$router.push("/");
     }
+  },
+  mounted() {
+    console.log(this.getContacts)
   }
 };
 </script>
@@ -113,7 +116,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: .6em;
+        font-size: 0.6em;
         width: 20px;
         height: 20px;
         border-radius: 20px;

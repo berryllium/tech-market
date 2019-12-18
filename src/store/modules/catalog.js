@@ -31,9 +31,11 @@ export default {
       state.feedbacks = feedbacks
     },
     updateCatalog(state, catalog) {
+      console.log(catalog)
       state.catalog = catalog.products
       state.feedbacks = catalog.feedbacks
       state.categories = catalog.categories
+      state.contacts = catalog.contacts
       state.filteredCatalog = state.catalog
       state.loading = false
     },
@@ -53,6 +55,7 @@ export default {
     catalog: [],
     filteredCatalog: [],
     categories: [],
+    contacts: [],
     currentCategory: '',
     loading: true
   },
@@ -95,6 +98,9 @@ export default {
     },
     photoProduct: (state) => (id) => {
       return state.catalog.find(element => element.id == id).photo
+    },
+    getContacts: (state) => {
+      return state.contacts
     }
   }
 }

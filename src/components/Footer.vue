@@ -39,7 +39,7 @@
           <i class="fa fa-map-marker" aria-hidden="true"></i>
           <span class="footer__title">Адрес</span>
         </div>
-        <p class="footer__par">Москва, ул. Лермонтова</p>
+        <p class="footer__par">{{getContacts.city}}, {{getContacts.street}}</p>
         <p class="footer__par">Доставка по всей России</p>
       </div>
       <div class="footer__item footer-contacts">
@@ -48,22 +48,22 @@
           <span class="footer__title">Контакты</span>
         </div>
         <p class="footer__par">
-          <a href="tel: 89999999999">8(999)999-99-99</a>
+          <a :href="'tel: '+ getContacts.phone">{{getContacts.phone}}</a>
         </p>
         <p class="footer__par">
-          <a href="tel: 89999999999">8(999)999-99-99</a>
+          <a :href="'mailto: '+ getContacts.email">{{getContacts.email}}</a>
         </p>
         <div class="soc-icons">
-          <a href="#">
+          <a :href="getContacts.whatsapp">
             <i class="fa fa-whatsapp" aria-hidden="true"></i>
           </a>
-          <a href="#">
+          <a :href="getContacts.telegram">
             <i class="fa fa-telegram" aria-hidden="true"></i>
           </a>
-          <a href="#">
+          <a :href="getContacts.vk">
             <i class="fa fa-vk" aria-hidden="true"></i>
           </a>
-          <a href="#">
+          <a :href="getContacts.instagram">
             <i class="fa fa-instagram" aria-hidden="true"></i>
           </a>
         </div>
@@ -81,12 +81,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(['allCategories'])
+    ...mapGetters(["allCategories", "getContacts"])
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
