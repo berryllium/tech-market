@@ -11,7 +11,7 @@ export default {
           cart: ctx.state.cart
         },
         success: function (msg) { 
-          alert(msg)
+          console.log(msg)
           ctx.commit('clearCart')
         }
       })
@@ -25,7 +25,7 @@ export default {
         cart: [{id: id, count: 1}]
       },
       success: function (msg) { 
-        alert(msg)
+        (msg)
       }
     })
   }

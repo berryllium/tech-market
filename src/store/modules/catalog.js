@@ -7,7 +7,7 @@ export default {
         .then(json => ctx.commit('updateCatalog', json))
     },
     sendFeedback(ctx, feedback) {
-      alert(feedback)
+      console.log(feedback)
       $.ajax({
         type: "POST",
         url: "/admin/index.php?page=api&act=feedback",
@@ -15,7 +15,7 @@ export default {
           feedback: feedback,
         },
         success: function (msg) {
-          alert(msg)
+          console.log(msg)
           ctx.commit('clearCart')
         }
       })

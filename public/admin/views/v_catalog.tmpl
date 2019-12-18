@@ -1,4 +1,4 @@
-<div class="form col-md-12 col-12"></div>
+<div class="form col-md-12 col-12">
   <form action="?page=catalog&act=add&id={{product.id}}" method="POST" enctype="multipart/form-data"
     class="flex columns">
     <input hidden name="id" value="{{product.id}}">
@@ -69,6 +69,7 @@
     </table>
   </form>
 </div>
+</div>
 {% if products %}
 <table class="col-12">
   <tr>
@@ -113,6 +114,7 @@
 <style>
   form, table {
     width: 100%;
+    margin-top: 20px;
   }
   td:first-child {
     width: 30%;

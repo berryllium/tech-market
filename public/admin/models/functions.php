@@ -17,9 +17,11 @@ function translit($str)
 }
 
 // создание уменьшенной копии
-function imageresize($outfile, $infile, $neww, $newh, $quality)
+function imageresize($type, $outfile, $infile, $neww, $newh, $quality)
 {
-    $im = imagecreatefromjpeg($infile);
+    if ($type == 'image/png') $im = imagecreatefrompng($infile);
+    elseif ($type == 'image/jpeg') $im = imagecreatefromjpeg($infile);
+    elseif ($type == 'image/gif') $im = imagecreatefromgif($infile);
     $k1 = $neww / imagesx($im);
     $k2 = $newh / imagesy($im);
     $k = $k1 > $k2 ? $k2 : $k1;

@@ -13,5 +13,5 @@ if ($_GET['act'] == 'login') {
 } elseif ($_GET['act'] == 'exit') {
   session_destroy();
   $isAdmin = false;
-  $views = 'v_login.tmpl';
+  header('Location: index.php');
 }
