@@ -1,6 +1,6 @@
 <template>
   <li class="catalog__item">
-    <img :src="'db/images/category/'+category.img" alt class="catalog__icon" />
+    <img :src="`db/images/category/${category.id}/${category.img}`" alt class="catalog__icon" />
     <div class="catalog__title"  @click="selectCat">{{category.name}}</div>
     <div class="submenu catalog__submenu" v-if="showMenu">
       <div class="submenu__wrap">

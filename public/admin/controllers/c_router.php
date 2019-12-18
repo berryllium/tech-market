@@ -15,6 +15,12 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 $act = $_GET['act'];
 $id_prod = $_GET['id'];
 
+if($page == 'api') {
+  if ($_GET['act'] == 'order') $cart = $_POST;
+  require_once('controllers/c_api.php');
+  exit;
+}
+
 if ($isAdmin) {
 
   switch ($page) {
