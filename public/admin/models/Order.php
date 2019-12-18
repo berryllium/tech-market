@@ -5,6 +5,9 @@ class Order
   {
     $this->db = SQL::Instance();
   }
+  public function sendOrder($order)
+  {
+  }
   public function save($order)
   {
     $user = $order['user'];
@@ -22,21 +25,24 @@ class Order
     $orders = $this->db->Select('orders');
     $full = [];
     foreach ($orders as $k => $v) {
-      $id = $v['id'];
-      $query = "SELECT  
-    `title`,`count`
-    FROM purchases INNER JOIN  products ON products.id = purchases.id_prod WHERE purchases.id_order = '$id'";
-      $products = $this->db->CompositeQuery($query);
-      $str = '';
-      foreach ($products as $key => $value) {
-        $str .= $value['title'] . ' - ' . $value['count'] . 'шт. ';
-        $v['products'] = $str;
-      }
+      $v['products'] = $this->getProducts($v['id']);
       $full[] = $v;
     }
     return $full;
   }
-  public function done($id) {
+  public function done($id)
+  {
     $this->db->Update('orders', ['status' => 'done'], 'id', $id);
+  }
+  public function getProducts($id)
+  {
+    $query = "SELECT  `title`,`count`
+  FROM purchases INNER JOIN  products ON products.id = purchases.id_prod WHERE purchases.id_order = '$id'";
+    $products = $this->db->CompositeQuery($query);
+    $str = '';
+    foreach ($products as $key => $value) {
+      $str .= $value['title'] . ' - ' . $value['count'] . 'шт. ';
+    }
+    return $str;
   }
 }
