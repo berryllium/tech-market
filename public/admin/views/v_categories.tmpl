@@ -1,14 +1,15 @@
 <div class="form col-md-6 col-12">
-  <form action="?page=categories&act=add" method="post">
+  <form action="?page=categories&act=add" method="post" enctype="multipart/form-data">
     <input type="text" name="name" id="name" placeholder="Категория" required>
     <input type="text" name="title" id="title" placeholder="Описание">
-    <input type="file" value="Фото">
+    <input type="file" name="img" id="img" accept="image/jpeg,image/png,image/gif">
     <input type="submit" value="Добавить категорию">
   </form>
 </div>
 <table class="col-12">
   <tr>
     <th>id</th>
+    <th>Фото</th>
     <th>Категория</th>
     <th>Удалить</th>
   </tr>
@@ -18,12 +19,13 @@
   {% for category in categories %}
       <tr>
           <td> {{ category.id }} </td>
+          <td><img src="../db/images/category/{{category.id}}/{{category.img}}" alt=""></td>
         <td>
-          <form action="?page=categories&act=update&id={{category.id}}" method="post">
+          <form action="?page=categories&act=update&id={{category.id}}" method="post" enctype="multipart/form-data">
             <input type="text" name="name" value="{{ category.name }}">
             <input type="text" name="title" value="{{ category.title }}">
             <input hidden type="text" name="id" value="{{ category.id }}">
-            <input type="file" value="Фото">
+            <input type="file" name="img" id="img" accept="image/jpeg,image/png,image/gif">
             <input type="submit" value="Изменить">
           </form>
         <td> <a class="delete-link" href="?page=categories&act=del&id={{ category.id }}">&times;</a></td>

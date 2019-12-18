@@ -23,7 +23,7 @@ input, textarea, select {
 img {
   width: 200px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .login-form {
   width: 100%;
