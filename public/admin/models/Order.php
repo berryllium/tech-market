@@ -22,9 +22,10 @@ class Order
     $orders = $this->db->Select('orders');
     $full = [];
     foreach ($orders as $k => $v) {
+      $id = $v['id'];
       $query = "SELECT  
     `title`,`count`
-    FROM purchases INNER JOIN  products ON products.id = purchases.id_prod ";
+    FROM purchases INNER JOIN  products ON products.id = purchases.id_prod WHERE purchases.id_order = '$id'";
       $products = $this->db->CompositeQuery($query);
       $str = '';
       foreach ($products as $key => $value) {
@@ -34,5 +35,8 @@ class Order
       $full[] = $v;
     }
     return $full;
+  }
+  public function done($id) {
+    $this->db->Update('orders', ['status' => 'done'], 'id', $id);
   }
 }
