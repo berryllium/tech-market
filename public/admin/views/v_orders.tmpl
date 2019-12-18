@@ -2,6 +2,7 @@
 <table class="col-12">
   <tr>
     <th>Статус</th>
+    <th>Дата</th>
     <th>Имя</th>
     <th>Телефон</th>
     <th>Email</th>
@@ -16,6 +17,7 @@
     <tr>
       <td> <a href="?page=orders&act=done&id={{ order.id }}">Завершить</a></td>
     {% endif %}
+    <td> {{ order.date }} </td>
     <td> {{ order.name }} </td>
     <td> {{ order.email }} </td>
     <td> {{ order.phone }} </td>
