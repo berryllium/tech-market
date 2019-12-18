@@ -16,12 +16,14 @@
   <main class="container">
     <div class="row">
       <nav class="col-12">
-      <?php if ($_SESSION['admin']): ?>
-        <a class="menu-link" href="login.php?exit=exit">Выход</a>
-        <a class="menu-link" href="?page=changepass">Смена пароля</a>
+        {% if isAdmin %}
+        <a class="menu-link" href="?page=login&act=exit">Выход</a>
+        <a class="menu-link" href="?page=pass">Смена пароля</a>
         <a class="menu-link" href="index.php">Каталог</a>
         <a class="menu-link" href="?page=orders">Заказы</a>
         <a class="menu-link" href="?page=categories">Категории товаров</a>
         <a class="menu-link" href="?page=contacts">Мои контакты</a>
-      <?php endif;?>
+        {% else %}
+        <a class="menu-link" href="?page=login">Вход</a>
+        {% endif %}
       </nav>

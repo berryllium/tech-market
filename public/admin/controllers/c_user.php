@@ -1,16 +1,17 @@
 <?php
-if ($act == 'login') {
+
+if ($_GET['act'] == 'login') {
+
   require_once('models/User.php');
-  $user = new User($db, $_POST['login'], $_POST['pass']);
-  if ($user->auth()) {
-    $login = $_SESSION['login'] = $user->getLogin();
-    $isAdmin = true;
-    $view = 'v_welcome.tmpl';
-  } else {
-    $view = 'v_login.tmpl';
-    $data = array('correct' => false);
+  if (isset($_POST['login'])) {
+    $user = new User($db, $_POST['login'], $_POST['pass']);
+    if ($user->auth()) {
+      $login = $_SESSION['login'] = $user->getLogin();
+      $isAdmin = true;
+    } else echo  'некорректные данные';
   }
-} else {
-  $view = 'v_login.tmpl';
-  $data = array('correct' => true);
+} elseif ($_GET['act'] == 'exit') {
+  session_destroy();
+  $isAdmin = false;
+  $views = 'v_login.tmpl';
 }
