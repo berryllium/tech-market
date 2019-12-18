@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <main class="container">
+    <main v-if="!loadingState" class="container">
       <Catalog />
       <router-view />
     </main>
@@ -15,6 +15,9 @@ import Catalog from "@/components/Catalog";
 import Footer from "@/components/Footer";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["loadingState"]),
+  },
   components: {
     Header,
     Footer,
