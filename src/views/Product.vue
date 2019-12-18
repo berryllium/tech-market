@@ -136,7 +136,7 @@
         </div>
       </div>
     </section>
-    <OrderForm v-if="showForm" @closeForm="closeForm" :id_prod="oneProduct.id" @quickOrder="quickBuy($event, oneProduct.id)"/>
+    <OrderForm v-if="showForm" @closeForm="closeForm" :id_prod="oneProduct.id" @quickOrder="quickBuy($event)"/>
   </div>
 </template>
 
@@ -210,8 +210,6 @@ export default {
     this.slider();
   },
   mounted() {
-    console.log(this.allCart);
-    console.log(this.isBuy);
     var $ = require("jquery");
     window.jQuery = $;
     const fotorama = require("fotorama/fotorama");

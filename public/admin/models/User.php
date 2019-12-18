@@ -18,9 +18,6 @@ class User
   }
   public function changePass($login, $old, $new, $confirm)
   {
-    echo $old;
-    echo $new;
-    echo $confirm;
     $old_md5 = $this->db->Select('users', 'login', $login)['pass'];
     if (md5($old . $this->sault) === $old_md5) {
       if ($new == $confirm) {

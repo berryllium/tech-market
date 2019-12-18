@@ -99,7 +99,7 @@ class Catalog
       $id = $this->db->Insert('products', $product);
     }
 
-
+    if(!empty($id_spec))
     for ($k = 0; $k < count($id_spec); $k++) {
       if ($id_spec[$k]) {
         $this->db->Update('specifications', [

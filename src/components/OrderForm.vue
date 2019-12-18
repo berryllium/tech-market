@@ -65,7 +65,7 @@ export default {
     onSubmit() {
       this.done = true;
       if (this.id_prod) {
-        this.$emit('quickOrder', this.user)
+        this.$emit('quickOrder', {user: this.user, id_prod: this.id_prod})
       }
        else this.$emit('order', this.user)
     },

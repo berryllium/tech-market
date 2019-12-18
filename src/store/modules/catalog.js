@@ -7,7 +7,6 @@ export default {
         .then(json => ctx.commit('updateCatalog', json))
     },
     sendFeedback(ctx, feedback) {
-      console.log(feedback)
       $.ajax({
         type: "POST",
         url: "/admin/index.php?page=api&act=feedback",
@@ -32,7 +31,6 @@ export default {
       state.feedbacks = feedbacks
     },
     updateCatalog(state, catalog) {
-      console.log(catalog)
       state.catalog = catalog.products
       state.feedbacks = catalog.feedbacks
       state.categories = catalog.categories

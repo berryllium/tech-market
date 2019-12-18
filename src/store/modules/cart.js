@@ -16,13 +16,14 @@ export default {
         }
       })
     },
-  quickBuy(ctx, user, id) {
+  quickBuy(ctx, order) {
+    console.log(order)
     $.ajax({
       type: "POST",
       url: "/admin/index.php?page=api&act=order",
       data: {
-        user: user,
-        cart: [{id: id, count: 1}]
+        user: order.user,
+        cart: [{id: order.id_prod, count: 1}]
       },
       success: function (msg) { 
         (msg)
