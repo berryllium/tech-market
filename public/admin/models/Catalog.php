@@ -9,13 +9,32 @@ class Catalog
   {
     return $this->db->Select('categories');
   }
+  public function setCatImg($category, $img, $action)
+  {
+    $category['img'] = translit($img['name']);
+    if ($action == 'update') {
+      $folder = '../db/images/category/' . $category['id'] . '/';
+      $path = $folder . $category['img'];
+      if (!file_exists($folder)) mkdir($folder, 0700, true);
+      move_uploaded_file($img['tmp_name'], $path);
+      $this->db->Update('categories', $category, 'id', $category['id']);
+    } elseif ($action == 'add') {
+      $category['id'] = $this->db->Insert('categories', $category);
+      $folder = '../db/images/category/' . $category['id'] . '/';
+      $path = $folder . $category['img'];
+      if (!file_exists($folder)) mkdir($folder, 0700, true);
+      move_uploaded_file($img['tmp_name'], $path);
+      $this->db->Update('categories', $category, 'id', $category['id']);
+    }
+  }
   public function getShopFeedbacks()
   {
     return $this->db->Select('feedbacks', 'id_prod', '-1', true);
   }
-  public function saveFeedback($feedback) {
+  public function saveFeedback($feedback)
+  {
     print_r($feedback);
-      $this->db->Insert('feedbacks', $feedback);
+    $this->db->Insert('feedbacks', $feedback);
   }
   public function getAll()
   {

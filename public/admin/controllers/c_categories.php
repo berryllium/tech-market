@@ -9,32 +9,8 @@ if ($_GET['act'] == 'del') {
   $catalog->db->Delete('categories', 'id', $id);
 }
 
-if ($_GET['act'] == 'add' && !empty($_POST)) {
-  $category = $_POST;
-  $category['id'] = $catalog->db->Insert('categories', $category);
-  if($_FILES['img']['name']) {
-    $img = $_FILES['img'];
-    $category['img'] = translit($img['name']);
-    $folder = '../db/images/category/'.$category['id'].'/';
-    $path = $folder.$category['img'];
-    if(!file_exists($folder)) mkdir($folder, 0700, true);
-    move_uploaded_file($img['tmp_name'], $path);
-  }
-  $catalog->db->Update('categories', $category, 'id', $category['id']);
-}
-
-if ($_GET['act'] == 'update' && !empty($_POST)) {
-  $category = $_POST;
-  if($_FILES['img']['name']) {
-    $img = $_FILES['img'];
-    $category['img'] = translit($img['name']);
-    $folder = '../db/images/category/'.$category['id'].'/';
-    $path = $folder.$category['img'];
-    if(!file_exists($folder)) mkdir($folder, 0700, true);
-    move_uploaded_file($img['tmp_name'], $path);
-  }
-
-  $catalog->db->Update('categories', $category, 'id', $category['id']);
+if ($_GET['act'] && !empty($_POST)) {
+  $catalog->setCatImg($_POST, $_FILES['img'], $_GET['act']);
 }
 
 $categories = $catalog->db->Select('categories');

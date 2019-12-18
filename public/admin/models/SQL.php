@@ -69,7 +69,6 @@
 			$masks_s = implode(',', $masks);
 			
 			$query = "INSERT INTO $table ($columns_s) VALUES ($masks_s)";
-			
 			$q = $this->db->prepare($query);
 			$q->execute($object);
 			
