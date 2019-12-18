@@ -5,8 +5,27 @@ class Order
   {
     $this->db = SQL::Instance();
   }
-  public function sendOrder($order)
+  public function sendOrder($id)
   {
+    $order = $this->db->Select('orders', 'id', $id);
+    $products = $this->getProducts($id);
+
+    $subject = 'Monkey Цифровый товары';
+    $name = $order['name'];
+    $phone = $order['phone'];
+    $email = $order['email'];
+    $from = 'gorkun.dp@yandex.ru';
+    $to = 'gorkun.dp@yandex.ru';
+
+    $message = "
+      Имя: $name <br>
+      Телефон: $phone <br>
+      Почта: $email <br>
+      Заказ: $products <br>
+    ";
+
+    mail($to, $subject, $message);
+
   }
   public function save($order)
   {
@@ -19,6 +38,7 @@ class Order
       $good['count'] = $v['count'];
       $this->db->Insert('purchases', $good);
     }
+    $this->sendOrder($id_order);
   }
   public function getAll()
   {
