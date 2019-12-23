@@ -17,32 +17,74 @@
   <h3 class="col-12">добавьте товары</h3>
   {% else %}
   {% for category in categories %}
-      <tr>
-          <td> {{ category.id }} </td>
-          <td><img src="../db/images/category/{{category.id}}/{{category.img}}" alt=""></td>
-        <td>
-          <form action="?page=categories&act=update&id={{category.id}}" method="post" enctype="multipart/form-data">
-            <input type="text" name="name" value="{{ category.name }}">
-            <input type="text" name="title" value="{{ category.title }}">
-            <input hidden type="text" name="id" value="{{ category.id }}">
-            <input type="file" name="img" id="img" accept="image/jpeg,image/png,image/gif">
-            {% for spec in specifications %}
-            <table>
+  <tr>
+    <td> {{ category.id }} </td>
+    <td><img src="../db/images/category/{{category.id}}/{{category.img}}" alt=""></td>
+    <td>
+      <form id="form_{{category.id}}" action="?page=categories&act=update&id={{category.id}}" method="post"
+        enctype="multipart/form-data">
+        <input type="text" name="name" value="{{ category.name }}">
+        <input type="text" name="title" value="{{ category.title }}">
+        <input hidden type="text" name="id" value="{{ category.id }}">
+        <input type="file" name="img" accept="image/jpeg,image/png,image/gif">
+        <div>
+          <table>
             <tr>
-              <td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td>
-              <td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
-              <input type="hidden" name="id_spec[]" value="{{spec.id}}">
+              <th>Характеристика</th>
+              <th>Единицы изменения</th>
+              <th>Фильтр</th>
+            </tr>
+            {% for prop in category.props %}
+            <tr>
+              <td><input type="text" name="prop_name[]" placeholder="Характеристика" value="{{prop.name}}" required>
+              </td>
+              <td><input type="text" name="prop_unit[]" placeholder="Единицы измерения" value="{{prop.unit}}" required>
+              </td>
+              <td>
+                <select name="prop_filter[]">
+                  <option value="0">нет</option>
+                  <option {%if prop.filter %} selected {% endif %} value="1">да</option>
+                </select>
+                <a href="?page=categories&act=delprop&id={{prop.id}}">&times;</a>
+              </td>
+
+
+              <input type="hidden" name="prop_id[]" value="{{prop.id}}">
             </tr>
             {% endfor %}
             <tr id="add-tr">
-              <td colspan="2" class="text-center"><button id="addspec" class="btn btn-warning m-auto">Добавить
+              <td colspan="3" class="text-center"><button class="addprop btn btn-warning m-auto">Добавить
                   характеристику</button></td>
             </tr>
           </table>
-            <input type="submit" value="Изменить">
-          </form>
-        <td> <a class="delete-link" href="?page=categories&act=del&id={{ category.id }}">&times;</a></td>
-      </tr>
-      {% endfor %}
-      {% endif %}
+        </div>
+        <input type="submit" value="Изменить" form="form_{{category.id}}">
+      </form>
+    <td> <a class="delete-link" href="?page=categories&act=del&id={{ category.id }}">&times;</a></td>
+  </tr>
+  {% endfor %}
+  {% endif %}
 </table>
+
+<script>
+  let count = 1;
+  let fields = `
+      <tr>
+      <td><input type="text" name="prop_name[]" placeholder="Характеристика" value="" required>
+      </td>
+      <td><input type="text" name="prop_unit[]" placeholder="Единицы измерения" value="" required>
+      </td>
+      <td>
+        <select name="prop_filter[]">
+          <option selected value="0">нет</option>
+          <option  value="1">да</option>
+        </select>
+      </td>
+      <input type="hidden" name="prop_id[]" value="0">
+    </tr>
+    `;
+
+  $('.addprop').click(() =>
+    $('.addprop').parent().parent().before(fields)
+  )
+</script>

@@ -29,7 +29,8 @@
 			if ($where_key AND $where_value) {
 				$query = "SELECT * FROM " . $table . " WHERE " . $where_key . " = '" . $where_value . "'";
 			} else {
-				$query = "SELECT * FROM " . $table;
+				// $query = "SELECT * FROM " . $table;
+				$query = "SELECT * FROM  $table ORDER BY id DESC";
 			}
 
 			$q = $this->db->prepare($query);

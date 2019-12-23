@@ -7,25 +7,58 @@ class Catalog
   }
   public function getCategories()
   {
-    return $this->db->Select('categories');
+    $categories = [];
+    foreach ($this->db->Select('categories') as $k => $v) {
+      $v['props'] = $this->db->Select('properties', 'id_cat', $v['id'], true);
+      $categories[] = $v;
+    }
+    return $categories;
   }
+  // работа с категориями
   public function setCatImg($category, $img, $action)
   {
-    $category['img'] = translit($img['name']);
-    if ($action == 'update') {
-      $folder = '../db/images/category/' . $category['id'] . '/';
-      $path = $folder . $category['img'];
+    $cat['name'] = $category['name'];
+    $cat['title'] = $category['title'];
+
+    // если есть картинка прогоняем через транслит
+    if (!empty($img['tmp_name'])) $cat['img'] = $category['img'] = translit($img['name']);
+
+    // получаем id
+    $cat['id'] = $category['id'] ? $category['id'] : $this->db->Insert('categories', $category);
+
+    // создаем папку и копируем изображение, если оно есть
+    if (!empty($img['tmp_name'])) {
+      $folder = '../db/images/category/' . $cat['id'] . '/';
+      $path = $folder . $cat['img'];
       if (!file_exists($folder)) mkdir($folder, 0700, true);
       move_uploaded_file($img['tmp_name'], $path);
-      $this->db->Update('categories', $category, 'id', $category['id']);
-    } elseif ($action == 'add') {
-      $category['id'] = $this->db->Insert('categories', $category);
-      $folder = '../db/images/category/' . $category['id'] . '/';
-      $path = $folder . $category['img'];
-      if (!file_exists($folder)) mkdir($folder, 0700, true);
-      move_uploaded_file($img['tmp_name'], $path);
-      $this->db->Update('categories', $category, 'id', $category['id']);
     }
+
+    // обновляем и добавляем характеристики
+    if (!empty($category['prop_name'])) {
+      for ($i = 0; $i < count($category['prop_name']); $i++) {
+        $props = [
+          'id_cat' => $category['id'],
+          'name' => $category['prop_name'][$i],
+          'unit' => $category['prop_unit'][$i],
+          'filter' => $category['prop_filter'][$i]
+        ];
+        if ($category['prop_id'][$i]) {
+          $this->db->Update('properties', $props, 'id', $category['prop_id'][$i]);
+        } else $this->db->Insert('properties', $props);
+      }
+    }
+    if ($action == 'update') {
+      $this->db->Update('categories', $cat, 'id', $cat['id']);
+    }
+    // elseif ($action == 'add') {
+    //   $category['id'] = $this->db->Insert('categories', $category);
+    //   $folder = '../db/images/category/' . $category['id'] . '/';
+    //   $path = $folder . $category['img'];
+    //   if (!file_exists($folder)) mkdir($folder, 0700, true);
+    //   move_uploaded_file($img['tmp_name'], $path);
+    //   $this->db->Update('categories', $category, 'id', $category['id']);
+    // }
   }
   public function getShopFeedbacks()
   {
@@ -99,22 +132,22 @@ class Catalog
       $id = $this->db->Insert('products', $product);
     }
 
-    if(!empty($id_spec))
-    for ($k = 0; $k < count($id_spec); $k++) {
-      if ($id_spec[$k]) {
-        $this->db->Update('specifications', [
-          'id_prod' => $id,
-          'prop' => $spec_prop[$k],
-          'value' => $spec_val[$k]
-        ], 'id', $id_spec[$k]);
-      } else {
-        $this->db->Insert('specifications', [
-          'id_prod' => $id,
-          'prop' => $spec_prop[$k],
-          'value' => $spec_val[$k]
-        ]);
+    if (!empty($id_spec))
+      for ($k = 0; $k < count($id_spec); $k++) {
+        if ($id_spec[$k]) {
+          $this->db->Update('specifications', [
+            'id_prod' => $id,
+            'prop' => $spec_prop[$k],
+            'value' => $spec_val[$k]
+          ], 'id', $id_spec[$k]);
+        } else {
+          $this->db->Insert('specifications', [
+            'id_prod' => $id,
+            'prop' => $spec_prop[$k],
+            'value' => $spec_val[$k]
+          ]);
+        }
       }
-    }
 
     if (($files['photo']['name'][0])) {
       $files = $files['photo'];

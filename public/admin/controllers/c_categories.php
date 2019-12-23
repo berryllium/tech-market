@@ -13,6 +13,10 @@ if ($_GET['act'] && !empty($_POST)) {
   $catalog->setCatImg($_POST, $_FILES['img'], $_GET['act']);
 }
 
-$categories = $catalog->db->Select('categories');
+// удаление характеристики
+if ($_GET['act'] == 'delprop') {
+  $catalog->db->Delete('properties', 'id', $_GET['id']);
+}
 
+$categories = $catalog->getCategories();
 $data = array('categories' => $categories);

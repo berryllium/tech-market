@@ -100,16 +100,7 @@
 <h3 class="col-12">добавьте товары</h3>';
 {% endif %}
 
-<script>
-  let fields = `<tr><td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td><td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
-    <input type="hidden" name="id_spec[]" value="0"></tr>`;
-  let specButton = document.querySelector('#addspec')
-  let tr = document.querySelector('#add-tr')
-  specButton.addEventListener('click', event => {
-    event.preventDefault()
-    tr.insertAdjacentHTML('beforebegin', fields);
-  })
-</script>
+
 
 <style>
   form, table {
