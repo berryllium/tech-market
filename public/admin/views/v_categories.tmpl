@@ -26,6 +26,19 @@
             <input type="text" name="title" value="{{ category.title }}">
             <input hidden type="text" name="id" value="{{ category.id }}">
             <input type="file" name="img" id="img" accept="image/jpeg,image/png,image/gif">
+            {% for spec in specifications %}
+            <table>
+            <tr>
+              <td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td>
+              <td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
+              <input type="hidden" name="id_spec[]" value="{{spec.id}}">
+            </tr>
+            {% endfor %}
+            <tr id="add-tr">
+              <td colspan="2" class="text-center"><button id="addspec" class="btn btn-warning m-auto">Добавить
+                  характеристику</button></td>
+            </tr>
+          </table>
             <input type="submit" value="Изменить">
           </form>
         <td> <a class="delete-link" href="?page=categories&act=del&id={{ category.id }}">&times;</a></td>
