@@ -16,20 +16,13 @@
           {% endfor %}
         </select></td>
     </tr>
-    <tr>
-      <td colspan="2" class="text-center">Характеристики</td>
-    </tr>
     {% for spec in specifications %}
     <tr>
-      <td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td>
+      <td>{{spec.name}} ({{spec.unit}})</td>
       <td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
       <input type="hidden" name="id_spec[]" value="{{spec.id}}">
     </tr>
     {% endfor %}
-    <tr id="add-tr">
-      <td colspan="2" class="text-center"><button id="addspec" class="btn btn-warning m-auto">Добавить
-          характеристику</button></td>
-    </tr>
 
     <tr>
       <td>Новая цена</td>
@@ -70,16 +63,6 @@
 </form>
 </div>
 
-<script>
-  let fields = `<tr><td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td><td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
-    <input type="hidden" name="id_spec[]" value="0"></tr>`;
-  let specButton = document.querySelector('#addspec')
-  let tr = document.querySelector('#add-tr')
-  specButton.addEventListener('click', event => {
-    event.preventDefault()
-    tr.insertAdjacentHTML('beforebegin', fields);
-  })
-</script>
 
 <style>
   td:first-child {

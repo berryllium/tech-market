@@ -16,21 +16,10 @@
             {% endfor %}
           </select></td>
       </tr>
-      <tr>
+      <tr id="tr-props">
         <td colspan="2" class="text-center">Характеристики</td>
       </tr>
-      {% for spec in specifications %}
-      <tr>
-        <td><input type="text" name="spec_prop[]" placeholder="Параметр" value="{{spec.prop}}" required></td>
-        <td><input type="text" name="spec_val[]" placeholder="Значение" value="{{spec.value}}" required></td>
-        <input type="hidden" name="id_spec[]" value="{{spec.id}}">
-      </tr>
-      {% endfor %}
-      <tr id="add-tr">
-        <td colspan="2" class="text-center"><button id="addspec" class="btn btn-warning m-auto">Добавить
-            характеристику</button></td>
-      </tr>
-
+      <!-- тут выводим категории из fetch -->
       <tr>
         <td>Новая цена</td>
         <td><input type="number" name="price_new" id="price_new" placeholder="Цена новая" value="{{product.price_new}}"
@@ -101,18 +90,53 @@
 {% endif %}
 
 
-
 <style>
-  form, table {
+  form,
+  table {
     width: 100%;
     margin-top: 20px;
   }
+
   td:first-child {
     width: 30%;
   }
-  input, textarea {
+
+  input,
+  textarea {
     display: block;
     width: 100% !important;
     margin: 0 !important;
   }
 </style>
+<script>
+
+  const select_cat = $('#id_cat')
+
+  fetch(`?page=catalog&fetch_spec_cat=${select_cat.val()}`)
+    .then(data => data.json())
+    .then(json => insertPorps(json))
+
+  select_cat.change(() => {
+    const id_cat = select_cat.val()
+    fetch(`?page=catalog&fetch_spec_cat=${id_cat}`)
+      .then(data => data.json())
+      .then(json => insertPorps(json))
+  })
+
+  function insertPorps(props) {
+    console.log(props)
+    $('.tr-props').remove()
+    let html = '';
+    props.forEach(el => {
+      html += `
+      <tr class="tr-props">
+        <td>${el.name} (${el.unit})</td>
+        <td><input type="text" name="spec_val[]" placeholder="Значение" required></td>
+        <input type="hidden" name="spec_prop[]" value="${el.id} ">
+      </tr>
+`
+    });
+    $('#tr-props').after(html)
+  }
+
+</script>

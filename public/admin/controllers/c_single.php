@@ -12,13 +12,13 @@ if(!empty($_POST)) {
   print_r($_POST);
 }
 
-
-$specifications = $catalog->db->Select('specifications', 'id_prod', $id, true);
+$specifications = $catalog->getSpecifications($id);
+print_r($specifications);
 $photos = $catalog->db->Select('photos', 'id_prod', $id, true);
-print_r($photos);
+$product = $catalog->getProduct($id);
 $data = array(
-  'product' => $catalog->getProduct($id),
-  'categories' => $catalog->getCategories(),
+  'product' => $product,
+  'category' => $catalog->db->Select('categories', 'id', $product['id_cat']),
   'specifications' => $specifications,
   'photos' => $photos,
 );

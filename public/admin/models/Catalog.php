@@ -5,6 +5,12 @@ class Catalog
   {
     $this->db = SQL::Instance();
   }
+
+  public function getSpecifications($id) {
+    return $this->db->CompositeQuery("SELECT t1.id, t1.value, t2.name, t2.unit FROM `specifications` AS `t1` 
+    INNER JOIN `properties` AS t2 ON t1.id_prop = t2.id WHERE t1.id_prod = $id");
+  }
+
   public function getCategories()
   {
     $categories = [];
@@ -132,18 +138,16 @@ class Catalog
       $id = $this->db->Insert('products', $product);
     }
 
-    if (!empty($id_spec))
-      for ($k = 0; $k < count($id_spec); $k++) {
+    if (!empty($spec_prop))
+      for ($k = 0; $k < count($spec_prop); $k++) {
         if ($id_spec[$k]) {
           $this->db->Update('specifications', [
-            'id_prod' => $id,
-            'prop' => $spec_prop[$k],
             'value' => $spec_val[$k]
           ], 'id', $id_spec[$k]);
         } else {
           $this->db->Insert('specifications', [
             'id_prod' => $id,
-            'prop' => $spec_prop[$k],
+            'id_prop' => $spec_prop[$k],
             'value' => $spec_val[$k]
           ]);
         }

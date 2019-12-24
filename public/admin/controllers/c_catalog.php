@@ -16,7 +16,12 @@ if ($act == 'del') {
 } elseif ($id) {
   $data = $catalog->getProduct($id_prod);
   $view = 'v_product.tmpl';
-} else {
+} elseif ($_GET['fetch_spec_cat']) {
+  $id_cat = $_GET['fetch_spec_cat'];
+  echo json_encode($catalog->db->Select('properties', 'id_cat', $id_cat, true));
+  exit;
+}
+else {
   $data = array('products' => $catalog->getAll(), 'categories' => $catalog->getCategories());
   $view = 'v_catalog.tmpl';
 }
