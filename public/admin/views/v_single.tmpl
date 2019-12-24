@@ -7,15 +7,6 @@
       <td><label>Название</label></td>
       <td><input type="text" name="title" id="title" placeholder="Название" value="{{product.title}}" required></td>
     </tr>
-    <tr>
-      <td><label>Категория</label></td>
-      <td><select name="id_cat" id="id_cat" required>
-          {% for category in categories %}
-          <option value="{{category.id}}" {{product.id_cat == category.id ? 'selected' : ''}}>{{category.name}}
-          </option>
-          {% endfor %}
-        </select></td>
-    </tr>
     {% for spec in specifications %}
     <tr>
       <td>{{spec.name}} ({{spec.unit}})</td>

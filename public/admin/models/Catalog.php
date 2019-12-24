@@ -129,12 +129,12 @@ class Catalog
       'features' => $features,
       'price_new' => $price_new,
       'price_old' => $price_old,
-      'id_cat' => $id_cat
     ];
 
     if ($id) {
       $this->db->Update('products', $product, 'id', $id);
     } else {
+      $product['id_cat'] = $id_cat;
       $id = $this->db->Insert('products', $product);
     }
 
