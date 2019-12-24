@@ -15,33 +15,18 @@
       <div class="product-card">
         <div class="block-feedback">
           <div class="stars stars_four">
-                        <i
-              class="fa"
-              :class="rating > 0 ? 'fa-star' : 'fa-star-o'"
-              aria-hidden="true"
-            ></i>
-            <i
-              class="fa"
-              :class="rating > 1 ? 'fa-star' : 'fa-star-o'"
-              aria-hidden="true"
-            ></i>
-            <i
-              class="fa"
-              :class="rating > 2 ? 'fa-star' : 'fa-star-o'"
-              aria-hidden="true"
-            ></i>
-            <i
-              class="fa"
-              :class="rating > 3 ? 'fa-star' : 'fa-star-o'"
-              aria-hidden="true"
-            ></i>
-            <i
-              class="fa"
-              :class="rating > 4 ? 'fa-star' : 'fa-star-o'"
-              aria-hidden="true"
-            ></i>
+            <i class="fa" :class="rating > 0 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i class="fa" :class="rating > 1 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i class="fa" :class="rating > 2 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i class="fa" :class="rating > 3 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
+            <i class="fa" :class="rating > 4 ? 'fa-star' : 'fa-star-o'" aria-hidden="true"></i>
           </div>
-          <div class="counter">Отзывы: {{oneProduct.feedbacks.length}}</div>
+          <div class="counter">Отзывы: {{oneProduct.feedbacks.length}}</div><br>
+          {{oneProduct.features}}
+        </div>
+        <div class="properties">
+          <!-- <header class="properties__header">Особенности товара</header> -->
+          <!-- <div class="properties__content">{{oneProduct.features}}</div> -->
         </div>
         <div class="block-price">
           <div class="price-line price-line_rec">
@@ -69,10 +54,7 @@
           >В корзине</router-link>
           <button v-else class="cart-btn" @click="toCart" :data-id="oneProduct.id">Купить</button>
         </div>
-        <div class="properties">
-          <header class="properties__header">Особенности товара</header>
-          <div class="properties__content">{{oneProduct.features}}</div>
-        </div>
+        <!-- здесь были особенности товара -->
       </div>
     </section>
     <section class="section-tabs">
@@ -125,7 +107,7 @@
           </div>
           <div class="tabs__item" v-if="this.tab=='feed'">
             <div class="feedback-wrap">
-              <FeedbackForm :id="oneProduct.id"/>
+              <FeedbackForm :id="oneProduct.id" />
               <Feedback
                 v-for="feedback in oneProduct.feedbacks"
                 :key="feedback.date"
@@ -136,7 +118,12 @@
         </div>
       </div>
     </section>
-    <OrderForm v-if="showForm" @closeForm="closeForm" :id_prod="oneProduct.id" @quickOrder="quickBuy($event)"/>
+    <OrderForm
+      v-if="showForm"
+      @closeForm="closeForm"
+      :id_prod="oneProduct.id"
+      @quickOrder="quickBuy($event)"
+    />
   </div>
 </template>
 
