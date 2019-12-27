@@ -59,7 +59,6 @@ export default {
       })
     },
     filterCategory(state, filters) {
-      console.log(filters)
       // если нет фильтров, оставляем весь каталог
       if (!filters) state.filteredCatalog = state.catalog
 
@@ -77,11 +76,7 @@ export default {
         if (filters.specifications.length) {
           filters.specifications.forEach(fSpec => {
             catalog = catalog.filter(product => {
-              console.log(product)
               let pSpec = product.spec.find(el => el.prop == fSpec.name)
-              console.log(fSpec.min)
-              console.log(pSpec)
-              console.log(fSpec.max)
               if ((+pSpec.value >= fSpec.min) && (+pSpec.value <= fSpec.max)) return true
               else return false
           })
@@ -109,6 +104,9 @@ export default {
     },
     currentCategory(state) {
       return state.currentCategory
+    },
+    countCategory(state) {
+      return state.catalog.filter(element=> element.category == state.currentCategory).length
     },
     allCatalog(state) {
       return state.catalog
