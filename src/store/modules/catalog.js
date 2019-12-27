@@ -60,15 +60,19 @@ export default {
     },
     filterCategory(state, filters) {
       console.log(filters)
-      if(!filters) state.filteredCatalog = state.catalog
+      // если нет фильтров, оставляем весь каталог
+      if (!filters) state.filteredCatalog = state.catalog
+
       else {
         let catalog = state.catalog
-        console.log('cat: ' + state.currentCategory)
+
         catalog = catalog.filter(product => {
-          return (product.category == state.currentCategory)
-        })
-        catalog = catalog.filter(product => {
-          return (+product.price_new > +filters.priceMin && +product.price_new < +filters.priceMax)
+          return (
+            // фильтрация по категории
+            (product.category == state.currentCategory) &&
+            // фильтрация по цене
+            (+product.price_new > +filters.priceMin && +product.price_new < +filters.priceMax)
+          )
         })
         state.filteredCatalog = catalog
         console.log(catalog)
