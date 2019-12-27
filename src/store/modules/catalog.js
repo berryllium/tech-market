@@ -71,7 +71,7 @@ export default {
             // фильтрация по категории
             (product.category == state.currentCategory) &&
             // фильтрация по цене
-            (+product.price_new > +filters.priceMin && +product.price_new < +filters.priceMax)
+            (+product.price_new >= +filters.priceMin && +product.price_new <= +filters.priceMax)
           )
         })
         if (filters.specifications.length) {
@@ -82,7 +82,7 @@ export default {
               console.log(fSpec.min)
               console.log(pSpec)
               console.log(fSpec.max)
-              if ((+pSpec.value > fSpec.min) && (+pSpec.value < fSpec.max)) return true
+              if ((+pSpec.value >= fSpec.min) && (+pSpec.value <= fSpec.max)) return true
               else return false
           })
         })

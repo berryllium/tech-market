@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <ul class="filters" v-if="currentCategory && this.filteredCatalog.length">
+    <ul class="filters" v-if="currentCategory">
       <li class="filter">
         <div class="filer__name">Цена</div>
         <label>
@@ -91,11 +91,17 @@ export default {
           this.filteredCatalog[0].spec.forEach(element => {
             console.log(element);
             if (element.filter == 1) {
-              const filter = {
+              let filter = {
                 name: element.prop,
-                min: 0,
-                max: 10000
+                min: 100000,
+                max: 0
               };
+              this.filteredCatalog.forEach(element => {
+                console.log(element.spec)
+                const prop = element.spec.find(el => el.prop == filter.name)
+                if (prop.value <= filter.min) filter.min = prop.value
+                if (prop.value >= filter.max) filter.max = prop.value
+              })
               this.filters.specifications.push(filter);
             }
           });
