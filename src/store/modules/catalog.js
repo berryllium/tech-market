@@ -41,6 +41,15 @@ export default {
     },
     setCategory(state, category) {
       state.currentCategory = category
+      if (category) {
+        state.filteredCatalog = state.catalog.filter(product => {
+          console.log(category)
+          return product.category == category
+        })
+      } else {
+        console.log('all')
+        state.filteredCatalog = state.catalog
+      }
     },
     filterSearch(state, str) {
       state.filteredCatalog = state.catalog.filter(product => {
@@ -48,6 +57,22 @@ export default {
         const reg = new RegExp(str, 'i')
         return reg.test(product.title)
       })
+    },
+    filterCategory(state, filters) {
+      console.log(filters)
+      if(!filters) state.filteredCatalog = state.catalog
+      else {
+        let catalog = state.catalog
+        console.log('cat: ' + state.currentCategory)
+        catalog = catalog.filter(product => {
+          return (product.category == state.currentCategory)
+        })
+        catalog = catalog.filter(product => {
+          return (+product.price_new > +filters.priceMin && +product.price_new < +filters.priceMax)
+        })
+        state.filteredCatalog = catalog
+        console.log(catalog)
+      }
     }
   },
   state: {

@@ -2,49 +2,51 @@
   <div class="content">
     <ul class="filters">
       <li class="filter">
-        <div class="filter-name">Популярность</div>
-        <select name="filter1">
-          <option value="значение 1">по убыванию</option>
-          <option value="значение 2">по возрастанию</option>
-        </select>
-      </li>
-      <li class="filter">
-        <div class="filter-name">Цена</div>
-        <select name="filter2">
-          <option value="значение 1">по убыванию</option>
-          <option value="значение 2">по возрастанию</option>
-        </select>
-      </li>
-      <li class="filter">
-        <div class="filter-name">Мощность</div>
-        <select name="filter2">
-          <option value="значение 1">по убыванию</option>
-          <option value="значение 2">по возрастанию</option>
-        </select>
+        <input
+          @change="filterCategory(filters)"
+          v-model="filters.priceMin"
+          type="number"
+          name="price-min"
+          id="price-min"
+          placeholder="min"
+        />
+        <input
+          @change="filterCategory(filters)"
+          v-model="filters.priceMax"
+          type="number"
+          name="price-max"
+          id="price-max"
+          placeholder="max"
+        />
       </li>
     </ul>
     <div class="products">
-      <product v-for="product in this.products" :product="product" :key="product.id" />
+      <product v-for="product in filteredCatalog" :product="product" :key="product.id" />
     </div>
   </div>
 </template>
 
 <script>
 import Product from "@/components/Product";
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(['currentCategory']),
-    products() {
-      if(this.currentCategory.length == 0) return this.$store.getters.filteredCatalog
-      else {
-        return this.$store.getters.filteredCatalog.filter(product => product.category == this.currentCategory)
+  data() {
+    return {
+      filters: {
+        priceMax: 99500,
+        priceMin: 0
       }
-    }
+    };
+  },
+  methods: {
+    ...mapMutations(["filterCategory"])
+  },
+  computed: {
+    ...mapGetters(["filteredCatalog"])
   },
   components: {
     product: Product
-  },
+  }
 };
 </script>
 
