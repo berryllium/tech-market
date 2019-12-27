@@ -94,7 +94,7 @@ class Catalog
       $product['desc'] = $v['detail'];
       $product['photos'] = $this->db->Select('photos', 'id_prod', $id, true);
       $product['feedbacks'] = $this->db->Select('feedbacks', 'id_prod', $id, true);
-      $product['spec'] = $this->db->CompositeQuery("SELECT t1.value AS `value`, t2.name AS prop 
+      $product['spec'] = $this->db->CompositeQuery("SELECT t1.value AS `value`, t2.name AS prop, t2.filter AS `filter` 
       FROM specifications AS t1 INNER JOIN properties AS t2 WHERE t1.id_prop = t2.id AND t1.id_prod = $id");
       // Select('specifications', 'id_prod', $v['id'], true)
       

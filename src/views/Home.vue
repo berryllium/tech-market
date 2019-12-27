@@ -3,37 +3,49 @@
     <ul class="filters" v-if="currentCategory">
       <li class="filter">
         <div class="filer__name">Цена</div>
-        <label><span class="filter__label">От</span><input
-          @change="filterCategory(filters)"
-          @keyup="filterCategory(filters)"
-          v-model="filters.priceMin"
-          type="number"
-          placeholder="от"
-        /></label>
-        <label><span class="filter__label">До</span><input
-          @change="filterCategory(filters)"
-          @keyup="filterCategory(filters)"
-          v-model="filters.priceMax"
-          type="number"
-          placeholder="до"
-        /></label>
+        <label>
+          <span class="filter__label">От</span>
+          <input
+            @change="filterCategory(filters)"
+            @keyup="filterCategory(filters)"
+            v-model="filters.priceMin"
+            type="number"
+            placeholder="от"
+          />
+        </label>
+        <label>
+          <span class="filter__label">До</span>
+          <input
+            @change="filterCategory(filters)"
+            @keyup="filterCategory(filters)"
+            v-model="filters.priceMax"
+            type="number"
+            placeholder="до"
+          />
+        </label>
       </li>
       <li class="filter" v-for="(spec, index) in filters.specifications" :key="spec.name">
         <div class="filer__name">{{spec.name}}</div>
-        <label><span class="filter__label">От</span><input
-          @change="filterCategory(filters)"
-          @keyup="filterCategory(filters)"
-          v-model.number="filters.specifications[index].min"
-          type="number"
-          placeholder="от"
-        /></label>
-        <label><span class="filter__label">До</span><input
-          @change="filterCategory(filters)"
-          @keyup="filterCategory(filters)"
-          v-model.number="filters.specifications[index].max"
-          type="number"
-          placeholder="до"
-        /></label>
+        <label>
+          <span class="filter__label">От</span>
+          <input
+            @change="filterCategory(filters)"
+            @keyup="filterCategory(filters)"
+            v-model.number="filters.specifications[index].min"
+            type="number"
+            placeholder="от"
+          />
+        </label>
+        <label>
+          <span class="filter__label">До</span>
+          <input
+            @change="filterCategory(filters)"
+            @keyup="filterCategory(filters)"
+            v-model.number="filters.specifications[index].max"
+            type="number"
+            placeholder="до"
+          />
+        </label>
       </li>
     </ul>
     <div class="products">
@@ -52,18 +64,18 @@ export default {
         priceMax: 999999,
         priceMin: 0,
         specifications: [
-          {
-            name: 'Мощность',
-            min: 0,
-            max: 10000
-          },
-          {
-            name: 'Шум',
-            min: 0,
-            max: 100
-          }
+          // {
+          //   name: 'Мощность',
+          //   min: 0,
+          //   max: 10000
+          // },
+          // {
+          //   name: 'Шум',
+          //   min: 0,
+          //   max: 100
+          // }
         ]
-      },
+      }
     };
   },
   methods: {
@@ -72,9 +84,27 @@ export default {
   computed: {
     ...mapGetters(["filteredCatalog", "currentCategory"])
   },
+  watch: {
+    currentCategory: function(val) {
+      if (val) {
+        this.filteredCatalog[0].spec.forEach(element => {
+          console.log(element)
+          if (element.filter == 1) {
+            const filter = {
+              name: element.prop,
+              min: 0,
+              max: 10000
+            };
+            this.filters.specifications.push(filter);
+          }
+        });
+      }
+    }
+  },
   components: {
     product: Product
-  }
+  },
+  mounted() {}
 };
 </script>
 
@@ -95,6 +125,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-right: 22px;
+  margin-bottom: 15px;
   &__name {
     text-transform: capitalize;
   }
