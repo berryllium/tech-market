@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <ul class="filters" v-if="currentCategory">
+    <ul class="filters" v-if="currentCategory && this.filteredCatalog.length">
       <li class="filter">
         <div class="filer__name">Цена</div>
         <label>
@@ -86,18 +86,20 @@ export default {
   },
   watch: {
     currentCategory: function(val) {
-      if (val) {
-        this.filteredCatalog[0].spec.forEach(element => {
-          console.log(element)
-          if (element.filter == 1) {
-            const filter = {
-              name: element.prop,
-              min: 0,
-              max: 10000
-            };
-            this.filters.specifications.push(filter);
-          }
-        });
+      if (val && this.filteredCatalog.length) {
+        if (this.filteredCatalog[0].hasOwnProperty("spec")) {
+          this.filteredCatalog[0].spec.forEach(element => {
+            console.log(element);
+            if (element.filter == 1) {
+              const filter = {
+                name: element.prop,
+                min: 0,
+                max: 10000
+              };
+              this.filters.specifications.push(filter);
+            }
+          });
+        }
       }
     }
   },
