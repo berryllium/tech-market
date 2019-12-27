@@ -74,10 +74,22 @@ export default {
             (+product.price_new > +filters.priceMin && +product.price_new < +filters.priceMax)
           )
         })
-        state.filteredCatalog = catalog
-        console.log(catalog)
+        if (filters.specifications.length) {
+          filters.specifications.forEach(fSpec => {
+            catalog = catalog.filter(product => {
+              console.log(product)
+              let pSpec = product.spec.find(el => el.prop == fSpec.name)
+              console.log(fSpec.min)
+              console.log(pSpec)
+              console.log(fSpec.max)
+              if ((+pSpec.value > fSpec.min) && (+pSpec.value < fSpec.max)) return true
+              else return false
+          })
+        })
       }
+      state.filteredCatalog = catalog
     }
+  }
   },
   state: {
     feedbacks: [],

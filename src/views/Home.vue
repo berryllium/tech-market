@@ -1,23 +1,39 @@
 <template>
   <div class="content">
-    <ul class="filters">
+    <ul class="filters" v-if="currentCategory">
       <li class="filter">
-        <input
+        <div class="filer__name">Цена</div>
+        <label><span class="filter__label">От</span><input
           @change="filterCategory(filters)"
+          @keyup="filterCategory(filters)"
           v-model="filters.priceMin"
           type="number"
-          name="price-min"
-          id="price-min"
-          placeholder="min"
-        />
-        <input
+          placeholder="от"
+        /></label>
+        <label><span class="filter__label">До</span><input
           @change="filterCategory(filters)"
+          @keyup="filterCategory(filters)"
           v-model="filters.priceMax"
           type="number"
-          name="price-max"
-          id="price-max"
-          placeholder="max"
-        />
+          placeholder="до"
+        /></label>
+      </li>
+      <li class="filter" v-for="(spec, index) in filters.specifications" :key="spec.name">
+        <div class="filer__name">{{spec.name}}</div>
+        <label><span class="filter__label">От</span><input
+          @change="filterCategory(filters)"
+          @keyup="filterCategory(filters)"
+          v-model.number="filters.specifications[index].min"
+          type="number"
+          placeholder="от"
+        /></label>
+        <label><span class="filter__label">До</span><input
+          @change="filterCategory(filters)"
+          @keyup="filterCategory(filters)"
+          v-model.number="filters.specifications[index].max"
+          type="number"
+          placeholder="до"
+        /></label>
       </li>
     </ul>
     <div class="products">
@@ -33,16 +49,28 @@ export default {
   data() {
     return {
       filters: {
-        priceMax: 99500,
-        priceMin: 0
-      }
+        priceMax: 999999,
+        priceMin: 0,
+        specifications: [
+          {
+            name: 'Мощность',
+            min: 0,
+            max: 10000
+          },
+          {
+            name: 'Шум',
+            min: 0,
+            max: 100
+          }
+        ]
+      },
     };
   },
   methods: {
     ...mapMutations(["filterCategory"])
   },
   computed: {
-    ...mapGetters(["filteredCatalog"])
+    ...mapGetters(["filteredCatalog", "currentCategory"])
   },
   components: {
     product: Product
@@ -59,10 +87,28 @@ export default {
 .filters {
   list-style-type: none;
   padding: 0;
+  margin: 0 0 20px 0;
   display: flex;
   flex-wrap: wrap;
 }
 .filter {
-  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 22px;
+  &__name {
+    text-transform: capitalize;
+  }
+  label {
+    margin-top: 5px;
+  }
+  input {
+    box-sizing: border-box;
+    width: 170px;
+    min-width: 170px;
+  }
+  &__label {
+    display: inline-block;
+    width: 30px;
+  }
 }
 </style>
